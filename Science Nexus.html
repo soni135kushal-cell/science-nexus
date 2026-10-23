@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10142d">
+<title>Science Nexus | Math + Chemistry</title>
+<style>
+:root {
+  --bg:#10142d; --panel:#1b2142; --muted:#b9c3e8;
+  --purple:#a78bfa; --blue:#60a5fa; --green:#4ade80;
+  --red:#fb7185; --gold:#facc15;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; background:radial-gradient(circle at top left,#34346b,transparent 36%),var(--bg);
+  color:#f5f6ff; font-family:system-ui,Arial,sans-serif;
+}
+button,input,select { font:inherit; }
+button { color:inherit; cursor:pointer; transition:.2s; }
+button:active { transform:scale(.98); }
+button:disabled { opacity:.55; cursor:not-allowed; }
+.app { max-width:1000px; margin:auto; padding:14px; }
+header { display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; gap:8px; }
+.brand { display:flex; align-items:center; gap:10px; font-weight:900; }
+.logo {
+  width:44px;height:44px;border-radius:15px;display:grid;place-items:center;
+  font-size:25px;background:linear-gradient(135deg,#a78bfa,#3b82f6);
+  animation:float 3s infinite;
+}
+.screen { display:none; }
+.screen.active { display:block; animation:enter .3s; }
+.panel {
+  background:#1b2142ee;border:1px solid #ffffff18;border-radius:20px;
+  padding:17px;margin-bottom:15px;box-shadow:0 12px 30px #0002;
+}
+.hero { text-align:center;background:linear-gradient(135deg,#312e81,#6d28d9,#1d4ed8);padding:24px 16px; }
+.hero h1 {
+  font-size:clamp(2rem,7vw,3.4rem);margin:10px 0;
+  background:linear-gradient(90deg,#fff,#fde68a,#fff);
+  background-clip:text;color:transparent;
+}
+.hero p { color:#e0e7ff;line-height:1.6; }
+.eyebrow { font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:#ddd6fe;font-weight:800; }
+h2 { font-size:1.2rem;margin:0 0 13px; }
+h3 { margin:0 0 8px; }
+p { line-height:1.55; }
+.small { color:var(--muted);font-size:.85rem; }
+.primary {
+  width:100%;background:linear-gradient(135deg,#8b5cf6,#4f46e5);
+  padding:14px;border:0;border-radius:13px;font-weight:850;
+}
+.secondary { background:#ffffff12;border:1px solid #ffffff22;padding:11px 13px;border-radius:12px;font-weight:700; }
+input,select { width:100%;padding:12px;border-radius:12px;border:1px solid #ffffff25;background:#101831;color:white; }
+label { display:block;color:var(--muted);font-size:.88rem;margin-bottom:7px; }
+.field { margin-bottom:13px; }
+.grid2,.navgrid,.mode-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px; }
+.stats { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px; }
+.stat { padding:11px 5px;background:#ffffff0b;border:1px solid #ffffff12;border-radius:13px;text-align:center; }
+.stat strong { display:block;font-size:1.3rem; }
+.stat span { font-size:.75rem;color:var(--muted); }
+.profile { display:flex;align-items:center;gap:11px; }
+.avatar { width:50px;height:50px;display:grid;place-items:center;font-size:2rem;background:#ffffff12;border-radius:14px; }
+.profile-info { flex:1;min-width:0; }
+.bar { height:8px;border-radius:20px;background:#ffffff18;overflow:hidden;margin-top:8px; }
+.barfill { height:100%;background:linear-gradient(90deg,#a78bfa,#60a5fa,#4ade80);width:0;transition:.3s; }
+.navcard,.choice,.stage {
+  padding:14px;border:1px solid #ffffff20;border-radius:16px;
+  background:linear-gradient(145deg,#29315d,#1a2040);text-align:left;min-width:0;
+}
+.navcard { min-height:115px; }
+.navcard .bigicon { font-size:1.9rem;display:block;margin-bottom:7px; }
+.navcard strong,.choice strong { display:block; }
+.navcard small,.choice small { display:block;color:var(--muted);margin-top:5px;line-height:1.45; }
+.tabs { display:flex;gap:8px;overflow-x:auto;margin-bottom:12px; }
+.tab { white-space:nowrap;background:#ffffff0c;border:1px solid #ffffff20;border-radius:25px;padding:9px 12px; }
+.tab.active { background:#7c3aed;border-color:#c4b5fd; }
+.formula-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px; }
+.formula { background:#ffffff09;border:1px solid #ffffff17;border-radius:13px;padding:13px;min-width:0; }
+.formula-title { font-size:.8rem;color:#c4b5fd;font-weight:800;margin-bottom:7px; }
+.equation { font-size:1.08rem;font-weight:850;overflow-wrap:anywhere;line-height:1.65; }
+.explain { font-size:.82rem;color:var(--muted);margin-top:6px;line-height:1.5; }
+.tablewrap { overflow-x:auto;margin:10px 0 16px;border-radius:12px;border:1px solid #ffffff20; }
+table { border-collapse:collapse;width:100%;min-width:400px;font-size:.82rem; }
+th,td { padding:9px;text-align:center;border-bottom:1px solid #ffffff15; }
+th { background:#343064;color:#e9d5ff; }
+td { background:#ffffff06; }
+.note { padding:12px;background:#60a5fa12;border-left:3px solid var(--blue);border-radius:8px;color:#dbeafe;font-size:.88rem;line-height:1.55; }
+.choice { border:2px solid #ffffff20; }
+.choice.selected { border-color:#a78bfa;background:#342e68; }
+.choice .emoji { font-size:1.7rem;display:block;margin-bottom:7px; }
+.stage { text-align:center;padding:12px 5px;min-width:0; }
+.stage span { font-size:1.5rem;display:block; }
+.stage.selected { border:2px solid var(--gold); }
+#difficultyChoices { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px; }
+.quiztop { display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px; }
+.question { background:linear-gradient(145deg,#292f5b,#1b2142);border:1px solid #ffffff20;border-radius:20px;text-align:center;padding:22px 14px;margin-bottom:13px;animation:enter .3s; }
+.question.boss { border:2px solid var(--red); }
+.qtext { font-size:clamp(1.25rem,5vw,2rem);font-weight:900;margin:15px 0;overflow-wrap:anywhere; }
+.answers { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px; }
+.answer { min-height:55px;padding:11px 7px;background:#252d55;border:2px solid #ffffff18;border-radius:12px;font-weight:800;overflow-wrap:anywhere; }
+.answer.correct { background:#166534;border-color:var(--green); }
+.answer.wrong { background:#881337;border-color:var(--red); }
+.feedback { text-align:center;font-weight:800;min-height:28px;margin:12px 0; }
+.good { color:var(--green); }
+.bad { color:var(--red); }
+.actions { display:flex;gap:9px; }
+.actions>* { flex:1; }
+.timer { text-align:center;padding:11px;background:#ffffff0b;border-radius:12px;font-weight:850;margin:10px 0; }
+.timer.danger { background:#991b1b;animation:timerBlink .65s steps(2,start) infinite; }
+.badges { display:flex;gap:8px;flex-wrap:wrap; }
+.badge { padding:8px 10px;border-radius:12px;background:#ffffff10;border:1px solid #ffffff20;font-size:.82rem; }
+.resultbig { text-align:center;font-size:3rem; }
+.resultscore { text-align:center;font-size:2.5rem;color:var(--gold);font-weight:950; }
+.footer { text-align:center;color:var(--muted);font-size:.78rem;padding:14px; }
+.hidden { display:none!important; }
+.pill { padding:7px 10px;border-radius:20px;background:#ffffff12;border:1px solid #ffffff20;white-space:nowrap; }
+
+/* Atomic models */
+.atom-visual {
+  min-height:320px;padding:10px;margin:12px 0;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;border-radius:18px;border:1px solid #ffffff20;
+  background:radial-gradient(circle,#202c55,#10142d 75%);
+}
+.atom-stage { width:min(88vw,350px);aspect-ratio:1;position:relative;flex:0 0 auto;overflow:visible; }
+.atom-shell { position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid #9bb9ff90;border-radius:50%; }
+.electron { position:absolute;width:11px;height:11px;border-radius:50%;background:#67f5ff;box-shadow:0 0 9px #67f5ff,0 0 18px #67f5ff99;transform:translate(-50%,-50%); }
+.nucleus {
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:clamp(54px,21%,78px);height:clamp(54px,21%,78px);padding:5px;
+  border-radius:50%;border:2px solid #d8b4fe;background:radial-gradient(circle,#30234e,#151a38);
+  box-shadow:0 0 18px #a78bfa70;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  place-items:center;align-content:center;gap:2px;overflow:hidden;z-index:5;
+}
+.nucleon { border-radius:50%;aspect-ratio:1;box-shadow:inset -2px -2px 3px #0005; }
+.proton { background:#fb637e; }
+.neutron { background:#a78bfa; }
+.legend { display:flex;justify-content:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.8rem; }
+.legend i { display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px; }
+.solid-atom { width:135px;aspect-ratio:1;border-radius:50%;margin:auto;background:radial-gradient(circle at 35% 30%,#ddd6fe,#8b5cf6 48%,#4c1d95);box-shadow:0 0 35px #a78bfa50;animation:float 3s infinite; }
+.plum { width:min(65vw,240px);aspect-ratio:1;position:relative;border-radius:50%;margin:auto;border:2px solid #facc15;background:#facc1520; }
+.plum-electron { position:absolute;width:12px;height:12px;border-radius:50%;background:#67f5ff;box-shadow:0 0 10px #67f5ff; }
+
+/* Correct answer celebration */
+.celebration {
+  position:fixed;z-index:1000;pointer-events:none;left:0;top:0;
+  animation:celebrateFade 1.8s ease-out forwards;
+  filter:drop-shadow(0 2px 6px #0006);
+}
+@keyframes celebrateFade {
+  0% { opacity:0;transform:translate(0,15px) rotate(0deg) scale(.55); }
+  12% { opacity:1; }
+  70% { opacity:1; }
+  100% { opacity:0;transform:translate(var(--drift),-120px) rotate(var(--spin)) scale(1.15); }
+}
+
+/* Rutherford: three elliptical paths with independently revolving electrons */
+.rutherford-orbit {
+  position:absolute;left:50%;top:50%;border:1.5px solid rgba(147,197,253,.85);
+  border-radius:50%;pointer-events:none;box-shadow:0 0 8px #60a5fa18;
+}
+.rutherford-electron {
+  position:absolute;width:11px;height:11px;border-radius:50%;
+  background:#67f5ff;box-shadow:0 0 9px #67f5ff,0 0 18px #38bdf8;
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+.bohr-shell { position:absolute;left:50%;top:50%;border:1.5px solid #93c5fd99;border-radius:50%;transform:translate(-50%,-50%); }
+.bohr-electron { position:absolute;width:12px;height:12px;border-radius:50%;background:#67f5ff;box-shadow:0 0 10px #67f5ff;transform:translate(-50%,-50%); }
+.bohr-label { position:absolute;font-size:10px;color:#c4b5fd;font-weight:800;pointer-events:none; }
+.quantum-cloud {
+  position:absolute;left:50%;top:50%;width:90%;height:90%;transform:translate(-50%,-50%);
+  border-radius:50%;background:radial-gradient(ellipse,rgba(221,214,254,.95),rgba(167,139,250,.65) 20%,rgba(96,165,250,.35) 45%,transparent 72%);
+  filter:blur(2px);animation:cloudpulse 3s ease-in-out infinite alternate;
+}
+.cloud-speck { position:absolute;width:5px;height:5px;border-radius:50%;background:#c4f7ff;box-shadow:0 0 8px #67e8f9;animation:twinkle 1.8s ease-in-out infinite alternate; }
+@keyframes enter { from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)} }
+@keyframes float { 50%{transform:translateY(-5px)} }
+@keyframes cloudpulse { from{scale:.92;opacity:.75}to{scale:1.05;opacity:1} }
+@keyframes twinkle { from{opacity:.25;scale:.7}to{opacity:1;scale:1.4} }
+@keyframes timerBlink { to{visibility:hidden} }
+@media(max-width:440px) {
+  .app { padding:9px; }
+  .panel { padding:13px; }
+  .formula-grid { grid-template-columns:1fr; }
+  .navgrid { gap:8px; }
+  .navcard { padding:12px; }
+  .stats { gap:5px; }
+  .stat strong { font-size:1.1rem; }
+  .answers { grid-template-columns:1fr; }
+  .atom-stage { width:min(82vw,300px); }
+  #difficultyChoices { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .stage { font-size:.82rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after { animation:none!important;transition:none!important; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="logo">🧪</div><div>Science Nexus<br><span class="small">MATH + CHEMISTRY</span></div></div>
+  <div class="pill">🪙 <span id="coinsTop">0</span></div>
+</header>
+
+<section id="home" class="screen active">
+  <div class="panel hero"><div class="eyebrow">Learn • Practise • Discover</div><h1>Science Nexus</h1><p>Your universe for mathematics, chemistry, formulas and challenges.</p></div>
+  <div class="panel">
+    <div class="profile"><div class="avatar" id="avatarDisplay">🚀</div><div class="profile-info"><strong id="nameDisplay">Math Champion</strong><div class="small" id="levelDisplay">Level 1 • 0 XP</div><div class="bar"><div class="barfill" id="xpBar"></div></div></div><div class="pill">🏆 <span id="bestDisplay">0</span></div></div>
+    <div class="field" style="margin-top:14px"><label for="playerName">Nickname</label><input id="playerName" maxlength="20" placeholder="Your nickname"></div>
+    <div class="grid2"><div class="field"><label for="avatarChoice">Avatar</label><select id="avatarChoice"><option>🚀</option><option>🦊</option><option>🐼</option><option>🐯</option><option>🦄</option><option>🤖</option><option>🐲</option><option>⭐</option></select></div><div class="field"><label for="homeClass">Your class</label><select id="homeClass"></select></div></div>
+    <button class="secondary" id="saveProfile" style="width:100%">Save My Profile</button>
+  </div>
+  <div class="panel"><h2>📊 Your Journey</h2><div class="stats"><div class="stat"><strong id="gamesDisplay">0</strong><span>Games</span></div><div class="stat"><strong id="correctDisplay">0</strong><span>Correct</span></div><div class="stat"><strong id="streakDisplay">0</strong><span>Best streak</span></div></div><h3 style="margin-top:15px">🎖️ Achievements</h3><div id="badgesDisplay" class="badges"></div></div>
+  <div class="panel"><h2>🪐 Explore Science Nexus</h2><div class="navgrid">
+    <button class="navcard" data-go="help"><span class="bigicon">📚</span><strong>Math Help Centre</strong><small>Tables, formulas, identities and theorems.</small></button>
+    <button class="navcard" data-go="quizSetup"><span class="bigicon">🎮</span><strong>Quiz Arena</strong><small>20 questions, four modes and three difficulties.</small></button>
+    <button class="navcard" data-go="library"><span class="bigicon">🧮</span><strong>Formula Library</strong><small>Browse maths by class and topic.</small></button>
+    <button class="navcard" data-go="tables"><span class="bigicon">📈</span><strong>Math Tables</strong><small>Trigonometry, logarithms, squares and cubes.</small></button>
+    <button class="navcard" data-go="chemistry"><span class="bigicon">⚛️</span><strong>Chemistry Lab</strong><small>Explore five atomic models.</small></button>
+    <button class="navcard" data-go="atomExplorer"><span class="bigicon">🧬</span><strong>First 20 Elements</strong><small>Explore elements, nuclei and electron shells.</small></button>
+  </div></div>
+
+<div class="panel" id="feedbackPanel">
+  <h2>💬 Feedback & Ideas</h2>
+  <p class="small">
+    Help us improve Science Nexus! Share an idea, report a bug,
+    or tell us what feature you want next.
+  </p>
+
+  <form id="feedbackForm">
+    <div class="field">
+      <label for="feedbackType">Feedback type</label>
+      <select id="feedbackType" required>
+        <option value="💡 New idea">💡 New idea</option>
+        <option value="🐛 Bug report">🐛 Report a bug</option>
+        <option value="📚 Maths questions">📚 Maths questions</option>
+        <option value="🧪 Chemistry Lab">🧪 Chemistry Lab</option>
+        <option value="⭐ General feedback">⭐ General feedback</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="feedbackMessage">Your message</label>
+      <textarea id="feedbackMessage"
+        placeholder="Write your feedback or idea here..."
+        required maxlength="1500" rows="2"
+        style="width:100%;padding:12px;border-radius:12px;
+        border:1px solid #ffffff25;background:#101831;color:white;
+        font:inherit;resize:vertical"></textarea>
+    </div>
+
+    <button class="primary" type="submit">
+      📲 Send Feedback on WhatsApp
+    </button>
+    <p class="small">
+      WhatsApp will open with your message ready to send.
+      Please tap Send in WhatsApp to submit it.
+    </p>
+  </form>
+</div>
+
+<div class="footer">© 2026 Science Nexus | Created & Developed by Kushal Soni | Learn • Explore • Innovate</div>
+</section>
+<section id="help" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+  <div class="panel hero"><div class="eyebrow">Your personal maths companion</div><h1>Math Help Centre</h1><p>Look up formulas, understand theorems, and revise tables.</p></div>
+  <div class="panel"><div class="grid2"><button class="navcard" data-go="library"><span class="bigicon">📐</span><strong>Formulas & Theorems</strong><small>Geometry, algebra and advanced maths.</small></button><button class="navcard" data-go="tables"><span class="bigicon">📊</span><strong>Reference Tables</strong><small>Trigonometry, logarithms and squares.</small></button></div></div>
+  <div class="panel"><h2>⚡ Quick Formula Cards</h2><div class="formula-grid">
+    <div class="formula"><div class="formula-title">RECTANGLE AREA</div><div class="equation">A = l × b</div></div>
+    <div class="formula"><div class="formula-title">TRIANGLE AREA</div><div class="equation">A = ½bh</div></div>
+    <div class="formula"><div class="formula-title">PYTHAGORAS</div><div class="equation">a² + b² = c²</div></div>
+    <div class="formula"><div class="formula-title">QUADRATIC FORMULA</div><div class="equation">x = (−b ± √(b²−4ac))/(2a)</div></div>
+  </div></div>
+</section>
+
+<section id="library" class="screen">
+  <button class="secondary" data-go="help">← Math Help</button>
+  <div class="panel hero"><div class="eyebrow">Understand the rules</div><h1>Formula Library</h1><p>Search equations, identities and theorems.</p></div>
+  <div class="panel"><div class="field"><label for="formulaClass">Learning level</label><select id="formulaClass"><option value="1">Classes 1–5 • Foundations</option><option value="6" selected>Classes 6–8 • Middle school</option><option value="9">Classes 9–10 • Secondary</option><option value="11">Classes 11–12 • Advanced</option><option value="all">All levels</option></select></div>
+  <input id="formulaSearch" placeholder="🔎 Search formulas..." style="margin-bottom:12px">
+
+<div class="tabs" id="formulaTabs">
+  <button class="tab active" data-cat="all">All Topics</button>
+  <button class="tab" data-cat="Arithmetic">Arithmetic</button>
+  <button class="tab" data-cat="Fractions">Fractions</button>
+  <button class="tab" data-cat="Algebra">Algebra</button>
+  <button class="tab" data-cat="Geometry">Geometry</button>
+  <button class="tab" data-cat="Mensuration">Mensuration</button>
+  <button class="tab" data-cat="Coordinate Geometry">Coordinate Geometry</button>
+  <button class="tab" data-cat="Trigonometry">Trigonometry</button>
+  <button class="tab" data-cat="Logarithms">Logarithms</button>
+  <button class="tab" data-cat="Statistics">Statistics</button>
+  <button class="tab" data-cat="Probability">Probability</button>
+  <button class="tab" data-cat="Sets">Sets</button>
+  <button class="tab" data-cat="Functions">Functions</button>
+  <button class="tab" data-cat="Sequences">Sequences</button>
+  <button class="tab" data-cat="Complex Numbers">Complex Numbers</button>
+  <button class="tab" data-cat="Matrices">Matrices</button>
+  <button class="tab" data-cat="Vectors">Vectors</button>
+  <button class="tab" data-cat="Calculus">Calculus</button>
+  <button class="tab" data-cat="Advanced">Advanced</button>
+</div>
+
+  <div class="formula-grid" id="formulaResults"></div></div>
+</section>
+
+<section id="tables" class="screen">
+  <button class="secondary" data-go="help">← Math Help</button>
+  <div class="panel hero"><div class="eyebrow">Keep these nearby</div><h1>Math Tables</h1><p>Reference tables for revision and calculations.</p></div>
+  <div class="panel"><div class="tabs" id="tableTabs"><button class="tab active" data-table="trig">Trigonometry</button><button class="tab" data-table="logs">Logarithms</button><button class="tab" data-table="squares">Squares & Cubes</button><button class="tab" data-table="powers">Powers of 10</button></div><div id="tableContent"></div></div>
+</section>
+
+<section id="quizSetup" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+  <div class="panel hero"><div class="eyebrow">Choose your challenge</div><h1>Quiz Arena</h1><p>Test your skills and aim for a new high score!</p></div>
+  <div class="panel">
+    <h2>🎓 1. Select class</h2><div class="field"><label for="quizClass">Question level</label><select id="quizClass"></select></div>
+    <h2>🎮 2. Choose your mode</h2>
+    <div class="mode-grid" id="modeChoices">
+      <button class="choice selected" data-mode="practice"><span class="emoji">📘</span><strong>Practice</strong><small>Learn without a timer.</small></button>
+      <button class="choice" data-mode="timed"><span class="emoji">⏱️</span><strong>Timed Challenge</strong><small>Beat the clock.</small></button>
+      <button class="choice" data-mode="survival"><span class="emoji">❤️</span><strong>Survival</strong><small>You have three lives.</small></button>
+      <button class="choice" data-mode="mixed"><span class="emoji">🌪️</span><strong>Mixed Master</strong><small>Questions from different classes.</small></button>
+    </div>
+    <h2 style="margin-top:20px">🚪 3. Choose difficulty</h2>
+    <div class="grid2" id="difficultyChoices">
+      <button class="stage selected" data-diff="1"><span>🌱</span><strong>Easy</strong><small>Warm up</small></button>
+      <button class="stage" data-diff="2"><span>🔥</span><strong>Medium</strong><small>Level up</small></button>
+      <button class="stage" data-diff="3"><span>👑</span><strong>Hard</strong><small>Boss challenge</small></button>
+    </div>
+    <div class="note" style="margin-top:15px">Every maths game has 20 questions. Question 20 is the boss challenge.</div>
+    <button class="primary" id="beginQuiz" style="margin-top:16px">🚀 START ADVENTURE</button>
+  </div>
+</section>
+
+<section id="quiz" class="screen">
+  <div class="quiztop"><button class="secondary" id="quitQuiz">← Exit</button><div class="pill" id="modeBadge">Practice</div><div class="pill" id="lifeBadge">✨ Ready</div></div>
+  <div class="panel"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong id="quizLevelLabel">Class 7</strong><span class="small" id="questionCounter">Question 1/20</span><span class="pill">🔥 <span id="currentStreak">0</span></span></div><div class="bar"><div class="barfill" id="quizProgress"></div></div><div class="timer hidden" id="quizTimer"></div></div>
+  <div class="question" id="questionCard"><div id="questionTag">QUESTION 1</div><div class="qtext" id="questionText">Ready?</div><div class="small" id="questionHint">Choose the correct answer.</div></div>
+  <div class="answers" id="answerGrid"></div><div class="feedback" id="answerFeedback"></div>
+  <div class="actions"><button class="secondary" id="hintButton">💡 Hint</button><button class="primary" id="nextButton" disabled>Next →</button></div>
+</section>
+
+<section id="results" class="screen">
+  <div class="panel"><button class="secondary" data-go="home">← Dashboard</button><div class="resultbig" id="resultEmoji">🏆</div><h1 id="resultTitle" style="text-align:center">Quest complete!</h1><div class="resultscore" id="resultXP">0 XP</div><p id="resultMessage" class="small" style="text-align:center"></p>
+  <div class="stats"><div class="stat"><strong id="resCorrect">0/20</strong><span>Correct</span></div><div class="stat"><strong id="resAccuracy">0%</strong><span>Accuracy</span></div><div class="stat"><strong id="resCoins">+0</strong><span>Coins</span></div></div>
+  <div class="stat" style="margin-top:10px"><strong id="resStreak">0</strong><span>Best streak</span></div>
+  <h3 style="margin-top:18px">🎖️ New achievements</h3><div class="badges" id="newBadges"></div>
+  <button class="primary" id="againButton" style="margin-top:17px">🔁 Play Again</button><button class="secondary" data-go="help" style="width:100%;margin-top:10px">📚 Review Formulas</button></div>
+</section>
+
+<section id="chemistry" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+  <div class="panel hero"><div class="eyebrow">Discover the building blocks of matter</div><h1>Chemistry Lab</h1><p>Explore five atomic models and take chemistry quizzes.</p></div>
+  <div class="panel"><h2>🧪 Choose an atomic model</h2><div class="navgrid">
+    <button class="navcard" data-atommodel="dalton"><span class="bigicon">⚫</span><strong>1. Dalton Model</strong><small>Atoms as solid spheres.</small></button>
+    <button class="navcard" data-atommodel="thomson"><span class="bigicon">🍪</span><strong>2. Thomson Model</strong><small>Electrons embedded in positive matter.</small></button>
+    <button class="navcard" data-atommodel="rutherford"><span class="bigicon">🎯</span><strong>3. Rutherford Model</strong><small>Tiny nucleus and mostly empty space.</small></button>
+    <button class="navcard" data-atommodel="bohr"><span class="bigicon">⚛️</span><strong>4. Bohr Model</strong><small>Electrons in defined energy levels.</small></button>
+    <button class="navcard" data-atommodel="quantum"><span class="bigicon">☁️</span><strong>5. Quantum Model</strong><small>Electron orbitals and probability clouds.</small></button>
+  </div></div>
+  <div class="panel"><h2>📘 Chemistry quick facts</h2><div class="formula-grid">
+    <div class="formula"><div class="formula-title">ATOMIC NUMBER</div><div class="equation">Z = protons</div></div>
+    <div class="formula"><div class="formula-title">MASS NUMBER</div><div class="equation">A = protons + neutrons</div></div>
+    <div class="formula"><div class="formula-title">NEUTRAL ATOM</div><div class="equation">Electrons = protons</div></div>
+    <div class="formula"><div class="formula-title">PARTICLE CHARGES</div><div class="equation">p: +1 • n: 0 • e: −1</div></div>
+  </div></div>
+</section>
+
+<section id="atomModel" class="screen">
+  <button class="secondary" data-go="chemistry">← Chemistry Lab</button>
+  <div class="panel hero"><div class="eyebrow" id="atomEra"></div><h1 id="atomTitle"></h1><p id="atomSubtitle"></p></div>
+  <div class="panel"><h2>🔬 Model illustration</h2><div id="atomModelVisual" class="atom-visual"></div>
+  <div class="legend"><span><i class="proton"></i> Proton (+)</span><span><i class="neutron"></i> Neutron (0)</span><span><i style="background:#67f5ff"></i> Electron (−)</span></div>
+  <h2 style="margin-top:18px">💡 Main idea</h2><p id="atomIdea"></p><h2>📚 Important points</h2><ul id="atomPoints"></ul><div class="note" id="atomHint"></div>
+  <button class="primary" id="atomQuizButton" style="margin-top:14px">🧠 Take this model's MCQ quiz</button></div>
+</section>
+
+<section id="atomExplorer" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+  <div class="panel hero"><div class="eyebrow">Periodic table explorer</div><h1>First 20 Elements</h1><p>Choose an element to view its electron shells and nucleus.</p></div>
+  <div class="panel"><div class="field"><label for="atomElementSelect">Choose element</label><select id="atomElementSelect"></select></div>
+  <div id="elementAtomVisual" class="atom-visual"></div>
+  <div class="legend"><span><i class="proton"></i> Proton (+)</span><span><i class="neutron"></i> Neutron (0)</span><span><i style="background:#67f5ff"></i> Electron (−)</span></div>
+  <div class="stats" style="margin-top:14px"><div class="stat"><strong id="elementAtomicNumber">1</strong><span>Atomic number</span></div><div class="stat"><strong id="elementMassNumber">1</strong><span>Mass number*</span></div><div class="stat"><strong id="elementNeutrons">0</strong><span>Neutrons*</span></div></div>
+  <div class="formula" style="margin-top:12px"><div class="formula-title">ELECTRON SHELL CONFIGURATION</div><div class="equation" id="elementConfiguration">K: 1</div><div class="explain" id="elementDescription"></div></div>
+  <div class="note">*Mass numbers show common isotopes. Isotopes may have different neutron counts. Nucleus illustrations are schematic and not to scale.</div>
+  </div>
+</section>
+<div id="toast" style="display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fde68a;color:#292044;padding:12px 17px;border-radius:30px;font-weight:850;z-index:50;max-width:90%"></div>
+</div>
+<script>
+"use strict";
+const $=id=>document.getElementById(id), PROFILE_KEY="scienceNexusProfile";
+const fresh=()=>({name:"Math Champion",avatar:"🚀",xp:0,coins:0,games:0,correct:0,bestStreak:0,bestScore:0,badges:[]});
+let profile;
+try { profile={...fresh(),...(JSON.parse(localStorage.getItem(PROFILE_KEY))||{})}; }
+catch(e) { profile=fresh(); }
+const badgeNames={first:"🌟 First Quest",perfect:"💯 Perfect Game",streak:"🔥 5 Streak",ten:"🎮 10 Games",scholar:"🧠 100 Correct",marathon:"🏆 20 Questions"};
+let timerId=null, toastId=null, rafIds=[];
+function stopTimer(){if(timerId){clearTimeout(timerId);timerId=null;}}
+function go(id){
+  stopTimer();
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b)go(b.dataset.go);});
+function toast(t){
+  $("toast").textContent=t;$("toast").style.display="block";
+  clearTimeout(toastId);toastId=setTimeout(()=>$("toast").style.display="none",2200);
+}
+function save(){try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));}catch(e){}}
+function renderProfile(){
+  $("nameDisplay").textContent=profile.name;$("avatarDisplay").textContent=profile.avatar;
+  $("playerName").value=profile.name;$("avatarChoice").value=profile.avatar;
+  $("coinsTop").textContent=profile.coins;
+  $("levelDisplay").textContent="Level "+(Math.floor(profile.xp/100)+1)+" • "+profile.xp+" XP";
+  $("xpBar").style.width=(profile.xp%100)+"%";$("bestDisplay").textContent=profile.bestScore;
+  $("gamesDisplay").textContent=profile.games;$("correctDisplay").textContent=profile.correct;
+  $("streakDisplay").textContent=profile.bestStreak;$("badgesDisplay").replaceChildren();
+  if(!profile.badges.length){$("badgesDisplay").innerHTML='<span class="small">Play to unlock achievements!</span>';return;}
+  profile.badges.forEach(k=>{let s=document.createElement("span");s.className="badge";s.textContent=badgeNames[k];$("badgesDisplay").appendChild(s);});
+}
+$("saveProfile").onclick=()=>{
+  profile.name=$("playerName").value.trim()||"Math Champion";
+  profile.avatar=$("avatarChoice").value;save();renderProfile();toast("Profile saved!");
+};
+function fillClasses(id){
+  for(let i=1;i<=12;i++){let o=document.createElement("option");o.value=i;o.textContent="Class "+i;if(i===7)o.selected=true;$(id).appendChild(o);}
+}
+fillClasses("homeClass");fillClasses("quizClass");
+
+/* Formula library */
+
+const formulas = [
+  // CLASSES 1–5
+  [1,"Arithmetic","Addition","a + b","Add two numbers."],
+  [1,"Arithmetic","Subtraction","a − b","Find the difference."],
+  [1,"Arithmetic","Multiplication","a × b","Multiply two numbers."],
+  [1,"Arithmetic","Division","a ÷ b","Divide into equal groups."],
+  [1,"Arithmetic","Order of operations","BODMAS","Brackets, orders, division, multiplication, addition, subtraction."],
+  [1,"Fractions","Fraction of a quantity","a/b × N","Multiply the fraction by the quantity."],
+  [1,"Fractions","Equivalent fractions","a/b = ka/kb","Multiply numerator and denominator by the same non-zero number."],
+  [1,"Arithmetic","Average","Sum ÷ number of values","Find the mean."],
+  [1,"Arithmetic","Percentage","Part/whole × 100","Express a part as a percentage."],
+  [1,"Geometry","Perimeter of a square","P = 4s","s is the side length."],
+  [1,"Geometry","Perimeter of a rectangle","P = 2(l + b)","l is length and b is breadth."],
+  [1,"Geometry","Area of a square","A = s²","Square the side length."],
+  [1,"Geometry","Area of a rectangle","A = l × b","Multiply length by breadth."],
+  [1,"Geometry","Area of a triangle","A = ½ × b × h","b is base and h is perpendicular height."],
+  [1,"Geometry","Perimeter of a triangle","P = a + b + c","Add all three sides."],
+  [1,"Geometry","Volume of a cube","V = s³","s is the edge length."],
+  [1,"Geometry","Volume of a cuboid","V = l × b × h","Multiply its three dimensions."],
+  [1,"Arithmetic","Speed","Speed = distance/time","Use matching units."],
+
+  // CLASSES 6–8
+  [6,"Arithmetic","Ratio","a : b = a/b","Compare two quantities."],
+  [6,"Arithmetic","Proportion","a/b = c/d","Two ratios are equal."],
+  [6,"Arithmetic","Percentage change","Change/original × 100%","Use the original value as the base."],
+  [6,"Arithmetic","Profit","Profit = SP − CP","SP is selling price; CP is cost price."],
+  [6,"Arithmetic","Loss","Loss = CP − SP","When cost price exceeds selling price."],
+  [6,"Arithmetic","Profit percentage","Profit/CP × 100%","Calculate profit relative to cost price."],
+  [6,"Arithmetic","Simple interest","SI = PRT/100","R is annual percentage rate and T is time in years."],
+  [6,"Arithmetic","Amount with simple interest","A = P + SI","Principal plus simple interest."],
+  [6,"Fractions","Fraction addition","a/b + c/d = (ad + bc)/bd","Use a common denominator."],
+  [6,"Fractions","Fraction multiplication","a/b × c/d = ac/bd","Multiply numerators and denominators."],
+  [6,"Fractions","Fraction division","(a/b) ÷ (c/d) = ad/bc","Multiply by the reciprocal; b,c,d are non-zero."],
+  [6,"Algebra","Distributive law","a(b + c) = ab + ac","Multiply each term inside brackets."],
+  [6,"Algebra","Linear equation","ax + b = c ⇒ x = (c − b)/a","a must not be zero."],
+  [6,"Algebra","Exponent product rule","aᵐ × aⁿ = aᵐ⁺ⁿ","Same base: add exponents."],
+  [6,"Algebra","Exponent quotient rule","aᵐ/aⁿ = aᵐ⁻ⁿ","For a ≠ 0."],
+  [6,"Algebra","Power of a power","(aᵐ)ⁿ = aᵐⁿ","Multiply the exponents."],
+  [6,"Geometry","Sum of triangle angles","A + B + C = 180°","Interior angles of a triangle."],
+  [6,"Geometry","Sum of quadrilateral angles","360°","Interior angles of a quadrilateral."],
+  [6,"Geometry","Area of a parallelogram","A = b × h","h is perpendicular height."],
+  [6,"Geometry","Area of a trapezium","A = ½(a + b)h","a and b are parallel sides."],
+  [6,"Geometry","Circumference of a circle","C = 2πr = πd","r is radius and d is diameter."],
+  [6,"Geometry","Area of a circle","A = πr²","r is radius."],
+  [6,"Geometry","Volume of a cylinder","V = πr²h","r is radius and h is height."],
+  [6,"Statistics","Mean","Mean = sum of values/count","Add all values and divide by their count."],
+  [6,"Statistics","Range","Range = maximum − minimum","Difference between largest and smallest values."],
+  [6,"Coordinate Geometry","Coordinate point","(x, y)","x is horizontal; y is vertical."],
+
+  // CLASSES 9–10
+  [9,"Algebra","Square of a sum","(a + b)² = a² + 2ab + b²","Algebraic identity."],
+  [9,"Algebra","Square of a difference","(a − b)² = a² − 2ab + b²","Algebraic identity."],
+  [9,"Algebra","Difference of squares","a² − b² = (a − b)(a + b)","Factorisation identity."],
+  [9,"Algebra","Cube of a sum","(a + b)³ = a³ + 3a²b + 3ab² + b³","Expand the cube of a sum."],
+  [9,"Algebra","Cube of a difference","(a − b)³ = a³ − 3a²b + 3ab² − b³","Expand the cube of a difference."],
+  [9,"Algebra","Quadratic formula","x = (−b ± √(b² − 4ac))/(2a)","For ax² + bx + c = 0, where a ≠ 0."],
+  [9,"Algebra","Discriminant","D = b² − 4ac","Determines the nature of quadratic roots."],
+  [9,"Algebra","Sum of quadratic roots","α + β = −b/a","For ax² + bx + c = 0."],
+  [9,"Algebra","Product of quadratic roots","αβ = c/a","For ax² + bx + c = 0."],
+  [9,"Geometry","Pythagorean theorem","a² + b² = c²","For a right-angled triangle; c is the hypotenuse."],
+  [9,"Geometry","Heron's formula","A = √[s(s−a)(s−b)(s−c)]","s = (a + b + c)/2; a,b,c are side lengths."],
+  [9,"Geometry","Sector arc length","L = (θ/360°) × 2πr","θ is the central angle in degrees."],
+  [9,"Geometry","Area of a sector","A = (θ/360°) × πr²","θ is the central angle in degrees."],
+  [9,"Geometry","Curved surface of a cylinder","CSA = 2πrh","r is radius and h is height."],
+  [9,"Geometry","Total surface of a cylinder","TSA = 2πr(h + r)","Includes both circular ends."],
+  [9,"Geometry","Volume of a cone","V = ⅓πr²h","r is radius and h is perpendicular height."],
+  [9,"Geometry","Volume of a sphere","V = ⁴⁄₃πr³","r is radius."],
+  [9,"Geometry","Surface area of a sphere","A = 4πr²","r is radius."],
+  [9,"Coordinate Geometry","Distance formula","d = √[(x₂−x₁)² + (y₂−y₁)²]","Distance between two coordinate points."],
+  [9,"Coordinate Geometry","Midpoint formula","M = ((x₁+x₂)/2, (y₁+y₂)/2)","Midpoint of a line segment."],
+  [9,"Coordinate Geometry","Slope","m = (y₂−y₁)/(x₂−x₁)","For x₂ ≠ x₁."],
+  [9,"Trigonometry","Sine ratio","sin θ = opposite/hypotenuse","Right-angled triangle."],
+  [9,"Trigonometry","Cosine ratio","cos θ = adjacent/hypotenuse","Right-angled triangle."],
+  [9,"Trigonometry","Tangent ratio","tan θ = opposite/adjacent","Right-angled triangle."],
+  [9,"Trigonometry","Cosecant ratio","cosec θ = 1/sin θ","Where sin θ ≠ 0."],
+  [9,"Trigonometry","Secant ratio","sec θ = 1/cos θ","Where cos θ ≠ 0."],
+  [9,"Trigonometry","Cotangent ratio","cot θ = 1/tan θ","Where tan θ is defined and non-zero."],
+  [9,"Trigonometry","Pythagorean identity","sin²θ + cos²θ = 1","Fundamental trigonometric identity."],
+  [9,"Trigonometry","Tangent identity","1 + tan²θ = sec²θ","Where the ratios are defined."],
+  [9,"Trigonometry","Cotangent identity","1 + cot²θ = cosec²θ","Where the ratios are defined."],
+  [9,"Trigonometry","Sine complementary angle","sin(90° − θ) = cos θ","For complementary angles."],
+  [9,"Trigonometry","Cosine complementary angle","cos(90° − θ) = sin θ","For complementary angles."],
+  [9,"Statistics","Probability","P(E) = favourable outcomes/total outcomes","For equally likely outcomes."],
+  [9,"Statistics","Median","Middle value of ordered data","For an even count, average the two middle values."],
+  [9,"Statistics","Mode","Most frequent value","The value occurring most often."],
+  [9,"Statistics","Mean of grouped data","Mean = Σfᵢxᵢ/Σfᵢ","xᵢ is class mark and fᵢ is frequency."],
+  [9,"Logarithms","Product rule","logₐ(xy) = logₐx + logₐy","For positive x,y and a > 0, a ≠ 1."],
+  [9,"Logarithms","Quotient rule","logₐ(x/y) = logₐx − logₐy","For positive x,y and a > 0, a ≠ 1."],
+  [9,"Logarithms","Power rule","logₐ(xⁿ) = n logₐx","For x > 0 and a > 0, a ≠ 1."],
+
+  // CLASSES 11–12
+  [11,"Sets","Union","A ∪ B","Elements in A, B, or both."],
+  [11,"Sets","Intersection","A ∩ B","Elements common to both sets."],
+  [11,"Sets","Complement","A′ = U \\ A","Elements in the universal set U but not in A."],
+  [11,"Sets","Two-set counting","n(A ∪ B) = n(A) + n(B) − n(A ∩ B)","Avoid counting the intersection twice."],
+  [11,"Functions","Composite function","(f ∘ g)(x) = f(g(x))","Apply g first, then f."],
+  [11,"Functions","Inverse function","f⁻¹(f(x)) = x","Where the inverse exists."],
+  [11,"Sequences","Arithmetic progression nth term","aₙ = a + (n−1)d","a is first term and d is common difference."],
+  [11,"Sequences","Arithmetic progression sum","Sₙ = n/2[2a + (n−1)d]","Sum of the first n terms."],
+  [11,"Sequences","Geometric progression nth term","aₙ = arⁿ⁻¹","r is the common ratio."],
+  [11,"Sequences","Geometric progression sum","Sₙ = a(rⁿ−1)/(r−1)","For r ≠ 1."],
+  [11,"Complex Numbers","Imaginary unit","i² = −1","Definition of the imaginary unit."],
+  [11,"Complex Numbers","Modulus","|a + ib| = √(a² + b²)","Magnitude of a complex number."],
+  [11,"Complex Numbers","Conjugate product","(a + ib)(a − ib) = a² + b²","Product of conjugates."],
+  [11,"Trigonometry","Sine addition","sin(A + B) = sin A cos B + cos A sin B","Angle-sum identity."],
+  [11,"Trigonometry","Cosine addition","cos(A + B) = cos A cos B − sin A sin B","Angle-sum identity."],
+  [11,"Trigonometry","Double-angle sine","sin 2A = 2 sin A cos A","Double-angle identity."],
+  [11,"Trigonometry","Double-angle cosine","cos 2A = cos²A − sin²A","Also equals 1 − 2sin²A or 2cos²A − 1."],
+  [11,"Trigonometry","Half-angle identity","sin²(A/2) = (1 − cos A)/2","Useful for half-angle calculations."],
+  [11,"Matrices","2×2 determinant","det(A) = ad − bc","For A = [[a,b],[c,d]]."],
+  [11,"Matrices","2×2 inverse","A⁻¹ = 1/(ad−bc) [[d,−b],[−c,a]]","For ad − bc ≠ 0."],
+  [11,"Vectors","Vector magnitude","|a| = √(a₁² + a₂² + a₃²)","Magnitude of a 3D vector."],
+  [11,"Vectors","Dot product","a · b = |a||b|cos θ","Angle θ between the vectors."],
+  [11,"Vectors","Perpendicular vectors","a · b = 0","For non-zero perpendicular vectors."],
+  [11,"Calculus","Power derivative","d(xⁿ)/dx = nxⁿ⁻¹","Power rule for differentiation."],
+  [11,"Calculus","Derivative of sine","d(sin x)/dx = cos x","x is in radians."],
+  [11,"Calculus","Derivative of cosine","d(cos x)/dx = −sin x","x is in radians."],
+  [11,"Calculus","Derivative of exponential","d(eˣ)/dx = eˣ","Exponential function."],
+  [11,"Calculus","Power integral","∫xⁿ dx = xⁿ⁺¹/(n+1) + C","For n ≠ −1."],
+  [11,"Calculus","Integral of reciprocal","∫(1/x) dx = ln|x| + C","For x ≠ 0."],
+  [11,"Probability","Permutation","nPᵣ = n!/(n−r)!","Arrangements where order matters."],
+  [11,"Probability","Combination","nCᵣ = n!/[r!(n−r)!]","Selections where order does not matter."],
+  [11,"Probability","Conditional probability","P(A|B) = P(A ∩ B)/P(B)","For P(B) > 0."],
+  [11,"Probability","Variance","σ² = Σ(xᵢ − μ)²/N","Population variance; μ is population mean."],
+  [11,"Logarithms","Change of base","logₐx = log_bx/log_ba","For valid positive arguments and bases."],
+  [11,"Advanced","Binomial theorem","(a + b)ⁿ = Σ C(n,r)aⁿ⁻ʳbʳ","For non-negative integer n."],
+  [11,"Advanced","Euler's formula","eⁱˣ = cos x + i sin x","x is in radians."]
+];
+
+let activeCat="all";
+function renderFormulas(){
+  const lev=$("formulaClass").value,q=$("formulaSearch").value.toLowerCase();
+  const list=formulas.filter(f=>(lev==="all"||Number(lev)===11||(Number(lev)===1?f[0]===1:Number(lev)===6?f[0]<=6:f[0]<=9))&&(activeCat==="all"||f[1]===activeCat)&&f.join(" ").toLowerCase().includes(q));
+  $("formulaResults").replaceChildren();
+  if(!list.length){$("formulaResults").textContent="No matching formulas found.";return;}
+  list.forEach(f=>{
+    let c=document.createElement("div");c.className="formula";
+    [f[1].toUpperCase()+" • "+f[2],f[3],f[4]].forEach((v,i)=>{
+      let e=document.createElement("div");e.className=i===0?"formula-title":i===1?"equation":"explain";e.textContent=v;c.appendChild(e);
+    });
+    $("formulaResults").appendChild(c);
+  });
+}
+$("formulaClass").onchange=renderFormulas;$("formulaSearch").oninput=renderFormulas;
+$("formulaTabs").onclick=e=>{
+  let b=e.target.closest("[data-cat]");if(!b)return;activeCat=b.dataset.cat;
+  $("formulaTabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderFormulas();
+};
+
+/* Maths reference tables */
+function renderTable(kind){
+  let html="";
+  if(kind==="trig"){
+    let rows=[["0°","0","1","0","Undefined","1","Undefined"],["30°","1/2","√3/2","1/√3","2","2/√3","√3"],["45°","1/√2","1/√2","1","√2","√2","1"],["60°","√3/2","1/2","√3","2/√3","2","1/√3"],["90°","1","0","Undefined","1","Undefined","0"]];
+    html="<h2>📐 Six trigonometric ratios</h2><div class='tablewrap'><table><tr><th>Angle</th><th>sin</th><th>cos</th><th>tan</th><th>cosec</th><th>sec</th><th>cot</th></tr>"+rows.map(r=>"<tr>"+r.map(v=>"<td>"+v+"</td>").join("")+"</tr>").join("")+"</table></div><div class='note'>cosec θ=1/sin θ; sec θ=1/cos θ; cot θ=1/tan θ, wherever defined.</div>";
+  } else if(kind==="logs"){
+    html="<h2>📈 Common logarithms (base 10)</h2><div class='tablewrap'><table><tr><th>x</th><th>log₁₀x</th><th>x</th><th>log₁₀x</th></tr>";
+    for(let i=1;i<=10;i++)html+="<tr><td>"+i+"</td><td>"+Math.log10(i).toFixed(4)+"</td><td>"+(i+10)+"</td><td>"+Math.log10(i+10).toFixed(4)+"</td></tr>";
+    html+="</table></div>";
+  } else if(kind==="squares"){
+    html="<h2>Squares and cubes</h2><div class='tablewrap'><table><tr><th>n</th><th>n²</th><th>n³</th></tr>";
+    for(let i=1;i<=30;i++)html+="<tr><td>"+i+"</td><td>"+i*i+"</td><td>"+i*i*i+"</td></tr>";
+    html+="</table></div>";
+  } else {
+    html="<h2>Powers of 10</h2><div class='tablewrap'><table><tr><th>Power</th><th>Value</th></tr>";
+    [["10⁻³","0.001"],["10⁻²","0.01"],["10⁻¹","0.1"],["10⁰","1"],["10¹","10"],["10²","100"],["10³","1,000"],["10⁶","1,000,000"],["10⁹","1,000,000,000"]].forEach(r=>html+="<tr>"+r.map(v=>"<td>"+v+"</td>").join("")+"</tr>");
+    html+="</table></div>";
+  }
+  $("tableContent").innerHTML=html;
+}
+$("tableTabs").onclick=e=>{
+  let b=e.target.closest("[data-table]");if(!b)return;
+  $("tableTabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderTable(b.dataset.table);
+};
+
+/* Quiz engine */
+const COUNT=20;
+let difficulty=1,mode="practice",grade=7,questions=[],qi=0,score=0,right=0,streak=0,bestStreak=0,lives=3,answered=false,finished=false,seconds=20,hintShown=false,subject="math",activeChemModel=null;
+$("modeChoices").onclick=e=>{
+  let b=e.target.closest("[data-mode]");if(!b)return;mode=b.dataset.mode;
+  $("modeChoices").querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("selected",x===b));
+};
+$("difficultyChoices").onclick=e=>{
+  let b=e.target.closest("[data-diff]");if(!b)return;difficulty=Number(b.dataset.diff);
+  $("difficultyChoices").querySelectorAll("[data-diff]").forEach(x=>x.classList.toggle("selected",x===b));
+};
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=rand(0,i);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function makeQ(text,answer,hint){
+  answer=Number.isFinite(answer)?Number(answer.toFixed(2)):answer;
+  let opts=[String(answer)],tries=0;
+  while(opts.length<4&&tries++<100){
+    let step=Math.max(2,Math.ceil(Math.abs(Number(answer)||1)*.2));
+    let w=Number.isInteger(answer)?answer+rand(-step,step):Number((answer+rand(-step,step)/10).toFixed(2));
+    if(String(w)!==String(answer)&&!opts.includes(String(w)))opts.push(String(w));
+  }
+  while(opts.length<4)opts.push(String(answer+opts.length+7));
+  return {text,answer:String(answer),options:shuffle(opts),hint:hint||"Work step by step."};
+}
+
+function genQ(c, d) {
+  // Keep the existing question level for Classes 1–8.
+  if (c <= 8) {
+    let a = rand(2, 10 + c * d * 2);
+    let b = rand(2, 10 + c * d * 2);
+    let t = rand(0, 7);
+
+    if (c <= 3) {
+      let x = rand(5, 20 + c * d * 3);
+      let y = rand(2, 15 + c * d * 2);
+      if (t === 0) return makeQ(x+" + "+y+" = ?", x+y, "Add the numbers.");
+      if (t === 1) return makeQ((x+y)+" − "+x+" = ?", y, "Use subtraction.");
+      if (t === 2) return makeQ(x+" × "+y+" = ?", x*y, "Multiply.");
+      if (t === 3) return makeQ((x*y)+" ÷ "+x+" = ?", y, "Use the inverse operation.");
+      if (t === 4) return makeQ("Double "+(x+y)+" = ?", 2*(x+y), "Multiply by 2.");
+      if (t === 5) return makeQ("Half of "+2*x+" = ?", x, "Divide by 2.");
+      if (t === 6) return makeQ(x+" + "+y+" + "+a+" = ?", x+y+a, "Add all three.");
+      return makeQ("What is "+x+" more than "+2*y+"?", x+2*y, "Add the quantities.");
+    }
+
+    if (c <= 5) {
+      if (t === 0) return makeQ(a+" × "+b+" = ?", a*b, "Multiply.");
+      if (t === 1) return makeQ((a*b)+" ÷ "+a+" = ?", b, "Use inverse operations.");
+      if (t === 2) return makeQ("Area of rectangle "+a+" cm × "+b+" cm?", a*b, "Area = length × breadth.");
+      if (t === 3) return makeQ("Perimeter of square side "+a+" cm?", 4*a, "Multiply the side by 4.");
+      if (t === 4) return makeQ("Find "+a*10+"% of "+b*10+".", a*b, "Use the percentage.");
+      if (t === 5) return makeQ("Simplify "+a+" + "+b+" × "+(d+2), a+b*(d+2), "Multiply before adding.");
+      if (t === 6) return makeQ("Find "+a+"² + "+b+".", a*a+b, "Square first.");
+      return makeQ("Find "+a+"/"+(a+b)+" of "+(a+b)+".", a, "Multiply the fraction by the whole.");
+    }
+
+    if (c <= 8) {
+      let x = rand(3, 12+c*d);
+      let y = rand(2, 12+c*d);
+      if (t === 0) return makeQ(x+"² + "+y+" = ?", x*x+y, "Square first.");
+      if (t === 1) return makeQ("Find "+10*d+"% of "+x*y*10+".", x*y*d, "Calculate the percentage.");
+      if (t === 2) return makeQ("Solve "+(d+2)+"x = "+((d+2)*x)+".", x, "Divide both sides.");
+      if (t === 3) return makeQ("Triangle area: base "+2*x+", height "+y+"?", x*y, "Use half × base × height.");
+      if (t === 4) return makeQ(x+" × "+y+" − "+x+" + "+d+" = ?", x*y-x+d, "Multiply first.");
+      if (t === 5) return makeQ("√"+(x*x)+" = ?", x, "Find the square root.");
+      if (t === 6) return makeQ("Solve x + "+x+" = "+2*x+".", x, "Solve the equation.");
+      return makeQ("Perimeter: length "+(x+y)+", breadth "+x+".", 2*(2*x+y), "Add length and breadth, then double.");
+    }
+  }
+
+  // CLASSES 9–10: algebra, quadratics, geometry and trigonometry.
+  if (c <= 10) {
+    let a = rand(2, d===1 ? 6 : d===2 ? 12 : 20);
+    let b = rand(2, d===1 ? 8 : d===2 ? 15 : 25);
+    let x = rand(2, d===1 ? 8 : d===2 ? 15 : 25);
+    let t = rand(0, 7);
+
+    if (t === 0) {
+      let r = rand(2, 8+d*4);
+      return makeQ("If f(x) = x² − "+a+"x + "+b+", find f("+r+").",
+        r*r-a*r+b, "Substitute the given value for every x.");
+    }
+    if (t === 1) {
+      let r = rand(2, 10+d*3);
+      return makeQ("Solve x² − "+(2*r)+"x + "+(r*r)+" = 0. Find x.",
+        r, "Factor the quadratic; this equation has a repeated root.");
+    }
+    if (t === 2) {
+      let n = rand(3, 8+d*2);
+      return makeQ("An AP has first term "+a+" and common difference "+b+
+        ". Find term "+n+".", a+(n-1)*b, "Use the nth-term rule.");
+    }
+    if (t === 3) {
+      let r = rand(3, 12+d*3);
+      return makeQ("A right triangle has legs "+r+" and "+(r+1)+
+        ". Find the square of its hypotenuse.", r*r+(r+1)*(r+1),
+        "Apply the Pythagorean theorem.");
+    }
+    if (t === 4) {
+      let r = rand(2, 10+d*2);
+      return makeQ("If tan θ = "+r+"/3, find 9 tan²θ.",
+        r*r, "Square the ratio, then multiply by 9.");
+    }
+    if (t === 5) {
+      let r = rand(2, 10+d*2);
+      return makeQ("Find the distance between (0,0) and ("+r+", "+(r+1)+
+        ") squared.", r*r+(r+1)*(r+1),
+        "The squared distance is x² + y² from the origin.");
+    }
+    if (t === 6) {
+      let r = rand(2, 8+d*3);
+      return makeQ("For x² − "+(r+3)+"x + "+(r*(r+3))+
+        " = 0, find the sum of its roots.", r+3,
+        "Use the relationship between roots and coefficients.");
+    }
+    let n = rand(3, 10+d*2);
+    return makeQ("A bag has "+n+" red and "+(n+2)+
+      " blue balls. Find the total number of balls.", 2*n+2,
+      "Add the numbers of both colours.");
+  }
+
+  // CLASSES 11–12: advanced algebra, calculus, vectors and probability.
+  let a = rand(2, d===1 ? 5 : d===2 ? 10 : 16);
+  let b = rand(2, d===1 ? 6 : d===2 ? 12 : 20);
+  let n = rand(3, d===1 ? 6 : d===2 ? 10 : 14);
+  let t = rand(0, 9);
+
+  if (t === 0) {
+    let r = rand(2, 6+d*3);
+    return makeQ("If f(x) = x³ − "+a+"x² + "+b+
+      "x, find f'("+r+").", 3*r*r-2*a*r+b,
+      "Differentiate each term before substituting x.");
+  }
+  if (t === 1) {
+    let r = rand(2, 8+d*2);
+    return makeQ("If f(x) = x³ + "+a+"x² − "+b+
+      "x, find f''("+r+").", 6*r+2*a,
+      "Differentiate twice, then substitute x.");
+  }
+  if (t === 2) {
+    return makeQ("Evaluate ∫₀ⁿ 2x dx, where n = "+n+".",
+      n*n, "Find an antiderivative, then evaluate at both limits.");
+  }
+  if (t === 3) {
+    return makeQ("Find the determinant of [[ "+a+", "+b+" ], [ "+(a+1)+
+      ", "+(b+3)+" ]].", a*(b+3)-b*(a+1),
+      "For a 2×2 matrix, multiply the main diagonal and subtract the other diagonal.");
+  }
+  if (t === 4) {
+    return makeQ("Find the dot product of vectors ("+a+", "+b+
+      ") and ("+b+", "+a+").", 2*a*b,
+      "Multiply corresponding components and add them.");
+  }
+  if (t === 5) {
+    return makeQ("Find the coefficient of x² in (1 + x)^"+n+".",
+      n*(n-1)/2, "Use the binomial coefficient for the x² term.");
+  }
+  if (t === 6) {
+    let r = rand(2, 5+d*2);
+    return makeQ("A GP starts at "+a+" with common ratio "+r+
+      ". Find its third term.", a*r*r, "Multiply the first term by the ratio squared.");
+  }
+  if (t === 7) {
+    return makeQ("How many ways can "+n+
+      " distinct objects be arranged?", factorialSafe(n),
+      "The number of permutations of n distinct objects is n factorial.");
+  }
+  if (t === 8) {
+    let r = rand(2, 8+d*2);
+    return makeQ("If z = "+a+" + "+r+"i, find |z|².",
+      a*a+r*r, "The squared modulus is the sum of the squares of the real and imaginary parts.");
+  }
+  let r = rand(2, 10+d*3);
+  return makeQ("If y = x² − "+a+"x + "+b+
+    ", find dy/dx at x = "+r+".", 2*r-a,
+    "Differentiate the polynomial and substitute the given x.");
+}
+
+function factorialSafe(n) {
+  let result = 1;
+  for (let i = 2; i <= n; i++) result *= i;
+  return result;
+}
+
+function bossQ(c, d) {
+  // Preserve the original boss style for Classes 1–8.
+  if (c <= 3) {
+    let a = rand(8, 30),
+      b = rand(5, 20);
+    return makeQ("BOSS: (" + a + " + " + b + ") × 3 = ?", (a + b) * 3, "Add first.");
+  }
+  if (c <= 5) {
+    let a = rand(8, 20),
+      b = rand(5, 16);
+    return makeQ("BOSS: rectangle " + a + " × " + b + ". Area?", a * b, "Length × breadth.");
+  }
+  if (c <= 8) {
+    let a = rand(5, 20);
+    return makeQ("BOSS: solve 3x + 7 = " + (3 * a + 7) + ".", a, "Subtract 7, then divide by 3.");
+  }
+  
+  // Classes 9–10 boss questions.
+  if (c <= 10) {
+    let a = rand(4, 8 + d * 3);
+    let b = rand(3, 8 + d * 2);
+    let x = rand(3, 8 + d * 2);
+    const t = rand(0, 4);
+    
+    if (t === 0) {
+      return makeQ("BOSS: Solve x² − " + (2 * a) + "x + " + (a * a) + " = 0. Find x.",
+        a, "Factor the quadratic.");
+    }
+    if (t === 1) {
+      return makeQ("BOSS: Find the sum of the first " + x +
+        " terms of an AP with first term " + a + " and difference " + b + ".",
+        x * (2 * a + (x - 1) * b) / 2, "Use the arithmetic-series sum formula.");
+    }
+    if (t === 2) {
+      return makeQ("BOSS: If sin θ = 3/5 and θ is acute, find 25 cos²θ.",
+        16, "Use the Pythagorean trigonometric identity.");
+    }
+    if (t === 3) {
+      return makeQ("BOSS: Find the distance between (" + a + ", " + b +
+        ") and (" + a + ", " + (b + x) + ") squared.", x * x,
+        "The x-coordinates are equal.");
+    }
+    return makeQ("BOSS: Find the discriminant of x² − " + (2 * a) +
+      "x + " + (a * a - b) + " = 0.", 4 * b,
+      "Calculate b² − 4ac carefully.");
+  }
+  
+  // Classes 11–12 boss questions.
+  let a = rand(3, 8 + d * 2);
+  let b = rand(2, 7 + d * 2);
+  let n = rand(4, 8 + d * 2);
+  const t = rand(0, 5);
+  
+  if (t === 0) {
+    return makeQ("BOSS: If f(x) = x³ − " + a + "x² + " + b +
+      "x, find f'(" + n + ").", 3 * n * n - 2 * a * n + b,
+      "Differentiate first, then substitute x.");
+  }
+  if (t === 1) {
+    return makeQ("BOSS: Evaluate ∫₀ⁿ 3x² dx, where n = " + n + ".",
+      n * n * n, "Find the antiderivative and apply both limits.");
+  }
+  if (t === 2) {
+    return makeQ("BOSS: Find the determinant of [[ " + a + ", " + b +
+      " ], [ " + b + ", " + a + " ]].", a * a - b * b,
+      "Multiply the main diagonal and subtract the other diagonal.");
+  }
+  if (t === 3) {
+    return makeQ("BOSS: Find the coefficient of x³ in (1 + x)^" + n + ".",
+      n * (n - 1) * (n - 2) / 6, "Use the binomial coefficient for the x³ term.");
+  }
+  if (t === 4) {
+    return makeQ("BOSS: Find the dot product of (" + a + ", " + b +
+      ") and (" + b + ", " + a + ").", 2 * a * b,
+      "Multiply corresponding components and add.");
+  }
+  return makeQ("BOSS: How many ways can " + n +
+    " distinct objects be arranged?", factorialSafe(n),
+    "Use the factorial of the number of objects.");
+}
+
+function startMath() {
+  subject = "math";
+  activeChemModel = null;
+  grade = Number($("quizClass").value);
+
+  questions = Array.from(
+    { length: COUNT },
+    () => genQ(
+      mode === "mixed" ? rand(1, 12) : grade,
+      difficulty
+    )
+  );
+
+  // Question 20 becomes the final boss.
+  questions[COUNT - 1] = bossQ(
+    mode === "mixed" ? rand(1, 12) : grade,
+    difficulty
+  );
+
+  beginGame(
+    mode === "mixed"
+      ? "Mixed Classes 1–12"
+      : "Class " + grade
+  );
+}
+
+$("beginQuiz").onclick = startMath;
+
+function beginGame(title){
+  qi=0;score=0;right=0;streak=0;bestStreak=0;lives=3;finished=false;
+  $("modeBadge").textContent=subject==="chem"?"🧪 Chemistry • Practice":({practice:"📘 Practice",timed:"⏱️ Timed",survival:"❤️ Survival",mixed:"🌪️ Mixed Master"}[mode]);
+  $("quizLevelLabel").textContent=title;go("quiz");renderQuestion();
+}
+function renderQuestion(){
+  stopTimer();answered=false;hintShown=false;
+  const q=questions[qi];
+  $("questionCard").classList.toggle("boss",subject==="math"&&qi===COUNT-1);
+  $("questionTag").textContent=subject==="math"&&qi===COUNT-1?"👑 FINAL BOSS":(subject==="chem"?"🧪 CHEMISTRY QUESTION ":"QUESTION ")+(qi+1);
+  $("questionText").textContent=q.text;$("questionHint").textContent="Choose the correct answer.";
+  $("questionCounter").textContent="Question "+(qi+1)+"/"+COUNT;
+  $("quizProgress").style.width=(qi/COUNT*100)+"%";
+  $("answerFeedback").textContent="";$("answerFeedback").className="feedback";
+  $("nextButton").disabled=true;$("nextButton").textContent=qi===COUNT-1?"Finish 🏆":"Next →";
+  $("answerGrid").replaceChildren();
+  q.options.forEach((v,i)=>{
+    let b=document.createElement("button");b.className="answer";b.textContent=["A. ","B. ","C. ","D. "][i]+v;
+    b.onclick=()=>checkAnswer(v,b);$("answerGrid").appendChild(b);
+  });
+  $("currentStreak").textContent=streak;
+  $("lifeBadge").textContent=mode==="survival"&&subject==="math"?"❤️".repeat(lives)+"🖤".repeat(3-lives):"✨ Keep going!";
+  if(mode==="timed"&&subject==="math"){$("quizTimer").classList.remove("hidden");seconds=15;tick();}
+  else $("quizTimer").classList.add("hidden");
+}
+function tick(){
+  if(answered||finished||mode!=="timed"||subject!=="math")return;
+  $("quizTimer").classList.toggle("danger",seconds<=5);
+  $("quizTimer").textContent=seconds<=5?"⚠️ "+seconds+" seconds left!":"⏱️ Time left: "+seconds+" seconds";
+  if(seconds<=0){checkAnswer(null,null);return;}
+  seconds--;timerId=setTimeout(tick,1000);
+}
+
+/* Flowers and leaves: float across the screen, then fade smoothly */
+function burst(){
+  const symbols=["🎉"  , "🎊" , "🥳" ,  "🌷" ,  "💐"  ,  "💗"  , "💝" ,   "🎀"];
+  for(let i=0;i<22;i++){
+    const p=document.createElement("span");
+    p.className="celebration";
+    p.textContent=symbols[rand(0,symbols.length-1)];
+    p.style.left=rand(2,96)+"vw";
+    p.style.top=rand(35,85)+"vh";
+    p.style.fontSize=rand(18,31)+"px";
+    p.style.setProperty("--drift",rand(-90,90)+"px");
+    p.style.setProperty("--spin",rand(-180,180)+"deg");
+    document.body.appendChild(p);
+    p.addEventListener("animationend",()=>p.remove(),{once:true});
+  }
+}
+function checkAnswer(v,button){
+  if(answered||finished)return;
+  answered=true;stopTimer();
+  const q=questions[qi],ok=v!==null&&String(v)===String(q.answer);
+  $("answerGrid").querySelectorAll("button").forEach(b=>{
+    b.disabled=true;
+    if(b.textContent.replace(/^[A-D]\.\s*/,"")===String(q.answer))b.classList.add("correct");
+  });
+  if(ok){
+    right++;streak++;bestStreak=Math.max(bestStreak,streak);
+    const pts=10+(subject==="math"?difficulty*3:2)+Math.min(15,(streak-1)*2);
+    score+=pts;
+    $("answerFeedback").textContent="✅ Correct! +"+pts+" XP";
+    $("answerFeedback").className="feedback good";
+    if(streak>=3&&streak%3===0){score+=5;$("answerFeedback").textContent="🌸 COMBO! +5 bonus XP";}
+    burst();
+  }else{
+    streak=0;if(button)button.classList.add("wrong");
+    if(mode==="survival"&&subject==="math")lives--;
+    $("answerFeedback").textContent=v===null?"⏰ Time's up! Answer: "+q.answer:"❌ Correct answer: "+q.answer;
+    $("answerFeedback").className="feedback bad";
+  }
+  $("currentStreak").textContent=streak;
+  $("lifeBadge").textContent=mode==="survival"&&subject==="math"?"❤️".repeat(lives)+"🖤".repeat(3-lives):"✨ Keep going!";
+  $("quizProgress").style.width=((qi+1)/COUNT*100)+"%";
+  $("nextButton").disabled=false;
+}
+$("hintButton").onclick=()=>{
+  if(!answered&&!hintShown){hintShown=true;$("questionHint").textContent="💡 Hint: "+questions[qi].hint;}
+};
+$("nextButton").onclick=()=>{
+  if(!answered)return;
+  if(qi===COUNT-1||(mode==="survival"&&lives<=0&&subject==="math"))finishQuiz();
+  else{qi++;renderQuestion();}
+};
+$("quitQuiz").onclick=()=>go(subject==="chem"?"chemistry":"home");
+function addBadge(k,a){if(!profile.badges.includes(k)){profile.badges.push(k);a.push(k);}}
+function finishQuiz(){
+  if(finished)return;finished=true;stopTimer();
+  const accuracy=Math.round(right/COUNT*100),coins=Math.floor(score/10),added=[];
+  profile.xp+=score;profile.coins+=coins;profile.games++;profile.correct+=right;
+  profile.bestStreak=Math.max(profile.bestStreak,bestStreak);profile.bestScore=Math.max(profile.bestScore,score);
+  addBadge("first",added);if(accuracy===100)addBadge("perfect",added);
+  if(bestStreak>=5)addBadge("streak",added);if(profile.games>=10)addBadge("ten",added);
+  if(profile.correct>=100)addBadge("scholar",added);addBadge("marathon",added);
+  save();renderProfile();
+  $("resultEmoji").textContent=accuracy>=80?"🏆":accuracy>=50?"🌟":"💪";
+  $("resultTitle").textContent=accuracy>=80?"Outstanding!":accuracy>=50?"Quest Complete!":"Keep Practising!";
+  $("resultXP").textContent="+"+score+" XP";
+  $("resultMessage").textContent=accuracy>=80?"Excellent work!":accuracy>=50?"Good effort. Practise again to improve.":"Every attempt is a chance to learn.";
+  $("resCorrect").textContent=right+"/"+COUNT;$("resAccuracy").textContent=accuracy+"%";
+  $("resCoins").textContent="+"+coins;$("resStreak").textContent=bestStreak;
+  $("newBadges").replaceChildren();
+  if(!added.length)$("newBadges").innerHTML='<span class="small">No new badges this time.</span>';
+  added.forEach(k=>{let b=document.createElement("span");b.className="badge";b.textContent=badgeNames[k];$("newBadges").appendChild(b);});
+  go("results");burst();
+}
+$("againButton").onclick=()=>subject==="chem"&&activeChemModel?startChemistryQuiz(activeChemModel):go("quizSetup");
+
+/* Atomic model information with 20 unique questions each */
+const models={
+dalton:{era:"Early atomic theory • 1803",title:"Dalton's Atomic Model",subtitle:"Atoms were represented as tiny solid spheres.",idea:"Dalton proposed that matter is made of atoms and treated them as indivisible particles.",points:["Matter consists of atoms.","Atoms of different elements were considered different.","Atoms combine in simple whole-number ratios.","Chemical reactions rearrange atoms.","Later discoveries showed atoms contain smaller particles."],hint:"Picture a tiny solid ball. This model has no electrons or nucleus.",qs:[
+  ["How did Dalton represent atoms?",["Solid spheres","Positive spheres with electrons","Nuclei with shells","Electron clouds"],0,"Think of a tiny solid ball."],
+  ["Who proposed the solid-sphere model?",["Bohr","Dalton","Thomson","Rutherford"],1,"His theory was proposed in the early 1800s."],
+  ["Compounds form in...",["Any fractional ratio","Simple whole-number ratios","Only groups of ten","Electron shells"],1,"Think of formulas such as H₂O."],
+  ["Which discovery showed atoms contain smaller particles?",["Electron discovery","Shadows","Gravity","Tides"],0,"J. J. Thomson discovered the electron."],
+  ["What did Dalton believe happens to atoms during a chemical reaction?",["They are created","They are destroyed","They are rearranged","They change into other elements"],2,"Atoms are neither created nor destroyed, only rearranged."],
+  ["According to Dalton, all atoms of a given element are...",["Identical in mass and properties","Different in size","Made of electrons","Negatively charged"],0,"Dalton stated atoms of the same element are identical."],
+  ["Dalton's atomic theory was introduced in which year?",["1803","1904","1911","1925"],0,"It was proposed in 1803."],
+  ["Did Dalton's model include a central nucleus?",["Yes, with protons","Yes, with neutrons","No, it had no nucleus","Only in heavy atoms"],2,"The nucleus was discovered much later by Rutherford."],
+  ["Which law does Dalton's theory help explain regarding chemical reactions?",["Law of Conservation of Mass","Law of Gravity","Law of Refraction","Law of Inertia"],0,"Mass is conserved because atoms are rearranged."],
+  ["Dalton described atoms as indivisible. Is this completely true today?",["Yes, completely","No, atoms can be split into subatomic particles","Yes, except in water","No, atoms are made of cells"],1,"Atoms consist of protons, neutrons, and electrons."],
+  ["What is the smallest unit of an element according to Dalton?",["Molecule","Atom","Electron","Proton"],1,"The atom is the fundamental unit."],
+  ["In Dalton's model, can an atom of iron turn into an atom of gold in a chemical reaction?",["Yes, easily","No, chemical reactions cannot transform elements","Only when heated","Yes, with electricity"],1,"Elements maintain their identity in chemical reactions."],
+  ["What feature of Dalton's model is depicted visually in Science Nexus?",["A solid sphere","A solar system","A cloud","A pudding"],0,"It is shown as a solid sphere."],
+  ["Which statement is a limitation of Dalton's model?",["It could not account for isotopes or subatomic particles","It predicted electrons","It used quantum mechanics","It explained spectral lines"],0,"Dalton didn't know about subatomic particles or isotopes."],
+  ["Dalton was a native scientist of which country?",["England","France","Germany","USA"],0,"John Dalton was an English chemist and physicist."],
+  ["What subatomic particle was first discovered after Dalton's death?",["Electron","Quark","Gluon","Positron"],0,"The electron was discovered in 1897."],
+  ["When two elements combine to form more than one compound, the mass ratios are simple whole numbers. This is the Law of...",["Multiple Proportions","Conservation of Energy","Definite Orbitals","Gravitation"],0,"Dalton formulated the Law of Multiple Proportions."],
+  ["Are subatomic charge clouds part of Dalton's original theory?",["Yes","No","Only for gases","Only for metals"],1,"Dalton knew nothing of charge clouds."],
+  ["Dalton's atomic symbols were represented by...",["Single letter codes","Geometric circles and diagrams","Numbers","Greek letters"],1,"He used circle diagrams with symbols inside."],
+  ["Why is Dalton's atomic theory still important today?",["It laid the foundation for modern chemistry","It is 100% accurate","It proved quantum mechanics","It discovered neutrons"],0,"It was the first scientific, quantitative atomic theory."]
+]},
+thomson:{era:"Plum-pudding model • 1904",title:"Thomson's Atomic Model",subtitle:"Electrons are embedded in spread-out positive charge.",idea:"Thomson proposed a positive sphere with negative electrons embedded throughout it, balancing the charge of a neutral atom.",points:["The model includes electrons.","Positive charge is spread through the sphere.","The atom is neutral overall.","There is no central nucleus in this model."],hint:"Imagine negative particles embedded in a positively charged sphere.",qs:[
+  ["Who proposed the plum-pudding model?",["Dalton","Thomson","Rutherford","Bohr"],1,"He is known for discovering the electron."],
+  ["Where was the positive charge in Thomson's model?",["Central nucleus","Spread through the sphere","Outside the atom","Only in electrons"],1,"This model had no central nucleus."],
+  ["What is the charge of an electron?",["Positive","Negative","Neutral","Zero always"],1,"An electron carries negative charge."],
+  ["Which particle did Thomson discover?",["Proton","Neutron","Electron","Nucleus"],2,"It is negatively charged."],
+  ["Thomson discovered the electron using which experimental setup?",["Gold-foil experiment","Cathode ray tube","Particle accelerator","Prism spectrometer"],1,"Cathode ray tubes demonstrated negatively charged rays."],
+  ["What dessert did Thomson compare his atomic model to?",["Apple pie","Plum pudding","Chocolate cake","Ice cream"],1,"The electrons were like raisins in plum pudding."],
+  ["In Thomson's model, the overall charge of the atom is...",["Positive","Negative","Neutral","Variable"],2,"Positive charge balanced the negative electrons."],
+  ["Did Thomson's model contain neutrons?",["Yes","No","Only in heavy elements","Yes, in pairs"],1,"Neutrons were discovered much later in 1932."],
+  ["What happens to cathode rays in an electric field?",["Deflected towards the positive plate","Deflected towards the negative plate","Unchanged","Reflected backwards"],0,"Negatively charged particles are attracted to the positive plate."],
+  ["Thomson's model was proposed in which year?",["1803","1904","1913","1926"],1,"It was introduced in 1904."],
+  ["Why was Thomson's model eventually replaced?",["It couldn't explain the gold-foil experiment results","Electrons were proven not to exist","Atoms were proven to be solid","It was too complicated"],0,"Rutherford's alpha scattering experiment disproved it."],
+  ["What is the mass ratio of an electron compared to a hydrogen atom?",["Equal","About 1/1836","Twice as heavy","Ten times heavier"],1,"Electrons are extremely light."],
+  ["Thomson received the Nobel Prize in Physics in 1906 for...",["Conduction of electricity in gases","Splitting the atom","Quantum mechanics","Radioactivity"],0,"His work on cathode rays and electricity in gases."],
+  ["In the plum-pudding model, electrons are assumed to be...",["Orbiting in circles","Embedded inside positive sphere","In the central nucleus","Floating in deep space"],1,"Embedded like plums or raisins."],
+  ["Did Thomson's model feature a central concentrated nucleus?",["Yes","No","Only for hydrogen","Only for helium"],1,"There was no nucleus in Thomson's model."],
+  ["Cathode rays consist of streams of...",["Protons","Neutrons","Electrons","Alpha particles"],2,"Cathode rays are streams of electrons."],
+  ["Which subatomic particle was known in 1904?",["Electron only","Proton and neutron","Quark","Boson"],0,"Only the electron had been discovered by 1904."],
+  ["The positive sphere in Thomson's model was believed to be...",["Extremely dense","Uniformly distributed mass and charge","Made of protons","Surrounding the atom"],1,"Charge and mass were thought to be spread out uniformly."],
+  ["Thomson's electron was originally called a...",["Corpuscle","Positron","Neutrino","Photon"],0,"Thomson called them corpuscles."],
+  ["What was the main accomplishment of Thomson's model?",["It proved atoms contain smaller subatomic particles","It explained energy shells","It measured neutron mass","It mapped orbitals"],0,"It established that atoms are divisible and contain electrons."]
+]},
+rutherford:{era:"Nuclear model • 1911",title:"Rutherford's Atomic Model",subtitle:"A tiny, dense, positively charged nucleus is at the centre.",idea:"The gold-foil experiment showed most alpha particles passed through, while a few were strongly deflected. Rutherford concluded atoms are mostly empty space.",points:["A small, dense, positive nucleus is at the centre.","Most of the atom is empty space.","Electrons are outside the nucleus.","The classical model did not fully explain atomic stability."],hint:"Most alpha particles passed through the gold foil; a few were strongly deflected.",qs:[
+  ["Which experiment supported Rutherford’s model?",["Gold-foil experiment","Pendulum","Mirror","Cathode ray"],0,"Alpha particles were directed at thin gold foil."],
+  ["Most of an atom is...",["Solid matter","Empty space","A proton","Positive pudding"],1,"Most alpha particles passed through."],
+  ["What lies at the centre of Rutherford's atom?",["An electron","A tiny positive nucleus","A large negative sphere","An empty shell only"],1,"It is small, dense and positively charged."],
+  ["Which particles were fired at the metal foil in Rutherford's experiment?",["Alpha particles","Sound waves","Water drops","Light bulbs"],0,"They are positively charged helium nuclei."],
+  ["Why were a few alpha particles deflected backwards?",["They hit the dense, positive nucleus","They hit electrons","They hit air molecules","They absorbed light"],0,"Like charges repel when coming near the dense positive nucleus."],
+  ["Rutherford's model was proposed in which year?",["1803","1904","1911","1935"],2,"It was proposed in 1911."],
+  ["What charge does the nucleus possess?",["Positive","Negative","Neutral","No charge"],0,"Protons give the nucleus a positive charge."],
+  ["Where are electrons located in Rutherford's model?",["Inside the nucleus","Orbiting outside the nucleus","Embedded in protons","In the neutron core"],1,"Electrons move around the outer space of the nucleus."],
+  ["Alpha particles have what charge?",["Positive (+2)","Negative (-1)","Neutral (0)","Variable"],0,"Alpha particles consist of two protons and two neutrons."],
+  ["What metal was used in Rutherford's famous scattering experiment?",["Gold","Copper","Iron","Lead"],0,"Gold foil can be made extremely thin."],
+  ["What fraction of alpha particles were deflected at very large angles?",["Nearly all","About 1 in 20,000","50%","None"],1,"Only a very tiny fraction bounced back."],
+  ["Rutherford compares the deflection of alpha particles to firing a shell at...",["Tissue paper","A steel plate","A brick wall","Water"],0,"He said it was like firing a 15-inch shell at tissue paper and having it bounce back."],
+  ["What main limitation did Rutherford's model face according to classical physics?",["Accelerating electrons should lose energy and collapse into the nucleus","It was too small","It had no protons","Gold was too expensive"],0,"Classical electrodynamics predicted planetary electrons would crash."],
+  ["Who conducted the gold-foil experiment alongside Rutherford?",["Geiger and Marsden","Thomson and Bohr","Dalton and Faraday","Einstein and Planck"],0,"Hans Geiger and Ernest Marsden executed the experiment."],
+  ["The nucleus contains almost all of the atom's...",["Volume","Mass","Negative charge","Electrons"],1,"Protons and neutrons hold nearly all the atomic mass."],
+  ["Ernest Rutherford is known as the father of...",["Nuclear Physics","Botany","Organic Chemistry","Computer Science"],0,"He pioneered nuclear physics."],
+  ["Compared to the total size of an atom, the nucleus is...",["Extremely small","Half the size","Larger than the atom","Equal in size"],0,"If an atom were a football stadium, the nucleus would be a marble."],
+  ["What subatomic particle was Rutherford credited with discovering/naming?",["Proton","Electron","Photon","Quark"],0,"He proved the existence of the hydrogen nucleus (proton)."],
+  ["Did Rutherford's original 1911 model include neutrons?",["Yes","No","Only for gold","Yes, inside electrons"],1,"Neutrons were proposed later and confirmed in 1932."],
+  ["What screen was used to detect deflected alpha particles?",["Zinc sulfide screen","Glass lens","Digital camera","Copper plate"],0,"Zinc sulfide flashes light (scintillations) when hit by alpha particles."]
+]},
+bohr:{era:"Quantised energy levels • 1913",title:"Bohr's Atomic Model",subtitle:"Electrons occupy specific allowed energy levels.",idea:"Bohr proposed that electrons occupy particular energy levels. Electrons absorb energy to move higher and emit energy when moving lower.",points:["Electrons occupy allowed energy levels or shells.","Absorbing energy can move an electron higher.","Emitting energy can move it lower.","The model explains hydrogen's spectrum well.","It is limited for complex atoms."],hint:"Picture electrons moving around the nucleus on shells in this simplified model.",qs:[
+  ["Who proposed the quantised shell model?",["Dalton","Thomson","Bohr","Chadwick"],2,"His model was published in 1913."],
+  ["When an electron absorbs energy, it...",["Moves to a higher energy level","Becomes a proton","Loses its charge","Falls into the nucleus"],0,"Absorbed energy raises the electron to an excited state."],
+  ["Which element's line spectrum is best explained by Bohr's model?",["Hydrogen","Uranium","Iron","Gold"],0,"Hydrogen has a single electron."],
+  ["What is emitted when an electron jumps from a higher orbit to a lower orbit?",["A photon (light)","A proton","A neutron","An alpha particle"],0,"Energy difference is released as electromagnetic radiation."],
+  ["What letter designates the first (innermost) electron shell?",["K","A","X","L"],0,"Shells are labeled K, L, M, N..."],
+  ["What is the maximum number of electrons in the K shell (n=1)?",["2","8","18","32"],0,"Formula 2n² gives 2(1)² = 2."],
+  ["What is the maximum number of electrons in the L shell (n=2)?",["8","2","18","32"],0,"Formula 2n² gives 2(2)² = 8."],
+  ["In Bohr's model, electron orbits have quantised...",["Angular momentum","Mass","Temperature","Color"],0,"Angular momentum is restricted to integer multiples of h/2π."],
+  ["What is the state of an electron in its lowest allowed energy level?",["Ground state","Excited state","Ionised state","Plasma state"],0,"The ground state is the lowest energy level."],
+  ["Bohr's model was introduced in which year?",["1803","1904","1913","1932"],2,"Niels Bohr published it in 1913."],
+  ["What happens if an electron absorbs energy equal to or greater than its binding energy?",["It leaves the atom (ionisation)","It becomes a neutron","It stops moving","It shrinks"],0,"The atom becomes an ion."],
+  ["Bohr modified whose model by applying quantum theory?",["Rutherford's model","Dalton's model","Thomson's model","Modern wave model"],0,"He added quantised orbits to Rutherford's nuclear atom."],
+  ["Why is Bohr's model insufficient for multi-electron atoms?",["It cannot account for electron-electron repulsions accurately","It denies electrons exist","It requires gold foil","It predicts negative protons"],0,"Complex inter-electron interactions require quantum mechanics."],
+  ["Niels Bohr was a physicist from which country?",["Denmark","USA","Germany","UK"],0,"Bohr was Danish."],
+  ["The energy of an electron in a Bohr orbit is...",["Negative and fixed (quantised)","Positive and infinite","Random","Zero"],0,"Energy levels are negative and discrete."],
+  ["What spectral series of hydrogen falls in the visible light region?",["Balmer series","Lyman series","Paschen series","Brackett series"],0,"Balmer series transitions land on n=2."],
+  ["What parameter determines the radius of a Bohr orbit?",["Principal quantum number (n)","Atomic weight","Number of neutrons","Temperature"],0,"Radius increases with n²."],
+  ["Energy absorption causes an electron transition from...",["Lower to higher shell","Higher to lower shell","Nucleus to electron","Outside to nucleus"],0,"Moving outward requires energy absorption."],
+  ["What constant links photon frequency to energy difference (ΔE = hf)?",["Planck's constant","Avogadro's number","Gas constant","Boltzmann constant"],0,"Planck's constant h."],
+  ["Which shell has the lowest energy level in an atom?",["K shell (n=1)","L shell (n=2)","M shell (n=3)","N shell (n=4)"],0,"The shell closest to the nucleus has the lowest energy."]
+]},
+quantum:{era:"Modern quantum mechanics • 1920s onward",title:"Modern Quantum Mechanical Model",subtitle:"Electrons are described by orbitals and probability clouds.",idea:"The modern model uses quantum mechanics. An orbital describes a probability distribution, not a fixed planet-like path.",points:["Electrons have wave-like and particle-like properties.","Orbitals describe where an electron is likely to be found.","Electron energies are quantised.","It describes complex atoms more accurately than the simple Bohr model."],hint:"An electron cloud shows likely locations, not a definite circular orbit.",qs:[
+  ["What does an atomic orbital describe?",["Electron probability distribution","Fixed planet path","Proton route","Neutron charge"],0,"It describes where an electron is likely to be found."],
+  ["Which principle states you cannot simultaneously know an electron's exact position and momentum?",["Heisenberg Uncertainty Principle","Pauli Exclusion Principle","Aufbau Principle","Hund's Rule"],0,"Heisenberg formulated this uncertainty principle."],
+  ["Which scientist formulated the wave equation for electron orbitals?",["Erwin Schrödinger","Albert Einstein","Isaac Newton","James Chadwick"],0,"Schrödinger developed the wave equation in 1926."],
+  ["What shape is an 's' orbital?",["Spherical","Dumbbell","Double dumbbell","Complex ring"],0,"An s orbital has a spherical shape."],
+  ["What shape is a 'p' orbital?",["Dumbbell","Spherical","Cube","Flat plane"],0,"A p orbital is dumbbell-shaped."],
+  ["How many electrons can occupy a single orbital at most?",["2","6","10","14"],0,"Pauli Exclusion Principle limits each orbital to 2 electrons with opposite spins."],
+  ["The wave-particle duality of electrons was proposed by...",["Louis de Broglie","John Dalton","J.J. Thomson","Robert Millikan"],0,"De Broglie proposed matter waves."],
+  ["How many p orbitals exist in a p subshell?",["3","1","5","7"],0,"There are three degenerate p orbitals (px, py, pz)."],
+  ["How many total electrons can a full 'd' subshell hold?",["10","2","6","14"],0,"There are 5 d orbitals, holding up to 10 electrons."],
+  ["The region of zero probability of finding an electron is called a...",["Node","Peak","Nucleus","Orbit"],0,"Nodes have zero electron probability density."],
+  ["Which quantum number determines the main energy level of an electron?",["Principal quantum number (n)","Azimuthal quantum number (l)","Magnetic quantum number (m)","Spin quantum number (s)"],0,"n defines the principal energy shell."],
+  ["Which quantum number indicates electron spin orientation?",["Spin quantum number (s)","Principal quantum number (n)","Magnetic quantum number (m)","Azimuthal quantum number (l)"],0,"Spin can be +1/2 or -1/2."],
+  ["According to Pauli Exclusion Principle, two electrons in the same orbital must have...",["Opposite spins","Same spin","Different charges","Zero energy"],0,"They must have opposite spin states."],
+  ["Hund's rule states that electrons fill degenerate orbitals...",["Singly before pairing up","In pairs first","Randomly","From highest to lowest energy"],0,"Electrons occupy separate orbitals before pairing."],
+  ["The modern quantum model replaces fixed Bohr circular orbits with...",["3D orbitals (probability clouds)","Solid rings","Rectangular boxes","Static paths"],0,"Orbitals represent 3D probability clouds."],
+  ["What is the maximum capacity of an 'f' subshell?",["14 electrons","6 electrons","10 electrons","2 electrons"],0,"An f subshell has 7 orbitals, holding up to 14 electrons."],
+  ["The Aufbau Principle states that electrons fill orbitals...",["In order of increasing energy","In order of decreasing energy","By charge","Randomly"],0,"Aufbau means 'building up' from lowest to highest energy."],
+  ["Light and electrons exhibiting both wave and particle traits is called...",["Wave-particle duality","Quantum leap","Nuclear fission","Refraction"],0,"Matter and light possess wave-particle duality."],
+  ["Who discovered the neutron in 1932?",["James Chadwick","Ernest Rutherford","Niels Bohr","J.J. Thomson"],0,"Chadwick identified the neutral neutron."],
+  ["In electron configuration notation, what does the superscript in 1s² represent?",["Number of electrons in that orbital","Energy level","Nuclear charge","Spin state"],0,"The superscript shows 2 electrons in the 1s orbital."]
+]}
+};
+
+/* Elements: first 20 */
+const elements=[
+["Hydrogen","H",1,1,[1]],["Helium","He",2,4,[2]],["Lithium","Li",3,7,[2,1]],["Beryllium","Be",4,9,[2,2]],["Boron","B",5,11,[2,3]],["Carbon","C",6,12,[2,4]],["Nitrogen","N",7,14,[2,5]],["Oxygen","O",8,16,[2,6]],["Fluorine","F",9,19,[2,7]],["Neon","Ne",10,20,[2,8]],["Sodium","Na",11,23,[2,8,1]],["Magnesium","Mg",12,24,[2,8,2]],["Aluminium","Al",13,27,[2,8,3]],["Silicon","Si",14,28,[2,8,4]],["Phosphorus","P",15,31,[2,8,5]],["Sulfur","S",16,32,[2,8,6]],["Chlorine","Cl",17,35,[2,8,7]],["Argon","Ar",18,40,[2,8,8]],["Potassium","K",19,39,[2,8,8,1]],["Calcium","Ca",20,40,[2,8,8,2]]
+];
+function drawNucleus(stage,pcount=6,ncount=6){
+  const nuc=document.createElement("div");nuc.className="nucleus";
+  const total=pcount+ncount,size=total>30?5:total>20?6:total>12?7:9;
+  for(let i=0;i<total;i++){
+    const p=document.createElement("span");p.className="nucleon "+(i%2===0?"proton":"neutron");
+    p.style.width=size+"px";p.style.maxWidth=size+"px";nuc.appendChild(p);
+  }
+  stage.appendChild(nuc);return nuc;
+}
+function drawAtom(target,el){
+  target.replaceChildren();
+  const stage=document.createElement("div");stage.className="atom-stage";
+  drawNucleus(stage,el[2],el[3]-el[2]);
+  el[4].forEach((count,i)=>{
+    const d=27+i*18,shell=document.createElement("div");shell.className="atom-shell";
+    shell.style.width=d+"%";shell.style.height=d+"%";
+    const track=document.createElement("div");track.style.position="absolute";track.style.inset="0";track.style.borderRadius="50%";
+    track.style.animation="shellSpin "+(5+i*2)+"s linear infinite";
+    for(let j=0;j<count;j++){
+      const e=document.createElement("span");e.className="electron";
+      const a=2*Math.PI*j/count-Math.PI/2;
+      e.style.left=(50+50*Math.cos(a))+"%";e.style.top=(50+50*Math.sin(a))+"%";track.appendChild(e);
+    }
+    shell.appendChild(track);stage.appendChild(shell);
+  });
+  target.appendChild(stage);
+}
+const animStyle=document.createElement("style");
+animStyle.textContent="@keyframes shellSpin{to{transform:rotate(360deg)}}";
+document.head.appendChild(animStyle);
+
+/* Rutherford model: elliptical paths with moving electrons */
+
+/* Rutherford model: four elliptical orbits and eight blue electrons */
+function drawRutherford(stage) {
+  const canvas = document.createElement("canvas");
+  canvas.style.display = "block";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.style.position = "absolute";
+  canvas.style.inset = "0";
+  canvas.setAttribute("aria-label",
+    "Animated Rutherford atomic model with four elliptical orbits");
+  stage.appendChild(canvas);
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const orbits = [
+    { angle: 0,             e1Offset: 0,              e2Offset: Math.PI },
+    { angle: Math.PI / 4,   e1Offset: Math.PI / 3,    e2Offset: Math.PI / 3 + Math.PI },
+    { angle: Math.PI / 2,   e1Offset: Math.PI / 1.5,  e2Offset: Math.PI / 1.5 + Math.PI },
+    { angle: -Math.PI / 4,  e1Offset: Math.PI / 2,    e2Offset: Math.PI / 2 + Math.PI }
+  ];
+
+  let animationAngle = 0;
+  const speed = 0.015;
+  let lastWidth = 0;
+  let lastHeight = 0;
+  let lastDpr = 0;
+
+  function animate() {
+    // Stop animating when the user leaves this model.
+    if (!canvas.isConnected) return;
+
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    if (!width || !height) {
+      requestAnimationFrame(animate);
+      return;
+    }
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    // Resize the drawing surface only when its size changes.
+    if (width !== lastWidth || height !== lastHeight || dpr !== lastDpr) {
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      lastWidth = width;
+      lastHeight = height;
+      lastDpr = dpr;
+    }
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const scale = Math.min(width, height) * 0.38;
+    const rx = scale;
+    const ry = scale * 0.32;
+
+    animationAngle += speed;
+
+    // 1. Four symmetrical elliptical orbits.
+    orbits.forEach(orbit => {
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(orbit.angle);
+
+      ctx.beginPath();
+      ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(147, 197, 253, 0.9)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.restore();
+    });
+
+    // 2. Glowing red-orange nucleus.
+    const nucleusRadius = scale * 0.16;
+
+    const outerGlow = ctx.createRadialGradient(
+      centerX, centerY, nucleusRadius * 0.5,
+      centerX, centerY, nucleusRadius * 1.5
+    );
+    outerGlow.addColorStop(0, "rgba(235, 60, 0, 0.4)");
+    outerGlow.addColorStop(1, "rgba(235, 60, 0, 0)");
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, nucleusRadius * 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = outerGlow;
+    ctx.fill();
+
+    const nucleusGrad = ctx.createRadialGradient(
+      centerX - nucleusRadius * 0.35,
+      centerY - nucleusRadius * 0.35,
+      nucleusRadius * 0.1,
+      centerX, centerY, nucleusRadius
+    );
+    nucleusGrad.addColorStop(0, "#ff9900");
+    nucleusGrad.addColorStop(0.5, "#ea3800");
+    nucleusGrad.addColorStop(1, "#990000");
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, nucleusRadius, 0, Math.PI * 2);
+    ctx.fillStyle = nucleusGrad;
+    ctx.fill();
+
+    // 3. Two revolving blue electrons on each orbit.
+    const electronRadius = Math.max(3, scale * 0.055);
+
+    orbits.forEach(orbit => {
+      [orbit.e1Offset, orbit.e2Offset].forEach(offset => {
+        const t = animationAngle + offset;
+
+        const localX = rx * Math.cos(t);
+        const localY = ry * Math.sin(t);
+
+        const cosA = Math.cos(orbit.angle);
+        const sinA = Math.sin(orbit.angle);
+
+        const x = centerX + localX * cosA - localY * sinA;
+        const y = centerY + localX * sinA + localY * cosA;
+
+        const electronGrad = ctx.createRadialGradient(
+          x - electronRadius * 0.3,
+          y - electronRadius * 0.3,
+          electronRadius * 0.1,
+          x, y, electronRadius
+        );
+        electronGrad.addColorStop(0, "#4477ff");
+        electronGrad.addColorStop(0.6, "#0011cc");
+        electronGrad.addColorStop(1, "#000066");
+
+        ctx.beginPath();
+        ctx.arc(x, y, electronRadius, 0, Math.PI * 2);
+        ctx.fillStyle = electronGrad;
+        ctx.fill();
+      });
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function drawModel(kind){
+  const target=$("atomModelVisual");target.replaceChildren();
+  if(kind==="dalton"){
+    const ball=document.createElement("div");ball.className="solid-atom";target.appendChild(ball);return;
+  }
+  if(kind==="thomson"){
+    const sphere=document.createElement("div");sphere.className="plum";
+    for(let i=0;i<12;i++){
+      const e=document.createElement("span");e.className="plum-electron";
+      const a=2*Math.PI*i/12;e.style.left=(50+40*Math.cos(a))+"%";e.style.top=(50+40*Math.sin(a))+"%";
+      sphere.appendChild(e);
+    }
+    target.appendChild(sphere);return;
+  }
+  const stage=document.createElement("div");stage.className="atom-stage";
+  if(kind==="rutherford"){drawRutherford(stage);target.appendChild(stage);return;}
+  if (kind === "bohr") {
+  const canvas = document.createElement("canvas");
+  canvas.style.display = "block";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.style.position = "absolute";
+  canvas.style.inset = "0";
+  canvas.setAttribute("aria-label", "Animated Bohr atomic model with K, L, M and N shells");
+  stage.appendChild(canvas);
+  
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  
+  const shells = [
+    { name: "K", n: 1, maxElectrons: 2, radiusFactor: 0.25, speed: 0.015 },
+    { name: "L", n: 2, maxElectrons: 8, radiusFactor: 0.45, speed: -0.01 },
+    { name: "M", n: 3, maxElectrons: 18, radiusFactor: 0.65, speed: 0.007 },
+    { name: "N", n: 4, maxElectrons: 32, radiusFactor: 0.85, speed: -0.004 }
+  ];
+  
+  const angles = [0, 0, 0, 0];
+  let lastWidth = 0,
+    lastHeight = 0,
+    lastDpr = 0;
+  
+  function animateBohr() {
+    if (!canvas.isConnected) return;
+    
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    
+    if (!width || !height) {
+      requestAnimationFrame(animateBohr);
+      return;
+    }
+    
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    
+    if (width !== lastWidth || height !== lastHeight || dpr !== lastDpr) {
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      lastWidth = width;
+      lastHeight = height;
+      lastDpr = dpr;
+    }
+    
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+    
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const scale = Math.min(width, height) * 0.42;
+    
+    // 1. Draw four shells and their labels.
+    shells.forEach(shell => {
+      const r = scale * shell.radiusFactor;
+      
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
+      ctx.strokeStyle = "#d0d5dd";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      
+      ctx.fillStyle = "#dbeafe";
+      ctx.font = "bold 10px system-ui, Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "alphabetic";
+      
+      const labelY = Math.max(13, centerY - r - 5);
+      ctx.fillText(
+        `${shell.name} Shell (n=${shell.n}, max: ${shell.maxElectrons})`,
+        centerX,
+        labelY
+      );
+    });
+    
+    // 2. Draw the glowing nucleus.
+    const nucleusRadius = scale * 0.14;
+    
+    const glow = ctx.createRadialGradient(
+      centerX, centerY, nucleusRadius * 0.4,
+      centerX, centerY, nucleusRadius * 1.6
+    );
+    glow.addColorStop(0, "rgba(235,60,0,0.3)");
+    glow.addColorStop(1, "rgba(235,60,0,0)");
+    
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, nucleusRadius * 1.6, 0, Math.PI * 2);
+    ctx.fillStyle = glow;
+    ctx.fill();
+    
+    const nucleusGrad = ctx.createRadialGradient(
+      centerX - nucleusRadius * 0.35,
+      centerY - nucleusRadius * 0.35,
+      nucleusRadius * 0.1,
+      centerX, centerY, nucleusRadius
+    );
+    nucleusGrad.addColorStop(0, "#ff9900");
+    nucleusGrad.addColorStop(0.5, "#ea3800");
+    nucleusGrad.addColorStop(1, "#990000");
+    
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, nucleusRadius, 0, Math.PI * 2);
+    ctx.fillStyle = nucleusGrad;
+    ctx.fill();
+    
+    // White positive-charge sign.
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(centerX - 7, centerY);
+    ctx.lineTo(centerX + 7, centerY);
+    ctx.moveTo(centerX, centerY - 7);
+    ctx.lineTo(centerX, centerY + 7);
+    ctx.stroke();
+    
+    // Nucleus label.
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 11px system-ui, Arial, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      "Nucleus",
+      centerX,
+      centerY + nucleusRadius + 15
+    );
+    
+    // 3. Draw revolving electrons.
+    shells.forEach((shell, index) => {
+      const r = scale * shell.radiusFactor;
+      angles[index] += shell.speed;
+      
+      // Show a clear subset on the outermost shell.
+      const electronCount = Math.min(
+        shell.maxElectrons,
+        shell.n === 4 ? 16 : shell.maxElectrons
+      );
+      
+      const electronRadius = Math.max(3, scale * 0.025);
+      
+      for (let i = 0; i < electronCount; i++) {
+        const theta = angles[index] + i * 2 * Math.PI / electronCount;
+        const ex = centerX + r * Math.cos(theta);
+        const ey = centerY + r * Math.sin(theta);
+        
+        const electronGrad = ctx.createRadialGradient(
+          ex - electronRadius * 0.3,
+          ey - electronRadius * 0.3,
+          electronRadius * 0.1,
+          ex, ey, electronRadius
+        );
+        electronGrad.addColorStop(0, "#4477ff");
+        electronGrad.addColorStop(0.6, "#0011cc");
+        electronGrad.addColorStop(1, "#000066");
+        
+        ctx.beginPath();
+        ctx.arc(ex, ey, electronRadius, 0, Math.PI * 2);
+        ctx.fillStyle = electronGrad;
+        ctx.fill();
+      }
+    });
+    
+    requestAnimationFrame(animateBohr);
+  }
+  
+  requestAnimationFrame(animateBohr);
+  target.appendChild(stage);
+  return;
+}
+  
+if(kind==="quantum"){
+  const canvas=document.createElement("canvas");
+  canvas.style.display="block";
+  canvas.style.width="100%";
+  canvas.style.height="100%";
+  canvas.style.position="absolute";
+  canvas.style.inset="0";
+  canvas.setAttribute(
+    "aria-label",
+    "Animated quantum mechanical model with electron probability cloud"
+  );
+  stage.appendChild(canvas);
+
+  const ctx=canvas.getContext("2d");
+  if(!ctx)return;
+
+  let width=0,height=0,scale=0;
+  let lastWidth=0,lastHeight=0,lastDpr=0;
+
+  function resize(){
+    width=canvas.clientWidth;
+    height=canvas.clientHeight;
+    if(!width||!height)return;
+
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+
+    if(width!==lastWidth||height!==lastHeight||dpr!==lastDpr){
+      canvas.width=Math.round(width*dpr);
+      canvas.height=Math.round(height*dpr);
+      lastWidth=width;
+      lastHeight=height;
+      lastDpr=dpr;
+    }
+
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    scale=Math.min(width,height)*0.4;
+  }
+
+  // Generate 450 probability-cloud particles.
+  const particles=[];
+  for(let i=0;i<450;i++){
+    particles.push({
+      baseR:(Math.random()*0.7+Math.random()*0.3)*Math.min(
+        stage.clientWidth||300,
+        stage.clientHeight||300
+      )*0.4,
+      theta:Math.random()*Math.PI*2,
+      phi:Math.acos(Math.random()*2-1),
+      speed:(Math.random()-0.5)*0.02,
+      size:Math.random()*2.2+0.8,
+      alpha:Math.random()*0.7+0.2
+    });
+  }
+
+  let time=0;
+
+  function animateQuantum(){
+    // Stop the animation when this model is closed.
+    if(!canvas.isConnected)return;
+
+    resize();
+
+    if(!width||!height){
+      requestAnimationFrame(animateQuantum);
+      return;
+    }
+
+    ctx.clearRect(0,0,width,height);
+
+    const centerX=width/2;
+    const centerY=height/2;
+    time+=0.012;
+
+    // 1. Pulsing quantum probability clouds.
+    for(let r=scale*0.85;r>scale*0.2;r-=scale*0.12){
+      const alphaFactor=(1-r/(scale*0.9))*0.15;
+      const pulseR=r+Math.sin(time*2+r)*6;
+
+      const cloudGradient=ctx.createRadialGradient(
+        centerX,centerY,pulseR*0.2,
+        centerX,centerY,pulseR
+      );
+      cloudGradient.addColorStop(0,"rgba(167,139,250,0)");
+      cloudGradient.addColorStop(
+        0.7,
+        `rgba(96,165,250,${alphaFactor})`
+      );
+      cloudGradient.addColorStop(1,"rgba(59,130,246,0)");
+
+      ctx.beginPath();
+      ctx.arc(centerX,centerY,pulseR,0,Math.PI*2);
+      ctx.fillStyle=cloudGradient;
+      ctx.fill();
+    }
+
+    // 2. Moving electron-probability specks.
+    particles.forEach(p=>{
+      p.theta+=p.speed;
+
+      const currentR=p.baseR*(
+        1+0.08*Math.sin(time*3+p.theta)
+      );
+
+      const x=centerX+
+        currentR*Math.cos(p.theta)*Math.cos(p.phi);
+
+      const y=centerY+
+        currentR*Math.sin(p.theta)*Math.sin(p.phi)*0.85;
+
+      ctx.beginPath();
+      ctx.arc(x,y,p.size,0,Math.PI*2);
+
+      const distRatio=currentR/Math.max(scale,1);
+      const red=Math.floor(100+155*distRatio);
+      const green=Math.floor(200+55*(1-distRatio));
+      const alpha=p.alpha*(
+        0.6+0.4*Math.sin(time+p.theta)
+      );
+
+      ctx.fillStyle=
+        `rgba(${red},${green},255,${alpha})`;
+      ctx.fill();
+    });
+
+    // 3. Glowing central nucleus.
+    const nucleusRadius=scale*0.15;
+
+    const outerGlow=ctx.createRadialGradient(
+      centerX,centerY,nucleusRadius*0.2,
+      centerX,centerY,nucleusRadius*2.2
+    );
+    outerGlow.addColorStop(0,"rgba(244,63,94,0.5)");
+    outerGlow.addColorStop(0.5,"rgba(168,85,247,0.2)");
+    outerGlow.addColorStop(1,"rgba(0,0,0,0)");
+
+    ctx.beginPath();
+    ctx.arc(
+      centerX,centerY,nucleusRadius*2.2,0,Math.PI*2
+    );
+    ctx.fillStyle=outerGlow;
+    ctx.fill();
+
+    const nucleusGrad=ctx.createRadialGradient(
+      centerX-nucleusRadius*0.35,
+      centerY-nucleusRadius*0.35,
+      nucleusRadius*0.05,
+      centerX,centerY,nucleusRadius
+    );
+    nucleusGrad.addColorStop(0,"#fbcfe8");
+    nucleusGrad.addColorStop(0.4,"#f43f5e");
+    nucleusGrad.addColorStop(1,"#881337");
+
+    ctx.beginPath();
+    ctx.arc(centerX,centerY,nucleusRadius,0,Math.PI*2);
+    ctx.fillStyle=nucleusGrad;
+    ctx.fill();
+
+    // 4. Rotating details inside the nucleus.
+    ctx.fillStyle="rgba(255,255,255,0.35)";
+
+    for(let i=0;i<7;i++){
+      const angle=i/7*Math.PI*2+time*0.5;
+      const dist=nucleusRadius*0.45;
+
+      ctx.beginPath();
+      ctx.arc(
+        centerX+Math.cos(angle)*dist,
+        centerY+Math.sin(angle)*dist,
+        nucleusRadius*0.22,
+        0,
+        Math.PI*2
+      );
+      ctx.fill();
+    }
+
+    requestAnimationFrame(animateQuantum);
+  }
+
+  requestAnimationFrame(animateQuantum);
+  target.appendChild(stage);
+  return;
+}
+
+}
+function openModel(kind){
+  const m=models[kind];if(!m)return;activeChemModel=kind;
+  $("atomEra").textContent=m.era;$("atomTitle").textContent=m.title;$("atomSubtitle").textContent=m.subtitle;
+  $("atomIdea").textContent=m.idea;$("atomHint").textContent="💡 Hint: "+m.hint;$("atomPoints").replaceChildren();
+  m.points.forEach(t=>{const li=document.createElement("li");li.textContent=t;$("atomPoints").appendChild(li);});
+  drawModel(kind);$("atomQuizButton").onclick=()=>startChemistryQuiz(kind);go("atomModel");
+}
+document.querySelectorAll("[data-atommodel]").forEach(b=>b.onclick=()=>openModel(b.dataset.atommodel));
+elements.forEach(el=>{const o=document.createElement("option");o.value=el[1];o.textContent=el[0]+" ("+el[1]+")";$("atomElementSelect").appendChild(o);});
+function showElement(){
+  const el=elements.find(e=>e[1]===$("atomElementSelect").value)||elements[0];
+  drawAtom($("elementAtomVisual"),el);
+  $("elementAtomicNumber").textContent=el[2];$("elementMassNumber").textContent=el[3];$("elementNeutrons").textContent=el[3]-el[2];
+  $("elementConfiguration").textContent=el[4].map((n,i)=>["K","L","M","N"][i]+": "+n).join(" • ");
+  $("elementDescription").textContent=el[0]+" has "+el[2]+" protons, "+(el[3]-el[2])+" neutrons in the isotope shown, and "+el[2]+" electrons when neutral.";
+}
+$("atomElementSelect").onchange=showElement;
+function startChemistryQuiz(kind){
+  const m=models[kind];if(!m)return;
+  subject="chem";activeChemModel=kind;mode="practice";
+  // Shuffle all 20 unique questions for this model
+  const modelQs = shuffle(m.qs.slice());
+  questions = modelQs.map(q => ({
+    text: q[0],
+    options: shuffle(q[1].slice()),
+    answer: q[1][q[2]],
+    hint: q[3]
+  }));
+  beginGame(m.title);
+}
+renderProfile();renderFormulas();renderTable("trig");showElement();
+
+
+const feedbackForm = document.getElementById("feedbackForm");
+
+feedbackForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const type = document.getElementById("feedbackType").value;
+  const message = document.getElementById("feedbackMessage").value.trim();
+
+  if (!message) {
+    toast("Please write your feedback first.");
+    return;
+  }
+
+  const nickname =
+    document.getElementById("playerName").value.trim() ||
+    "Anonymous player";
+
+  const text =
+    "Science Nexus Feedback\n\n" +
+    "Player: " + nickname + "\n" +
+    "Type: " + type + "\n\n" +
+    "Message:\n" + message;
+
+  const whatsappNumber = "918168109125";
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber +
+    "?text=" + encodeURIComponent(text);
+
+  window.open(whatsappURL, "_blank");
+});
+
+</script>
+</body>
+</html>
