@@ -4,19 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10142d">
-<title>Science Nexus | Math + Chemistry</title>
+<title>Science Nexus</title>
 <style>
+
+/* --- ANSWER ANIMATIONS & SHAKES --- */
+@keyframes answerCorrectPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); box-shadow: 0 0 25px rgba(74, 222, 128, 0.6); }
+  100% { transform: scale(1); }
+}
+
+@keyframes answerWrongShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.answer.correct-anim {
+  animation: answerCorrectPulse 0.4s ease-in-out;
+}
+
+.answer.wrong-anim {
+  animation: answerWrongShake 0.4s ease-in-out;
+}
+
+.question.shake-card {
+  animation: answerWrongShake 0.4s ease-in-out;
+}
+
+
 :root {
-  --bg:#10142d; --panel:#1b2142; --muted:#b9c3e8;
-  --purple:#a78bfa; --blue:#60a5fa; --green:#4ade80;
-  --red:#fb7185; --gold:#facc15;
+  --bg: #0f142b; 
+  --panel: #181f3d; 
+  --muted: #cbd5e1; /* Enhanced for better text contrast */
+  --purple: #a78bfa; 
+  --blue: #60a5fa; 
+  --green: #4ade80;
+  --red: #fb7185; 
+  --gold: #facc15;
 }
 * { box-sizing:border-box; }
 body {
-  margin:0; background:radial-gradient(circle at top left,#34346b,transparent 36%),var(--bg);
-  color:#f5f6ff; font-family:system-ui,Arial,sans-serif;
+  margin:0; 
+  background:radial-gradient(circle at top left,#34346b,transparent 36%),var(--bg);
+  color:#f8fafc; 
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  letter-spacing:0.15px;
 }
 button,input,select { font:inherit; }
+
+/* Enhanced accessibility focus rings */
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.5);
+}
+
 button { color:inherit; cursor:pointer; transition:.2s; }
 button:active { transform:scale(.98); }
 button:disabled { opacity:.55; cursor:not-allowed; }
@@ -50,7 +93,7 @@ p { line-height:1.55; }
   width:100%;background:linear-gradient(135deg,#8b5cf6,#4f46e5);
   padding:14px;border:0;border-radius:13px;font-weight:850;
 }
-.secondary { background:#ffffff12;border:1px solid #ffffff22;padding:11px 13px;border-radius:12px;font-weight:700; }
+.secondary { background:#ffffff12;border:1px solid #ffffff22;padding:10px 14px;border-radius:12px;font-weight:700; }
 input,select { width:100%;padding:12px;border-radius:12px;border:1px solid #ffffff25;background:#101831;color:white; }
 label { display:block;color:var(--muted);font-size:.88rem;margin-bottom:7px; }
 .field { margin-bottom:13px; }
@@ -65,9 +108,18 @@ label { display:block;color:var(--muted);font-size:.88rem;margin-bottom:7px; }
 .bar { height:8px;border-radius:20px;background:#ffffff18;overflow:hidden;margin-top:8px; }
 .barfill { height:100%;background:linear-gradient(90deg,#a78bfa,#60a5fa,#4ade80);width:0;transition:.3s; }
 .navcard,.choice,.stage {
-  padding:14px;border:1px solid #ffffff20;border-radius:16px;
-  background:linear-gradient(145deg,#29315d,#1a2040);text-align:left;min-width:0;
+  padding:14px; border:1px solid rgba(255, 255, 255, 0.18); border-radius:16px;
+  background:linear-gradient(145deg, #2b3363, #1c2246); text-align:left; min-width:0;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
+
+/* Enhanced hover glow effect */
+.navcard:hover, .choice:hover {
+  border-color: rgba(167, 139, 250, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(167, 139, 250, 0.25);
+  transform: translateY(-2px);
+}
+
 .navcard { min-height:115px; }
 .navcard .bigicon { font-size:1.9rem;display:block;margin-bottom:7px; }
 .navcard strong,.choice strong { display:block; }
@@ -154,7 +206,6 @@ td { background:#ffffff06; }
   100% { opacity:0;transform:translate(var(--drift),-120px) rotate(var(--spin)) scale(1.15); }
 }
 
-/* Rutherford: three elliptical paths with independently revolving electrons */
 .rutherford-orbit {
   position:absolute;left:50%;top:50%;border:1.5px solid rgba(147,197,253,.85);
   border-radius:50%;pointer-events:none;box-shadow:0 0 8px #60a5fa18;
@@ -178,6 +229,55 @@ td { background:#ffffff06; }
 @keyframes cloudpulse { from{scale:.92;opacity:.75}to{scale:1.05;opacity:1} }
 @keyframes twinkle { from{opacity:.25;scale:.7}to{opacity:1;scale:1.4} }
 @keyframes timerBlink { to{visibility:hidden} }
+/* --- ANSWER ANIMATIONS & SHAKES --- */
+@keyframes answerCorrectPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); box-shadow: 0 0 25px rgba(74, 222, 128, 0.6); }
+  100% { transform: scale(1); }
+}
+
+@keyframes answerWrongShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.answer.correct-anim {
+  animation: answerCorrectPulse 0.4s ease-in-out;
+}
+
+.answer.wrong-anim {
+  animation: answerWrongShake 0.4s ease-in-out;
+}
+
+.question.shake-card {
+  animation: answerWrongShake 0.4s ease-in-out;
+}
+
+/* --- FLOATING HANGING CARD ANIMATION --- */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.navcard {
+  animation: cardFloat 4.5s ease-in-out infinite;
+}
+.navcard:nth-child(2) { animation-delay: 0.6s; }
+.navcard:nth-child(3) { animation-delay: 1.2s; }
+.navcard:nth-child(4) { animation-delay: 1.8s; }
+.navcard:nth-child(5) { animation-delay: 2.4s; }
+.navcard:nth-child(6) { animation-delay: 3.0s; }
+.navcard:nth-child(7) { animation-delay: 3.6s; }
+.navcard:nth-child(8) { animation-delay: 4.2s; }
+
+.formula {
+  animation: cardFloat 5s ease-in-out infinite;
+}
+.formula:nth-child(even) {
+  animation-delay: 1.5s;
+}
+
 @media(max-width:440px) {
   .app { padding:9px; }
   .panel { padding:13px; }
@@ -194,12 +294,339 @@ td { background:#ffffff06; }
 @media(prefers-reduced-motion:reduce) {
   *,*:before,*:after { animation:none!important;transition:none!important; }
 }
+
+/* Cosmic Universe screen specific styles */
+#universeScreen {
+  position: relative;
+  background: #000005;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 0;
+  border: 2px solid rgba(110, 231, 255, 0.35);
+  border-radius: 20px;
+  box-shadow: inset 0 0 30px rgba(96, 165, 250, 0.15), 0 12px 40px rgba(0, 0, 0, 0.8);
+}
+#universeScreen canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+#universeScreen .ui-layer {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+#universeScreen button, #universeScreen input, #universeScreen select {
+  pointer-events: auto;
+}
+#universeTopBar {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 25;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+.universe-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+#universeOverlay {
+  position: absolute;
+  top: 96px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #eaf6ff;
+  padding: 0 12px;
+}
+#universeOverlay h1 {
+  margin: 4px 0 2px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 20px rgba(80, 200, 255, 0.6);
+}
+#universeOverlay p {
+  margin: 0;
+  font-size: 10px;
+  color: #7fb8d9;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+#universeShapeLabel {
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #6ee7ff;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  text-shadow: 0 0 12px rgba(100, 220, 255, 0.7);
+}
+#universeNavBar {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.universe-nav-btn {
+  background: rgba(10, 10, 20, 0.85);
+  border: 1px solid rgba(110, 231, 255, 0.3);
+  backdrop-filter: blur(10px);
+  color: #9fd3e8;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 8px 10px;
+  border-radius: 18px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 1;
+  text-align: center;
+}
+.universe-nav-btn.active {
+  background: rgba(110, 231, 255, 0.28);
+  border-color: rgba(110, 231, 255, 0.8);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(110, 231, 255, 0.3);
+}
+#universeColorPanel {
+  position: absolute;
+  top: 270px;
+  right: 0px;
+  background: rgba(10, 10, 20, 0.85);
+  border: 1px solid rgba(110, 231, 255, 0.25);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  padding: 8px 10px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #ffffff;
+  user-select: none;
+  max-width: 140px;
+}
+.universe-cp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+.universe-cp-row:last-of-type {
+  margin-bottom: 6px;
+}
+.universe-cp-row label {
+  font-size: 10px;
+  opacity: 0.85;
+  min-width: 28px;
+  margin-bottom: 0;
+}
+.universe-cp-row input[type="color"] {
+  width: 28px;
+  height: 18px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+.universe-cp-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.universe-cp-swatch {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 0;
+}
+#universePlanetMenu {
+  position: absolute;
+  top: 165px;
+  left: 12px;
+  background: rgba(10, 10, 20, 0.9);
+  border: 1px solid rgba(110, 231, 255, 0.28);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  padding: 6px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  max-height: 30vh;
+  width: 130px;
+  overflow-y: auto;
+}
+.universe-planet-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #cfeaf5;
+  font-size: 11px;
+  padding: 5px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+}
+.universe-planet-btn.active {
+  background: rgba(110, 231, 255, 0.22);
+  color: #fff;
+}
+.universe-planet-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 5px currentColor;
+}
+#universePlanetInfo {
+  position: fixed;     
+  bottom: -180px;        
+  left: 12px;          
+  right: auto;         
+  width: 260px;        
+  background: rgba(10, 10, 20, 0.92);
+  border: 1px solid rgba(110, 231, 255, 0.35);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #eaf6ff;
+  display: none;
+  max-height: 22vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+  z-index: 100;        
+}
+
+#universePlanetInfo h2 {
+  margin: 0 0 2px;
+  font-size: 13px;
+}
+#universePlanetInfo .au {
+  font-size: 9px;
+  color: #7fb8d9;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+#universePlanetInfo p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #d8ecf5;
+}
+
+/* PERIODIC TABLE UI */
+.ptable-filter-select {
+  min-width: 0; background: #090d16; color: #f8fafc; border: 1px solid rgba(255,255,255,0.15);
+  padding: 11px 14px; border-radius: 12px; outline: none; font-size: 0.9rem; transition: all 0.3s ease;
+  cursor: pointer;
+}
+.ptable-filter-select:focus {
+  border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25), 0 0 12px rgba(129, 140, 248, 0.3);
+}
+
+.ptable-hero { background:linear-gradient(135deg,#0f172a,#1e3a8a,#312e81)!important; }
+.ptable-tools { padding:16px!important; }
+.ptable-search-row { display:grid; grid-template-columns:1fr; gap:10px; margin-bottom:14px; }
+.ptable-search-row input, .ptable-search-row select {
+  min-width:0; background:#090d16; color:#f8fafc; border:1px solid rgba(255,255,255,0.15);
+  padding:11px 14px; border-radius:12px; outline:none; font-size:0.9rem; transition:all 0.3s ease;
+}
+.ptable-search-row input:focus, .ptable-search-row select:focus {
+  border-color:#818cf8; box-shadow:0 0 0 3px rgba(129, 140, 248, 0.25), 0 0 12px rgba(129, 140, 248, 0.3);
+}
+.ptable-legend {
+  display:flex; flex-wrap:wrap; gap:6px 10px; margin:10px 0 16px; font-size:10.5px;
+  color:#cbd5e1; background:rgba(0,0,0,0.3); padding:10px 14px; border-radius:14px; border:1px solid rgba(255,255,255,0.05);
+}
+.ptable-legend span { display:flex; align-items:center; gap:5px; white-space:nowrap; cursor:pointer; padding:3px 6px; border-radius:6px; transition:background 0.2s ease, transform 0.2s ease; }
+.ptable-legend span:hover { background:rgba(255,255,255,0.08); transform:translateY(-1px); }
+.ptable-legend i { width:10px; height:10px; border-radius:3px; display:inline-block; box-shadow:0 0 6px rgba(255,255,255,0.3); }
+.ptable-scroll { overflow-x:auto; padding:8px 2px 10px 2px; overscroll-behavior-x:contain; }
+.ptable-grid { display:grid; grid-template-columns:repeat(18,minmax(44px,1fr)); grid-template-rows:repeat(7,72px); gap:5px; min-width:860px; }
+.ptable-cell {
+  position:relative; min-width:0; border:1px solid rgba(255,255,255,0.15); border-radius:10px;
+  padding:4px 3px; text-align:center; color:#f8fafc; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:2px; transition:transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,0.25), 0 4px 10px rgba(0,0,0,0.3); backdrop-filter:blur(6px); user-select:none;
+}
+.ptable-cell:active { transform:scale(0.92)!important; }
+.ptable-cell:hover { transform:translateY(-5px) scale(1.1); filter:brightness(1.3); z-index:30; box-shadow:0 10px 20px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.5); }
+.ptable-cell.selected {
+  transform:translateY(-5px) scale(1.1); outline:2px solid #ffffff; outline-offset:2px; filter:brightness(1.35); z-index:40;
+  box-shadow:0 0 25px var(--glow-color, rgba(255,255,255,0.6)), 0 10px 20px rgba(0,0,0,0.6);
+}
+.ptable-cell.dimmed { opacity:0.15; filter:grayscale(0.8); transform:scale(0.95); }
+.ptable-cell .num { font-size:9px; align-self:flex-start; margin-left:2px; opacity:0.85; font-weight:700; }
+.ptable-cell .sym { font-size:20px; font-weight:900; line-height:1; letter-spacing:-0.03em; text-shadow:0 2px 4px rgba(0,0,0,0.4); }
+.ptable-cell .ename { font-size:8px; line-height:1; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; opacity:0.9; font-weight:500; }
+.ptable-cell .mass { font-size:7px; opacity:0.75; }
+.ptable-fblocks { margin-top:14px; display:grid; gap:6px; background:rgba(0,0,0,0.25); padding:10px; border-radius:14px; border:1px solid rgba(255,255,255,0.05); }
+.ptable-row-label { font-size:10px; color:#c4b5fd; font-weight:800; margin-top:2px; letter-spacing:0.08em; text-transform:uppercase; display:flex; align-items:center; gap:6px; }
+.ptable-row-label::after { content:''; flex:1; height:1px; background:rgba(255,255,255,0.1); }
+.ptable-fgrid { display:grid; grid-template-columns:repeat(15,minmax(44px,1fr)); gap:5px; overflow-x:auto; padding:2px 0 6px; }
+.ptable-fgrid .ptable-cell { height:62px; }
+.ptable-count { font-size:11.5px; color:#a5b4fc; margin-top:10px; font-weight:600; display:flex; align-items:center; justify-content:space-between; }
+.ptable-cell.alkali, .ptable-legend i.alkali { background:linear-gradient(135deg, #e11d48, #9f1239); }
+.ptable-cell.alkaline, .ptable-legend i.alkaline { background:linear-gradient(135deg, #ea580c, #9a3412); }
+.ptable-cell.transition, .ptable-legend i.transition { background:linear-gradient(135deg, #2563eb, #1e40af); }
+.ptable-cell.post, .ptable-legend i.post { background:linear-gradient(135deg, #0284c7, #0369a1); }
+.ptable-cell.metalloid, .ptable-legend i.metalloid { background:linear-gradient(135deg, #65a30d, #3f6212); }
+.ptable-cell.nonmetal, .ptable-legend i.nonmetal { background:linear-gradient(135deg, #059669, #047857); }
+.ptable-cell.halogen, .ptable-legend i.halogen { background:linear-gradient(135deg, #7c3aed, #5b21b6); }
+.ptable-cell.noble, .ptable-legend i.noble { background:linear-gradient(135deg, #c026d3, #86198f); }
+.ptable-cell.lanth, .ptable-legend i.lanth { background:linear-gradient(135deg, #d97706, #92400e); }
+.ptable-cell.act, .ptable-legend i.act { background:linear-gradient(135deg, #dc2626, #991b1b); }
+.ptable-cell.unknown, .ptable-legend i.unknown { background:linear-gradient(135deg, #475569, #334155); }
+.ptable-detail { min-height:160px; padding:14px 16px!important; position:relative; overflow:hidden; }
+.ptable-detail-top { display:flex; gap:14px; align-items:center; }
+.ptable-big-symbol {
+  width:75px; height:75px; flex:0 0 75px; border-radius:16px; display:grid; place-items:center;
+  font-size:34px; font-weight:950; border:1.5px solid rgba(255,255,255,0.3);
+  box-shadow:inset 0 0 20px rgba(255,255,255,0.25), 0 8px 20px rgba(0,0,0,0.5); position:relative;
+}
+.ptable-detail h2 { margin:0 0 2px; font-size:21px; font-weight:800; }
+.ptable-detail .ptable-name { color:#c4b5fd; font-size:13px; font-weight:700; margin-bottom:2px; }
+.ptable-facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin-top:12px; }
+.ptable-fact { background:rgba(11,15,25,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:8px 10px; }
+.ptable-fact strong { display:block; font-size:14.5px; color:#f1f5f9; font-weight:800; line-height:1.2; }
+.ptable-fact span { font-size:9.5px; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; }
+.shell-bars { display:flex; gap:3px; height:4px; margin-top:5px; background:rgba(255,255,255,0.05); border-radius:3px; padding:1px; }
+.shell-bar { height:100%; background:#818cf8; border-radius:2px; }
+.ptable-config { margin-top:10px; background:rgba(11,15,25,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:10px 12px; }
+.ptable-config b { display:block; color:#c4b5fd; font-size:11px; margin-bottom:4px; }
+.ptable-config span { font-family:ui-monospace,monospace; font-size:12px; color:#38bdf8; letter-spacing:0.4px; }
+.ptable-detail-empty { text-align:center; padding:18px 10px; }
+.ptable-empty-symbol { font-size:38px; color:#a78bfa; margin-bottom:6px; display:inline-block; }
+
 </style>
 </head>
 <body>
 <div class="app">
 <header>
-  <div class="brand"><div class="logo">🧪</div><div>Science Nexus<br><span class="small">MATH + CHEMISTRY</span></div></div>
+  <div class="brand"><div class="logo">🧪</div><div>Science Nexus</div></div>
   <div class="pill">🪙 <span id="coinsTop">0</span></div>
 </header>
 
@@ -219,6 +646,9 @@ td { background:#ffffff06; }
     <button class="navcard" data-go="tables"><span class="bigicon">📈</span><strong>Math Tables</strong><small>Trigonometry, logarithms, squares and cubes.</small></button>
     <button class="navcard" data-go="chemistry"><span class="bigicon">⚛️</span><strong>Chemistry Lab</strong><small>Explore five atomic models.</small></button>
     <button class="navcard" data-go="atomExplorer"><span class="bigicon">🧬</span><strong>First 20 Elements</strong><small>Explore elements, nuclei and electron shells.</small></button>
+    <button class="navcard" data-go="periodicTableScreen"><span class="bigicon">🧪</span><strong>Periodic Table</strong><small>Explore all 118 chemical elements interactively.</small></button>
+    <button class="navcard" data-go="universeScreen" id="openUniverseBtn">
+        <span class="bigicon">🌌</span><strong>Cosmic Universe</strong><small>Interactive 3D galaxies, black holes, and solar system.</small></button>
   </div></div>
 
 <div class="panel" id="feedbackPanel">
@@ -262,6 +692,81 @@ td { background:#ffffff06; }
 
 <div class="footer">© 2026 Science Nexus | Created & Developed by Kushal Soni | Learn • Explore • Innovate</div>
 </section>
+
+<section id="periodicTableScreen" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+
+  <div class="panel hero ptable-hero" style="margin-top:12px;">
+    <div class="eyebrow">Interactive Matrix • Audio-Visual Dynamic</div>
+    <h1>Periodic Table of Elements</h1>
+    <p>Explore 118 chemical elements with loud synthesized audio effects, real-time search, and deep atomic properties.</p>
+  </div>
+
+  <div class="panel ptable-tools">
+    <div class="ptable-search-row">
+      <input id="ptableSearch" type="search" placeholder="Search by element name, symbol, or atomic number…" autocomplete="off">
+      
+      <select id="ptableCategoryFilter" class="ptable-filter-select">
+        <option value="all">All Categories</option>
+        <option value="alkali">Alkali metals</option>
+        <option value="alkaline">Alkaline earth metals</option>
+        <option value="transition">Transition metals</option>
+        <option value="post">Post-transition metals</option>
+        <option value="metalloid">Metalloids</option>
+        <option value="nonmetal">Reactive nonmetals</option>
+        <option value="halogen">Halogens</option>
+        <option value="noble">Noble gases</option>
+        <option value="lanth">Lanthanides</option>
+        <option value="act">Actinides</option>
+        <option value="unknown">Unknown properties</option>
+      </select>
+    </div>
+
+    <div class="ptable-legend" id="ptableLegend">
+      <span data-cat="alkali"><i class="alkali"></i>Alkali</span>
+      <span data-cat="alkaline"><i class="alkaline"></i>Alkaline earth</span>
+      <span data-cat="transition"><i class="transition"></i>Transition</span>
+      <span data-cat="post"><i class="post"></i>Post-transition</span>
+      <span data-cat="metalloid"><i class="metalloid"></i>Metalloid</span>
+      <span data-cat="nonmetal"><i class="nonmetal"></i>Nonmetal</span>
+      <span data-cat="halogen"><i class="halogen"></i>Halogen</span>
+      <span data-cat="noble"><i class="noble"></i>Noble gas</span>
+      <span data-cat="lanth"><i class="lanth"></i>Lanthanide</span>
+      <span data-cat="act"><i class="act"></i>Actinide</span>
+      <span data-cat="unknown"><i class="unknown"></i>Unknown</span>
+    </div>
+
+    <div class="ptable-scroll">
+      <div id="ptableGrid" class="ptable-grid"></div>
+    </div>
+
+    <div class="ptable-fblocks">
+      <div class="ptable-row-label">Lanthanides</div>
+      <div id="ptableLanthanides" class="ptable-fgrid"></div>
+      <div class="ptable-row-label">Actinides</div>
+      <div id="ptableActinides" class="ptable-fgrid"></div>
+    </div>
+
+    <div class="ptable-count">
+      <span id="ptableCountText">Showing 118 of 118 elements</span>
+      <span id="activeFilterBadge" style="opacity:0.7; font-size:10.5px;"></span>
+    </div>
+  </div>
+
+  <div class="panel ptable-detail" id="ptableDetail">
+    <div class="ptable-detail-empty">
+      <div class="ptable-empty-symbol">⚛</div>
+      <h2>Select an element</h2>
+      <p class="small">Click or tap any element card above to inspect its atomic structure, mass, group, period, and shell breakdown compactly.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    *Electron configurations follow a simplified Aufbau filling model. Atomic masses reflect standard IUPAC values.
+  </div>
+</section>
+
+
 <section id="help" class="screen">
   <button class="secondary" data-go="home">← Dashboard</button>
   <div class="panel hero"><div class="eyebrow">Your personal maths companion</div><h1>Math Help Centre</h1><p>Look up formulas, understand theorems, and revise tables.</p></div>
@@ -388,8 +893,715 @@ td { background:#ffffff06; }
   <div class="note">*Mass numbers show common isotopes. Isotopes may have different neutron counts. Nucleus illustrations are schematic and not to scale.</div>
   </div>
 </section>
+
+<!-- Cosmic Universe Screen -->
+<section id="universeScreen" class="screen">
+  <div id="universeLoading" style="position:fixed; inset:0; display:flex; align-items:center; justify-content:center; color:#7fb8d9; font-family:'Segoe UI',system-ui,sans-serif; font-size:14px; letter-spacing:2px; z-index:25; background:#000005;">LOADING UNIVERSE…</div>
+  
+  <div id="universeTopBar" class="ui-layer">
+    <div class="universe-top-row">
+      <button class="secondary" data-go="home" style="padding: 6px 12px; font-size: 11px;">← Dashboard</button>
+    </div>
+    <div id="universeNavBar" class="ui-layer">
+      <button class="universe-nav-btn active" data-mode="galaxy">Galaxy</button>
+      <button class="universe-nav-btn" data-mode="blackhole">Black Hole</button>
+      <button class="universe-nav-btn" data-mode="planets">Solar System</button>
+    </div>
+  </div>
+  
+  <div id="universeOverlay" class="ui-layer">
+    <h1 id="universeOverlayTitle">Cosmic Universe</h1>
+    <p id="universeOverlaySub">Drag to rotate · Scroll to zoom</p>
+  </div>
+  
+  <div id="universeShapeLabel" class="ui-layer">Spiral Galaxy</div>
+  
+  <div id="universeColorPanel" class="ui-layer">
+    <div class="universe-cp-row"><label>Core</label><input type="color" id="uniCpCore" value="#ffffff" /></div>
+    <div class="universe-cp-row"><label>Glow</label><input type="color" id="uniCpMid" value="#6ee7ff" /></div>
+    <div class="universe-cp-row"><label>Edge</label><input type="color" id="uniCpEdge" value="#1450a8" /></div>
+    <div class="universe-cp-presets">
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#6ee7ff,#1450a8)" data-core="#ffffff" data-mid="#6ee7ff" data-edge="#1450a8" title="Cyan"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#ff6ec7,#7a0e6e)" data-core="#ffffff" data-mid="#ff6ec7" data-edge="#7a0e6e" title="Pink"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#b388ff,#3a0ca3)" data-core="#ffffff" data-mid="#b388ff" data-edge="#3a0ca3" title="Purple"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#ffd166,#a85200)" data-core="#ffffff" data-mid="#ffd166" data-edge="#a85200" title="Gold"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#6effa3,#0a6e3a)" data-core="#ffffff" data-mid="#6effa3" data-edge="#0a6e3a" title="Green"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#ff6e6e,#7a0e0e)" data-core="#ffffff" data-mid="#ff6e6e" data-edge="#7a0e0e" title="Red"></button>
+    </div>
+  </div>
+  
+  <div id="universePlanetMenu" class="ui-layer" style="display:none;"></div>
+  <div id="universePlanetInfo" class="ui-layer">
+    <h2 id="uniPiName">—</h2>
+    <div class="au" id="uniPiAu">—</div>
+    <p id="uniPiFact">—</p>
+  </div>
+</section>
+
 <div id="toast" style="display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fde68a;color:#292044;padding:12px 17px;border-radius:30px;font-weight:850;z-index:50;max-width:90%"></div>
 </div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+let universeInitialized = false;
+let uniScene, uniCamera, uniRenderer, uniControls, uniComposer;
+let universeAnimationId = null;
+
+function initCosmicUniverse() {
+  if (universeInitialized) return;
+  universeInitialized = true;
+
+  const container = document.getElementById('universeScreen');
+  
+  uniScene = new THREE.Scene();
+  uniCamera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 400);
+  uniCamera.position.set(0, 3.2, 9);
+  
+  uniRenderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
+  uniRenderer.setSize(window.innerWidth, window.innerHeight);
+  uniRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  uniRenderer.setClearColor(0x000001);
+  container.appendChild(uniRenderer.domElement);
+  
+  uniControls = new OrbitControls(uniCamera, uniRenderer.domElement);
+  uniControls.enableDamping = true;
+  uniControls.dampingFactor = 0.05;
+  uniControls.enablePan = false;
+  uniControls.minDistance = 1.5;
+  uniControls.maxDistance = 60;
+  uniControls.autoRotate = true;
+  uniControls.autoRotateSpeed = 0.4;
+  
+  uniComposer = new EffectComposer(uniRenderer);
+  uniComposer.addPass(new RenderPass(uniScene, uniCamera));
+  const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.55, 0.4, 0.35);
+  uniComposer.addPass(bloomPass);
+  uniComposer.addPass(new OutputPass());
+  
+  uniScene.add(new THREE.AmbientLight(0x223355, 1.1));
+  const sunLight = new THREE.PointLight(0xfff2cc, 3.2, 60, 1.6);
+  uniScene.add(sunLight);
+  
+  function makeSprite() {
+    const size = 64;
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    g.addColorStop(0, 'rgba(255,255,255,0.85)');
+    g.addColorStop(0.35, 'rgba(255,255,255,0.35)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(c);
+  }
+  const sprite = makeSprite();
+  
+  function makeDotSprite() {
+    const size = 64;
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    g.addColorStop(0, 'rgba(255,255,255,1)');
+    g.addColorStop(0.5, 'rgba(255,255,255,0.65)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(c);
+  }
+  const dotSprite = makeDotSprite();
+  
+  // Background starfield
+  (function addStarfield() {
+    const dimCount = 9000;
+    const dimPos = new Float32Array(dimCount * 3);
+    for (let i = 0; i < dimCount; i++) {
+      const r = 50 + Math.random() * 150;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      dimPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      dimPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      dimPos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const dimGeo = new THREE.BufferGeometry();
+    dimGeo.setAttribute('position', new THREE.BufferAttribute(dimPos, 3));
+    const dimMat = new THREE.PointsMaterial({
+      size: 0.028, map: sprite, transparent: true, depthWrite: false, color: 0xbfe0f2, opacity: 0.75, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+    });
+    uniScene.add(new THREE.Points(dimGeo, dimMat));
+    
+    const brightCount = 500;
+    const brightPos = new Float32Array(brightCount * 3);
+    for (let i = 0; i < brightCount; i++) {
+      const r = 45 + Math.random() * 140;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      brightPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      brightPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      brightPos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const brightGeo = new THREE.BufferGeometry();
+    brightGeo.setAttribute('position', new THREE.BufferAttribute(brightPos, 3));
+    const brightMat = new THREE.PointsMaterial({
+      size: 0.09, map: sprite, transparent: true, depthWrite: false, color: 0xffffff, opacity: 0.9, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+    });
+    uniScene.add(new THREE.Points(brightGeo, brightMat));
+    
+    const bokehCount = 40;
+    const bokehPos = new Float32Array(bokehCount * 3);
+    for (let i = 0; i < bokehCount; i++) {
+      const r = 9 + Math.random() * 26;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      bokehPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      bokehPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      bokehPos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const bokehGeo = new THREE.BufferGeometry();
+    bokehGeo.setAttribute('position', new THREE.BufferAttribute(bokehPos, 3));
+    const bokehMat = new THREE.PointsMaterial({
+      size: 0.55, map: sprite, transparent: true, depthWrite: false, color: 0x9fe0ff, opacity: 0.3, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+    });
+    uniScene.add(new THREE.Points(bokehGeo, bokehMat));
+  })();
+  
+  let galaxyBokehPoints;
+  (function addGalaxyBokeh() {
+    const count = 220;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = 6 + Math.random() * 34;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const mat = new THREE.PointsMaterial({
+      size: 1.6, map: sprite, transparent: true, depthWrite: false, color: 0x9fe0ff, opacity: 0.4, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+    });
+    galaxyBokehPoints = new THREE.Points(geo, mat);
+    uniScene.add(galaxyBokehPoints);
+  })();
+  
+  // Galaxy Mode
+  const GALAXY_COUNT = 40000;
+  let colorCore = new THREE.Color(0xffffff);
+  let colorMid = new THREE.Color(0x6ee7ff);
+  let colorEdge = new THREE.Color(0x1450a8);
+  
+  function lerpColor(a, b, t) { return a.clone().lerp(b, t); }
+  function colorForT(t) {
+    return t < 0.5 ? lerpColor(colorCore, colorMid, t * 2) : lerpColor(colorMid, colorEdge, (t - 0.5) * 2);
+  }
+  
+  function buildGalaxy(n) {
+    const positions = new Float32Array(n * 3), colors = new Float32Array(n * 3), tVals = new Float32Array(n);
+    const branches = 4, radius = 5.2, spin = 1.6, randomness = 0.32, randomnessPower = 2.6;
+    for (let i = 0; i < n; i++) {
+      const r = Math.pow(Math.random(), 0.7) * radius;
+      const branchAngle = ((i % branches) / branches) * Math.PI * 2;
+      const spinAngle = r * spin;
+      const rand = () => Math.pow(Math.random(), randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
+      const rx = rand() * randomness * r, ry = rand() * randomness * r * 0.25, rz = rand() * randomness * r;
+      const angle = branchAngle + spinAngle;
+      positions[i * 3] = Math.cos(angle) * r + rx;
+      positions[i * 3 + 1] = ry;
+      positions[i * 3 + 2] = Math.sin(angle) * r + rz;
+      const t = r / radius;
+      tVals[i] = t;
+      const col = colorForT(t);
+      colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+    }
+    return { positions, colors, tVals };
+  }
+  
+  function buildOrbJets(n) {
+    const positions = new Float32Array(n * 3), colors = new Float32Array(n * 3), tVals = new Float32Array(n);
+    const jetCount = Math.floor(n * 0.35), sphereCount = n - jetCount;
+    for (let i = 0; i < n; i++) {
+      let x, y, z, t;
+      if (i < sphereCount) {
+        const rad = 0.6 + Math.random() * 0.7;
+        const u = Math.random(), v = Math.random();
+        const theta = 2 * Math.PI * u, phi = Math.acos(2 * v - 1);
+        x = rad * Math.sin(phi) * Math.cos(theta);
+        y = rad * Math.sin(phi) * Math.sin(theta) * 0.4;
+        z = rad * Math.cos(phi);
+        t = rad / 1.3;
+      } else {
+        const side = (i % 2 === 0) ? 1 : -1;
+        const along = Math.pow(Math.random(), 1.8) * 4.6;
+        const spread = (0.04 + along * 0.05) * (Math.random() - 0.5) * 2;
+        const spread2 = (0.04 + along * 0.05) * (Math.random() - 0.5) * 2;
+        x = spread; y = side * (0.6 + along); z = spread2;
+        t = Math.min(along / 4.6, 1);
+      }
+      positions[i * 3] = x; positions[i * 3 + 1] = y; positions[i * 3 + 2] = z;
+      tVals[i] = t;
+      const col = colorForT(t);
+      colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+    }
+    return { positions, colors, tVals };
+  }
+  
+  function buildTorusKnot(n) {
+    const positions = new Float32Array(n * 3), colors = new Float32Array(n * 3), tVals = new Float32Array(n);
+    const p = 2, q = 3, R = 3.4, r = 1.1, tube = 0.22;
+    for (let i = 0; i < n; i++) {
+      const u = Math.random() * Math.PI * 2;
+      const cx = (R + r * Math.cos(q * u)) * Math.cos(p * u);
+      const cy = (R + r * Math.cos(q * u)) * Math.sin(p * u);
+      const cz = r * Math.sin(q * u);
+      const ox = (Math.random() - 0.5) * tube, oy = (Math.random() - 0.5) * tube, oz = (Math.random() - 0.5) * tube;
+      positions[i * 3] = cx + ox; positions[i * 3 + 1] = cz + oy; positions[i * 3 + 2] = cy + oz;
+      const t = Math.sin(q * u) * 0.5 + 0.5;
+      tVals[i] = t;
+      const col = colorForT(t);
+      colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+    }
+    return { positions, colors, tVals };
+  }
+  
+  const GALAXY_SHAPES = [
+    { name: 'Spiral Galaxy', data: buildGalaxy(GALAXY_COUNT) },
+    { name: 'Collapsing Star', data: buildOrbJets(GALAXY_COUNT) },
+    { name: 'Torus Knot', data: buildTorusKnot(GALAXY_COUNT) },
+  ];
+  
+  const galaxyGeometry = new THREE.BufferGeometry();
+  const galaxyLivePositions = new Float32Array(GALAXY_SHAPES[0].data.positions);
+  const galaxyLiveColors = new Float32Array(GALAXY_SHAPES[0].data.colors);
+  galaxyGeometry.setAttribute('position', new THREE.BufferAttribute(galaxyLivePositions, 3));
+  galaxyGeometry.setAttribute('color', new THREE.BufferAttribute(galaxyLiveColors, 3));
+  const galaxyMaterial = new THREE.PointsMaterial({
+    size: 0.022, map: dotSprite, vertexColors: true, transparent: true, opacity: 0.9, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+  });
+  const galaxyPoints = new THREE.Points(galaxyGeometry, galaxyMaterial);
+  uniScene.add(galaxyPoints);
+  
+  let galCurrent = 0, galNext = 1, galMorphing = false, galMorphT = 0;
+  const GAL_MORPH_DURATION = 2.2, GAL_HOLD_DURATION = 3.2;
+  let galHoldTimer = GAL_HOLD_DURATION;
+  const shapeLabel = document.getElementById('universeShapeLabel');
+  
+  function easeInOutCubic(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  
+  function startGalaxyMorph() {
+    galMorphing = true; galMorphT = 0;
+    galNext = (galCurrent + 1) % GALAXY_SHAPES.length;
+    shapeLabel.textContent = GALAXY_SHAPES[galNext].name;
+  }
+  
+  function regenerateGalaxyColors() {
+    for (const shape of GALAXY_SHAPES) {
+      const { colors, tVals } = shape.data;
+      for (let i = 0; i < GALAXY_COUNT; i++) {
+        const col = colorForT(tVals[i]);
+        colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+      }
+    }
+    if (galMorphing) {
+      const e = easeInOutCubic(Math.min(galMorphT, 1));
+      const from = GALAXY_SHAPES[galCurrent].data, to = GALAXY_SHAPES[galNext].data;
+      for (let i = 0; i < GALAXY_COUNT * 3; i++) galaxyLiveColors[i] = from.colors[i] + (to.colors[i] - from.colors[i]) * e;
+    } else {
+      galaxyLiveColors.set(GALAXY_SHAPES[galCurrent].data.colors);
+    }
+    galaxyGeometry.attributes.color.needsUpdate = true;
+  }
+  
+  function updateGalaxy(dt) {
+    if (galMorphing) {
+      galMorphT += dt / GAL_MORPH_DURATION;
+      const e = easeInOutCubic(Math.min(galMorphT, 1));
+      const from = GALAXY_SHAPES[galCurrent].data, to = GALAXY_SHAPES[galNext].data;
+      for (let i = 0; i < GALAXY_COUNT * 3; i++) {
+        galaxyLivePositions[i] = from.positions[i] + (to.positions[i] - from.positions[i]) * e;
+        galaxyLiveColors[i] = from.colors[i] + (to.colors[i] - from.colors[i]) * e;
+      }
+      galaxyGeometry.attributes.position.needsUpdate = true;
+      galaxyGeometry.attributes.color.needsUpdate = true;
+      if (galMorphT >= 1) { galMorphing = false; galCurrent = galNext; galHoldTimer = GAL_HOLD_DURATION; }
+    } else {
+      galHoldTimer -= dt;
+      if (galHoldTimer <= 0) startGalaxyMorph();
+    }
+    galaxyPoints.rotation.y += dt * 0.05;
+  }
+  
+  // Black Hole Mode
+  const blackholeGroup = new THREE.Group();
+  const horizon = new THREE.Mesh(
+    new THREE.SphereGeometry(0.22, 32, 32),
+    new THREE.MeshBasicMaterial({ color: 0x000000 })
+  );
+  blackholeGroup.add(horizon);
+  
+  const DISK_COUNT = 16000;
+  const diskRadius = new Float32Array(DISK_COUNT);
+  const diskAngle0 = new Float32Array(DISK_COUNT);
+  const diskSpeed = new Float32Array(DISK_COUNT);
+  const diskHeight = new Float32Array(DISK_COUNT);
+  const diskColors = new Float32Array(DISK_COUNT * 3);
+  const diskPositions = new Float32Array(DISK_COUNT * 3);
+  
+  const diskInner = new THREE.Color(0xfff8e0);
+  const diskMid = new THREE.Color(0xff8a2e);
+  const diskOuter = new THREE.Color(0x8a1010);
+  
+  const CORE_COUNT = Math.floor(DISK_COUNT * 0.4);
+  const ARM_BRANCHES = 2, ARM_SPIN = 2.4;
+  
+  for (let i = 0; i < DISK_COUNT; i++) {
+    let rr, angle0, height, t;
+    if (i < CORE_COUNT) {
+      rr = 0.28 + Math.pow(Math.random(), 1.6) * 1.6;
+      angle0 = Math.random() * Math.PI * 2;
+      height = (Math.random() - 0.5) * 0.1;
+      t = rr / 1.9;
+    } else {
+      rr = 1.5 + Math.pow(Math.random(), 0.75) * 7.5;
+      const branchAngle = ((i % ARM_BRANCHES) / ARM_BRANCHES) * Math.PI * 2;
+      const spinAngle = rr * ARM_SPIN * 0.18;
+      const scatter = (Math.pow(Math.random(), 2) * (Math.random() < 0.5 ? 1 : -1)) * 0.55;
+      angle0 = branchAngle + spinAngle + scatter;
+      height = (Math.random() - 0.5) * (0.04 + rr * 0.05);
+      t = Math.min((rr - 1.5) / 7.5, 1);
+    }
+    diskRadius[i] = rr; diskAngle0[i] = angle0;
+    diskSpeed[i] = 1.3 / Math.sqrt(rr);
+    diskHeight[i] = height;
+    const col = t < 0.5 ? diskInner.clone().lerp(diskMid, t * 2) : diskMid.clone().lerp(diskOuter, (t - 0.5) * 2);
+    diskColors[i * 3] = col.r; diskColors[i * 3 + 1] = col.g; diskColors[i * 3 + 2] = col.b;
+  }
+  const diskGeometry = new THREE.BufferGeometry();
+  diskGeometry.setAttribute('position', new THREE.BufferAttribute(diskPositions, 3));
+  diskGeometry.setAttribute('color', new THREE.BufferAttribute(diskColors, 3));
+  const diskMaterial = new THREE.PointsMaterial({
+    size: 0.045, map: sprite, vertexColors: true, transparent: true, opacity: 0.9, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+  });
+  const diskPoints = new THREE.Points(diskGeometry, diskMaterial);
+  diskPoints.rotation.x = Math.PI / 2.6;
+  blackholeGroup.add(diskPoints);
+  
+  let diskTime = 0;
+  function updateBlackhole(dt) {
+    diskTime += dt;
+    for (let i = 0; i < DISK_COUNT; i++) {
+      const a = diskAngle0[i] + diskTime * diskSpeed[i];
+      const r = diskRadius[i];
+      diskPositions[i * 3] = Math.cos(a) * r;
+      diskPositions[i * 3 + 1] = diskHeight[i];
+      diskPositions[i * 3 + 2] = Math.sin(a) * r;
+    }
+    diskGeometry.attributes.position.needsUpdate = true;
+    blackholeGroup.rotation.y += dt * 0.01;
+  }
+  
+  // Solar System Mode
+  function makeTerrestrialTexture(base, spots, count) {
+    const w = 256, h = 128;
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = base; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < count; i++) {
+      const x = Math.random() * w, y = Math.random() * h;
+      const r = 3 + Math.random() * 14;
+      ctx.globalAlpha = 0.18 + Math.random() * 0.35;
+      ctx.fillStyle = spots[Math.floor(Math.random() * spots.length)];
+      ctx.beginPath();
+      ctx.ellipse(x, y, r, r * (0.5 + Math.random() * 0.4), Math.random() * Math.PI, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+  
+  function makeBandedTexture(colorStops) {
+    const w = 256, h = 128;
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    colorStops.forEach((col, i) => grad.addColorStop(i / (colorStops.length - 1), col));
+    ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 55; i++) {
+      const y = Math.random() * h;
+      ctx.strokeStyle = `rgba(255,255,255,${0.03 + Math.random() * 0.07})`;
+      ctx.lineWidth = 1 + Math.random() * 2.5;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      for (let x = 0; x <= w; x += 12) ctx.lineTo(x, y + Math.sin(x * 0.06 + i) * 3);
+      ctx.stroke();
+    }
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+  
+  function makeSunTexture() {
+    const w = 512, h = 256;
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#ffd54f'; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 1400; i++) {
+      const x = Math.random() * w, y = Math.random() * h;
+      const r = 1 + Math.random() * 5;
+      ctx.globalAlpha = 0.2 + Math.random() * 0.35;
+      ctx.fillStyle = Math.random() < 0.5 ? '#ff8c28' : '#fff6c8';
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+  
+  const planetsGroup = new THREE.Group();
+  const sunMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(0.9, 32, 32),
+    new THREE.MeshBasicMaterial({ map: makeSunTexture() })
+  );
+  planetsGroup.add(sunMesh);
+  
+  const PLANET_DATA = [
+    { name: 'Mercury', au: 0.39, size: 0.16, dotColor: '#9c9c9c', fact: 'Closest planet to the Sun and the smallest in the solar system.', tex: () => makeTerrestrialTexture('#9c9c9c', ['#7a7a7a', '#bdbdbd', '#8f8f8f'], 260) },
+    { name: 'Venus', au: 0.72, size: 0.28, dotColor: '#e8cda2', fact: 'The hottest planet — a runaway greenhouse effect traps heat under thick clouds.', tex: () => makeTerrestrialTexture('#e8cda2', ['#d8b878', '#f0e0b8', '#c9a868'], 160) },
+    { name: 'Earth', au: 1.00, size: 0.30, dotColor: '#2f6fed', fact: 'The only known planet with life. About 71% of its surface is water.', tex: () => makeTerrestrialTexture('#1c4fa0', ['#2f7d32', '#5a8f3c', '#e8e8e8', '#3a6bc9'], 220) },
+    { name: 'Mars', au: 1.52, size: 0.20, dotColor: '#b1440e', fact: 'The Red Planet, colored by iron oxide dust. Home to Olympus Mons, the tallest volcano.', tex: () => makeTerrestrialTexture('#b1440e', ['#8a3208', '#d97a4a', '#c65a20'], 220) },
+    { name: 'Jupiter', au: 5.20, size: 0.85, dotColor: '#d8ae76', fact: 'The largest planet. Its Great Red Spot is a storm bigger than Earth.', tex: () => makeBandedTexture(['#a97a4e', '#e3c9a0', '#c9a26a', '#f0dfc0', '#b98a5c', '#e3c9a0']) },
+    { name: 'Saturn', au: 9.58, size: 0.72, dotColor: '#e3c98f', fact: 'Famous for its spectacular ring system made of ice and rock.', ring: true, tex: () => makeBandedTexture(['#d9c088', '#f2e6c2', '#e8d3a0', '#f2e6c2']) },
+    { name: 'Uranus', au: 19.2, size: 0.48, dotColor: '#9fe3e0', fact: 'Rotates almost on its side, likely from an ancient collision.', tex: () => makeBandedTexture(['#8fd6d3', '#bdf0ee', '#9fe3e0']) },
+    { name: 'Neptune', au: 30.1, size: 0.46, dotColor: '#3f5efb', fact: 'The windiest planet, with storms reaching over 2,000 km/h.', tex: () => makeBandedTexture(['#2f4ad0', '#5f7dfc', '#3f5efb']) },
+    { name: 'Pluto', au: 39.5, size: 0.12, dotColor: '#b8a58c', fact: 'A dwarf planet in the Kuiper Belt, with a heart-shaped glacier region.', tex: () => makeTerrestrialTexture('#b8a58c', ['#9c8770', '#cdbba0', '#a89478'], 180) },
+  ];
+  
+  function orbitRadiusFor(au) { return 2.4 + Math.sqrt(au) * 2.0; }
+  
+  const planets = PLANET_DATA.map((p, idx) => {
+    const orbitR = orbitRadiusFor(p.au);
+    const mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(p.size, 32, 32),
+      new THREE.MeshStandardMaterial({ map: p.tex(), roughness: 0.85, metalness: 0.03 })
+    );
+    planetsGroup.add(mesh);
+    
+    if (p.ring) {
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(p.size * 1.4, p.size * 2.2, 48),
+        new THREE.MeshBasicMaterial({ color: 0xd8c79a, side: THREE.DoubleSide, transparent: true, opacity: 0.7 })
+      );
+      ring.rotation.x = Math.PI / 2.3;
+      mesh.add(ring);
+    }
+    
+    const orbitCurve = new THREE.EllipseCurve(0, 0, orbitR, orbitR, 0, Math.PI * 2, false, 0);
+    const orbitPts = orbitCurve.getPoints(128).map(pt => new THREE.Vector3(pt.x, 0, pt.y));
+    const orbitLine = new THREE.LineLoop(
+      new THREE.BufferGeometry().setFromPoints(orbitPts),
+      new THREE.LineBasicMaterial({ color: 0x33475e, transparent: true, opacity: 0.28 })
+    );
+    planetsGroup.add(orbitLine);
+    
+    return { ...p, mesh, orbitR, angle: Math.random() * Math.PI * 2, speed: 0.35 / Math.sqrt(p.au), idx };
+  });
+  
+  function updatePlanets(dt) {
+    for (const p of planets) {
+      p.angle += dt * p.speed;
+      p.mesh.position.set(Math.cos(p.angle) * p.orbitR, 0, Math.sin(p.angle) * p.orbitR);
+      p.mesh.rotation.y += dt * 0.6;
+    }
+    sunMesh.rotation.y += dt * 0.05;
+  }
+  
+  const planetMenuEl = document.getElementById('universePlanetMenu');
+  const planetInfoEl = document.getElementById('universePlanetInfo');
+  const piName = document.getElementById('uniPiName');
+  const piAu = document.getElementById('uniPiAu');
+  const piFact = document.getElementById('uniPiFact');
+  
+  let selectedPlanet = null;
+  
+  function buildPlanetMenu() {
+    planetMenuEl.innerHTML = '';
+    const overviewBtn = document.createElement('button');
+    overviewBtn.className = 'universe-planet-btn active';
+    overviewBtn.innerHTML = `<span class="universe-planet-dot" style="background:#6ee7ff;color:#6ee7ff"></span>Overview`;
+    overviewBtn.addEventListener('click', () => selectPlanet(null, overviewBtn));
+    planetMenuEl.appendChild(overviewBtn);
+    
+    planets.forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'universe-planet-btn';
+      const hex = p.dotColor;
+      btn.innerHTML = `<span class="universe-planet-dot" style="background:${hex};color:${hex}"></span>${p.name}`;
+      btn.addEventListener('click', () => selectPlanet(p, btn));
+      planetMenuEl.appendChild(btn);
+    });
+  }
+  buildPlanetMenu();
+  
+  function selectPlanet(p, btnEl) {
+    selectedPlanet = p;
+    document.querySelectorAll('.universe-planet-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+    if (p) {
+      planetInfoEl.style.display = 'block';
+      piName.textContent = p.name;
+      piAu.textContent = `${p.au} AU from the Sun`;
+      piFact.textContent = p.fact;
+      requestFocus(p.size * 6 + 2.5);
+    } else {
+      planetInfoEl.style.display = 'none';
+      requestFocus(20);
+    }
+  }
+  
+  let currentMode = 'galaxy';
+  const overlayTitle = document.getElementById('universeOverlayTitle');
+  const overlaySub = document.getElementById('universeOverlaySub');
+  const colorPanelEl = document.getElementById('universeColorPanel');
+  
+  function setUniverseMode(mode) {
+    currentMode = mode;
+    galaxyPoints.visible = (mode === 'galaxy');
+    blackholeGroup.visible = (mode === 'blackhole');
+    planetsGroup.visible = (mode === 'planets');
+    if (galaxyBokehPoints) galaxyBokehPoints.visible = (mode === 'galaxy');
+    
+    document.getElementById('universeShapeLabel').style.display = (mode === 'galaxy') ? 'block' : 'none';
+    colorPanelEl.style.display = (mode === 'galaxy') ? 'block' : 'none';
+    planetMenuEl.style.display = (mode === 'planets') ? 'block' : 'none';
+    planetInfoEl.style.display = (mode === 'planets' && selectedPlanet) ? 'block' : 'none';
+    
+    document.querySelectorAll('.universe-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+    
+    if (mode === 'galaxy') {
+      overlayTitle.textContent = 'Cosmic Universe';
+      overlaySub.textContent = 'Drag to rotate · Scroll to zoom';
+      requestFocus(9);
+    } else if (mode === 'blackhole') {
+      overlayTitle.textContent = 'Black Hole';
+      overlaySub.textContent = 'A star’s light bends around the event horizon';
+      requestFocus(7);
+    } else {
+      overlayTitle.textContent = 'Solar System';
+      overlaySub.textContent = 'Tap a planet to explore';
+      requestFocus(20);
+    }
+  }
+  
+  document.querySelectorAll('.universe-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => setUniverseMode(btn.dataset.mode));
+  });
+  
+  blackholeGroup.visible = false;
+  planetsGroup.visible = false;
+  uniScene.add(blackholeGroup);
+  uniScene.add(planetsGroup);
+  
+  let focusTimer = 0, focusDistance = 9;
+  function requestFocus(distance, duration = 1.4) { focusDistance = distance; focusTimer = duration; }
+  function desiredTarget() {
+    if (currentMode === 'planets' && selectedPlanet) return selectedPlanet.mesh.position;
+    return new THREE.Vector3(0, 0, 0);
+  }
+  
+  const cpCore = document.getElementById('uniCpCore');
+  const cpMid = document.getElementById('uniCpMid');
+  const cpEdge = document.getElementById('uniCpEdge');
+  
+  function applyColors(coreHex, midHex, edgeHex) {
+    colorCore = new THREE.Color(coreHex);
+    colorMid = new THREE.Color(midHex);
+    colorEdge = new THREE.Color(edgeHex);
+    regenerateGalaxyColors();
+  }
+  cpCore.addEventListener('input', () => applyColors(cpCore.value, cpMid.value, cpEdge.value));
+  cpMid.addEventListener('input', () => applyColors(cpCore.value, cpMid.value, cpEdge.value));
+  cpEdge.addEventListener('input', () => applyColors(cpCore.value, cpMid.value, cpEdge.value));
+  document.querySelectorAll('.universe-cp-swatch').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const { core, mid, edge } = btn.dataset;
+      cpCore.value = core; cpMid.value = mid; cpEdge.value = edge;
+      applyColors(core, mid, edge);
+    });
+  });
+  
+  const clock = new THREE.Clock();
+  
+  function animateUniverse() {
+    universeAnimationId = requestAnimationFrame(animateUniverse);
+    const dt = Math.min(clock.getDelta(), 0.05);
+    
+    if (currentMode === 'galaxy') updateGalaxy(dt);
+    else if (currentMode === 'blackhole') updateBlackhole(dt);
+    else updatePlanets(dt);
+    
+    const targetOld = uniControls.target.clone();
+    const trackT = (currentMode === 'planets' && selectedPlanet) ? 0.05 : 0.06;
+    uniControls.target.lerp(desiredTarget(), trackT);
+    const delta = uniControls.target.clone().sub(targetOld);
+    uniCamera.position.add(delta);
+    
+    if (focusTimer > 0) {
+      focusTimer -= dt;
+      const offset = uniCamera.position.clone().sub(uniControls.target);
+      const dist = offset.length();
+      const newDist = THREE.MathUtils.lerp(dist, focusDistance, 0.06);
+      uniCamera.position.copy(uniControls.target).add(offset.setLength(Math.max(newDist, 0.01)));
+    }
+    
+    uniControls.update();
+    uniComposer.render();
+  }
+  
+  window.addEventListener('resize', () => {
+    if (!universeInitialized) return;
+    uniCamera.aspect = window.innerWidth / window.innerHeight;
+    uniCamera.updateProjectionMatrix();
+    uniRenderer.setSize(window.innerWidth, window.innerHeight);
+    uniComposer.setSize(window.innerWidth, window.innerHeight);
+  });
+  
+  document.getElementById('universeLoading').style.display = 'none';
+  shapeLabel.textContent = GALAXY_SHAPES[0].name;
+  setUniverseMode('galaxy');
+  animateUniverse();
+}
+
+// Hook navigation for universe screen
+document.querySelectorAll('[data-go]').forEach(btn => {
+  const targetId = btn.getAttribute('data-go');
+  if (targetId === 'universeScreen') {
+    btn.addEventListener('click', () => {
+      setTimeout(initCosmicUniverse, 100);
+    });
+  }
+});
+</script>
+
 <script>
 "use strict";
 const $=id=>document.getElementById(id), PROFILE_KEY="scienceNexusProfile";
@@ -433,9 +1645,7 @@ function fillClasses(id){
 fillClasses("homeClass");fillClasses("quizClass");
 
 /* Formula library */
-
 const formulas = [
-  // CLASSES 1–5
   [1,"Arithmetic","Addition","a + b","Add two numbers."],
   [1,"Arithmetic","Subtraction","a − b","Find the difference."],
   [1,"Arithmetic","Multiplication","a × b","Multiply two numbers."],
@@ -454,8 +1664,6 @@ const formulas = [
   [1,"Geometry","Volume of a cube","V = s³","s is the edge length."],
   [1,"Geometry","Volume of a cuboid","V = l × b × h","Multiply its three dimensions."],
   [1,"Arithmetic","Speed","Speed = distance/time","Use matching units."],
-
-  // CLASSES 6–8
   [6,"Arithmetic","Ratio","a : b = a/b","Compare two quantities."],
   [6,"Arithmetic","Proportion","a/b = c/d","Two ratios are equal."],
   [6,"Arithmetic","Percentage change","Change/original × 100%","Use the original value as the base."],
@@ -482,8 +1690,6 @@ const formulas = [
   [6,"Statistics","Mean","Mean = sum of values/count","Add all values and divide by their count."],
   [6,"Statistics","Range","Range = maximum − minimum","Difference between largest and smallest values."],
   [6,"Coordinate Geometry","Coordinate point","(x, y)","x is horizontal; y is vertical."],
-
-  // CLASSES 9–10
   [9,"Algebra","Square of a sum","(a + b)² = a² + 2ab + b²","Algebraic identity."],
   [9,"Algebra","Square of a difference","(a − b)² = a² − 2ab + b²","Algebraic identity."],
   [9,"Algebra","Difference of squares","a² − b² = (a − b)(a + b)","Factorisation identity."],
@@ -523,8 +1729,6 @@ const formulas = [
   [9,"Logarithms","Product rule","logₐ(xy) = logₐx + logₐy","For positive x,y and a > 0, a ≠ 1."],
   [9,"Logarithms","Quotient rule","logₐ(x/y) = logₐx − logₐy","For positive x,y and a > 0, a ≠ 1."],
   [9,"Logarithms","Power rule","logₐ(xⁿ) = n logₐx","For x > 0 and a > 0, a ≠ 1."],
-
-  // CLASSES 11–12
   [11,"Sets","Union","A ∪ B","Elements in A, B, or both."],
   [11,"Sets","Intersection","A ∩ B","Elements common to both sets."],
   [11,"Sets","Complement","A′ = U \\ A","Elements in the universal set U but not in A."],
@@ -635,7 +1839,6 @@ function makeQ(text,answer,hint){
 }
 
 function genQ(c, d) {
-  // Keep the existing question level for Classes 1–8.
   if (c <= 8) {
     let a = rand(2, 10 + c * d * 2);
     let b = rand(2, 10 + c * d * 2);
@@ -679,7 +1882,6 @@ function genQ(c, d) {
     }
   }
 
-  // CLASSES 9–10: algebra, quadratics, geometry and trigonometry.
   if (c <= 10) {
     let a = rand(2, d===1 ? 6 : d===2 ? 12 : 20);
     let b = rand(2, d===1 ? 8 : d===2 ? 15 : 25);
@@ -688,49 +1890,36 @@ function genQ(c, d) {
 
     if (t === 0) {
       let r = rand(2, 8+d*4);
-      return makeQ("If f(x) = x² − "+a+"x + "+b+", find f("+r+").",
-        r*r-a*r+b, "Substitute the given value for every x.");
+      return makeQ("If f(x) = x² − "+a+"x + "+b+", find f("+r+").", r*r-a*r+b, "Substitute the given value for every x.");
     }
     if (t === 1) {
       let r = rand(2, 10+d*3);
-      return makeQ("Solve x² − "+(2*r)+"x + "+(r*r)+" = 0. Find x.",
-        r, "Factor the quadratic; this equation has a repeated root.");
+      return makeQ("Solve x² − "+(2*r)+"x + "+(r*r)+" = 0. Find x.", r, "Factor the quadratic; this equation has a repeated root.");
     }
     if (t === 2) {
       let n = rand(3, 8+d*2);
-      return makeQ("An AP has first term "+a+" and common difference "+b+
-        ". Find term "+n+".", a+(n-1)*b, "Use the nth-term rule.");
+      return makeQ("An AP has first term "+a+" and common difference "+b+". Find term "+n+".", a+(n-1)*b, "Use the nth-term rule.");
     }
     if (t === 3) {
       let r = rand(3, 12+d*3);
-      return makeQ("A right triangle has legs "+r+" and "+(r+1)+
-        ". Find the square of its hypotenuse.", r*r+(r+1)*(r+1),
-        "Apply the Pythagorean theorem.");
+      return makeQ("A right triangle has legs "+r+" and "+(r+1)+". Find the square of its hypotenuse.", r*r+(r+1)*(r+1), "Apply the Pythagorean theorem.");
     }
     if (t === 4) {
       let r = rand(2, 10+d*2);
-      return makeQ("If tan θ = "+r+"/3, find 9 tan²θ.",
-        r*r, "Square the ratio, then multiply by 9.");
+      return makeQ("If tan θ = "+r+"/3, find 9 tan²θ.", r*r, "Square the ratio, then multiply by 9.");
     }
     if (t === 5) {
       let r = rand(2, 10+d*2);
-      return makeQ("Find the distance between (0,0) and ("+r+", "+(r+1)+
-        ") squared.", r*r+(r+1)*(r+1),
-        "The squared distance is x² + y² from the origin.");
+      return makeQ("Find the distance between (0,0) and ("+r+", "+(r+1)+") squared.", r*r+(r+1)*(r+1), "The squared distance is x² + y² from the origin.");
     }
     if (t === 6) {
       let r = rand(2, 8+d*3);
-      return makeQ("For x² − "+(r+3)+"x + "+(r*(r+3))+
-        " = 0, find the sum of its roots.", r+3,
-        "Use the relationship between roots and coefficients.");
+      return makeQ("For x² − "+(r+3)+"x + "+(r*(r+3))+" = 0, find the sum of its roots.", r+3, "Use the relationship between roots and coefficients.");
     }
     let n = rand(3, 10+d*2);
-    return makeQ("A bag has "+n+" red and "+(n+2)+
-      " blue balls. Find the total number of balls.", 2*n+2,
-      "Add the numbers of both colours.");
+    return makeQ("A bag has "+n+" red and "+(n+2)+" blue balls. Find the total number of balls.", 2*n+2, "Add the numbers of both colours.");
   }
 
-  // CLASSES 11–12: advanced algebra, calculus, vectors and probability.
   let a = rand(2, d===1 ? 5 : d===2 ? 10 : 16);
   let b = rand(2, d===1 ? 6 : d===2 ? 12 : 20);
   let n = rand(3, d===1 ? 6 : d===2 ? 10 : 14);
@@ -738,53 +1927,37 @@ function genQ(c, d) {
 
   if (t === 0) {
     let r = rand(2, 6+d*3);
-    return makeQ("If f(x) = x³ − "+a+"x² + "+b+
-      "x, find f'("+r+").", 3*r*r-2*a*r+b,
-      "Differentiate each term before substituting x.");
+    return makeQ("If f(x) = x³ − "+a+"x² + "+b+"x, find f'("+r+").", 3*r*r-2*a*r+b, "Differentiate each term before substituting x.");
   }
   if (t === 1) {
     let r = rand(2, 8+d*2);
-    return makeQ("If f(x) = x³ + "+a+"x² − "+b+
-      "x, find f''("+r+").", 6*r+2*a,
-      "Differentiate twice, then substitute x.");
+    return makeQ("If f(x) = x³ + "+a+"x² − "+b+"x, find f''("+r+").", 6*r+2*a, "Differentiate twice, then substitute x.");
   }
   if (t === 2) {
-    return makeQ("Evaluate ∫₀ⁿ 2x dx, where n = "+n+".",
-      n*n, "Find an antiderivative, then evaluate at both limits.");
+    return makeQ("Evaluate ∫₀ⁿ 2x dx, where n = "+n+".", n*n, "Find an antiderivative, then evaluate at both limits.");
   }
   if (t === 3) {
-    return makeQ("Find the determinant of [[ "+a+", "+b+" ], [ "+(a+1)+
-      ", "+(b+3)+" ]].", a*(b+3)-b*(a+1),
-      "For a 2×2 matrix, multiply the main diagonal and subtract the other diagonal.");
+    return makeQ("Find the determinant of [[ "+a+", "+b+" ], [ "+(a+1)+", "+(b+3)+" ]].", a*(b+3)-b*(a+1), "For a 2×2 matrix, multiply the main diagonal and subtract the other diagonal.");
   }
   if (t === 4) {
-    return makeQ("Find the dot product of vectors ("+a+", "+b+
-      ") and ("+b+", "+a+").", 2*a*b,
-      "Multiply corresponding components and add them.");
+    return makeQ("Find the dot product of vectors ("+a+", "+b+") and ("+b+", "+a+").", 2*a*b, "Multiply corresponding components and add them.");
   }
   if (t === 5) {
-    return makeQ("Find the coefficient of x² in (1 + x)^"+n+".",
-      n*(n-1)/2, "Use the binomial coefficient for the x² term.");
+    return makeQ("Find the coefficient of x² in (1 + x)^"+n+".", n*(n-1)/2, "Use the binomial coefficient for the x² term.");
   }
   if (t === 6) {
     let r = rand(2, 5+d*2);
-    return makeQ("A GP starts at "+a+" with common ratio "+r+
-      ". Find its third term.", a*r*r, "Multiply the first term by the ratio squared.");
+    return makeQ("A GP starts at "+a+" with common ratio "+r+". Find its third term.", a*r*r, "Multiply the first term by the ratio squared.");
   }
   if (t === 7) {
-    return makeQ("How many ways can "+n+
-      " distinct objects be arranged?", factorialSafe(n),
-      "The number of permutations of n distinct objects is n factorial.");
+    return makeQ("How many ways can "+n+" distinct objects be arranged?", factorialSafe(n), "The number of permutations of n distinct objects is n factorial.");
   }
   if (t === 8) {
     let r = rand(2, 8+d*2);
-    return makeQ("If z = "+a+" + "+r+"i, find |z|².",
-      a*a+r*r, "The squared modulus is the sum of the squares of the real and imaginary parts.");
+    return makeQ("If z = "+a+" + "+r+"i, find |z|².", a*a+r*r, "The squared modulus is the sum of the squares of the real and imaginary parts.");
   }
   let r = rand(2, 10+d*3);
-  return makeQ("If y = x² − "+a+"x + "+b+
-    ", find dy/dx at x = "+r+".", 2*r-a,
-    "Differentiate the polynomial and substitute the given x.");
+  return makeQ("If y = x² − "+a+"x + "+b+", find dy/dx at x = "+r+".", 2*r-a, "Differentiate the polynomial and substitute the given x.");
 }
 
 function factorialSafe(n) {
@@ -794,84 +1967,39 @@ function factorialSafe(n) {
 }
 
 function bossQ(c, d) {
-  // Preserve the original boss style for Classes 1–8.
   if (c <= 3) {
-    let a = rand(8, 30),
-      b = rand(5, 20);
+    let a = rand(8, 30), b = rand(5, 20);
     return makeQ("BOSS: (" + a + " + " + b + ") × 3 = ?", (a + b) * 3, "Add first.");
   }
   if (c <= 5) {
-    let a = rand(8, 20),
-      b = rand(5, 16);
+    let a = rand(8, 20), b = rand(5, 16);
     return makeQ("BOSS: rectangle " + a + " × " + b + ". Area?", a * b, "Length × breadth.");
   }
   if (c <= 8) {
     let a = rand(5, 20);
     return makeQ("BOSS: solve 3x + 7 = " + (3 * a + 7) + ".", a, "Subtract 7, then divide by 3.");
   }
-  
-  // Classes 9–10 boss questions.
   if (c <= 10) {
     let a = rand(4, 8 + d * 3);
     let b = rand(3, 8 + d * 2);
     let x = rand(3, 8 + d * 2);
     const t = rand(0, 4);
-    
-    if (t === 0) {
-      return makeQ("BOSS: Solve x² − " + (2 * a) + "x + " + (a * a) + " = 0. Find x.",
-        a, "Factor the quadratic.");
-    }
-    if (t === 1) {
-      return makeQ("BOSS: Find the sum of the first " + x +
-        " terms of an AP with first term " + a + " and difference " + b + ".",
-        x * (2 * a + (x - 1) * b) / 2, "Use the arithmetic-series sum formula.");
-    }
-    if (t === 2) {
-      return makeQ("BOSS: If sin θ = 3/5 and θ is acute, find 25 cos²θ.",
-        16, "Use the Pythagorean trigonometric identity.");
-    }
-    if (t === 3) {
-      return makeQ("BOSS: Find the distance between (" + a + ", " + b +
-        ") and (" + a + ", " + (b + x) + ") squared.", x * x,
-        "The x-coordinates are equal.");
-    }
-    return makeQ("BOSS: Find the discriminant of x² − " + (2 * a) +
-      "x + " + (a * a - b) + " = 0.", 4 * b,
-      "Calculate b² − 4ac carefully.");
+    if (t === 0) return makeQ("BOSS: Solve x² − " + (2 * a) + "x + " + (a * a) + " = 0. Find x.", a, "Factor the quadratic.");
+    if (t === 1) return makeQ("BOSS: Find the sum of the first " + x + " terms of an AP with first term " + a + " and difference " + b + ".", x * (2 * a + (x - 1) * b) / 2, "Use the arithmetic-series sum formula.");
+    if (t === 2) return makeQ("BOSS: If sin θ = 3/5 and θ is acute, find 25 cos²θ.", 16, "Use the Pythagorean trigonometric identity.");
+    if (t === 3) return makeQ("BOSS: Find the distance between (" + a + ", " + b + ") and (" + a + ", " + (b + x) + ") squared.", x * x, "The x-coordinates are equal.");
+    return makeQ("BOSS: Find the discriminant of x² − " + (2 * a) + "x + " + (a * a - b) + " = 0.", 4 * b, "Calculate b² − 4ac carefully.");
   }
-  
-  // Classes 11–12 boss questions.
   let a = rand(3, 8 + d * 2);
   let b = rand(2, 7 + d * 2);
   let n = rand(4, 8 + d * 2);
   const t = rand(0, 5);
-  
-  if (t === 0) {
-    return makeQ("BOSS: If f(x) = x³ − " + a + "x² + " + b +
-      "x, find f'(" + n + ").", 3 * n * n - 2 * a * n + b,
-      "Differentiate first, then substitute x.");
-  }
-  if (t === 1) {
-    return makeQ("BOSS: Evaluate ∫₀ⁿ 3x² dx, where n = " + n + ".",
-      n * n * n, "Find the antiderivative and apply both limits.");
-  }
-  if (t === 2) {
-    return makeQ("BOSS: Find the determinant of [[ " + a + ", " + b +
-      " ], [ " + b + ", " + a + " ]].", a * a - b * b,
-      "Multiply the main diagonal and subtract the other diagonal.");
-  }
-  if (t === 3) {
-    return makeQ("BOSS: Find the coefficient of x³ in (1 + x)^" + n + ".",
-      n * (n - 1) * (n - 2) / 6, "Use the binomial coefficient for the x³ term.");
-  }
-  if (t === 4) {
-    return makeQ("BOSS: Find the dot product of (" + a + ", " + b +
-      ") and (" + b + ", " + a + ").", 2 * a * b,
-      "Multiply corresponding components and add.");
-  }
-  return makeQ("BOSS: How many ways can " + n +
-    " distinct objects be arranged?", factorialSafe(n),
-    "Use the factorial of the number of objects.");
+  if (t === 0) return makeQ("BOSS: If f(x) = x³ − " + a + "x² + " + b + "x, find f'(" + n + ").", 3 * n * n - 2 * a * n + b, "Differentiate first, then substitute x.");
+  if (t === 1) return makeQ("BOSS: Evaluate ∫₀ⁿ 3x² dx, where n = " + n + ".", n * n * n, "Find the antiderivative and apply both limits.");
+  if (t === 2) return makeQ("BOSS: Find the determinant of [[ " + a + ", " + b + " ], [ " + b + ", " + a + " ]].", a * a - b * b, "Multiply the main diagonal and subtract the other diagonal.");
+  if (t === 3) return makeQ("BOSS: Find the coefficient of x³ in (1 + x)^" + n + ".", n * (n - 1) * (n - 2) / 6, "Use the binomial coefficient for the x³ term.");
+  if (t === 4) return makeQ("BOSS: Find the dot product of (" + a + ", " + b + ") and (" + b + ", " + a + ").", 2 * a * b, "Multiply corresponding components and add.");
+  return makeQ("BOSS: How many ways can " + n + " distinct objects be arranged?", factorialSafe(n), "Use the factorial of the number of objects.");
 }
 
 function startMath() {
@@ -881,23 +2009,12 @@ function startMath() {
 
   questions = Array.from(
     { length: COUNT },
-    () => genQ(
-      mode === "mixed" ? rand(1, 12) : grade,
-      difficulty
-    )
+    () => genQ(mode === "mixed" ? rand(1, 12) : grade, difficulty)
   );
 
-  // Question 20 becomes the final boss.
-  questions[COUNT - 1] = bossQ(
-    mode === "mixed" ? rand(1, 12) : grade,
-    difficulty
-  );
+  questions[COUNT - 1] = bossQ(mode === "mixed" ? rand(1, 12) : grade, difficulty);
 
-  beginGame(
-    mode === "mixed"
-      ? "Mixed Classes 1–12"
-      : "Class " + grade
-  );
+  beginGame(mode === "mixed" ? "Mixed Classes 1–12" : "Class " + grade);
 }
 
 $("beginQuiz").onclick = startMath;
@@ -935,7 +2052,6 @@ function tick(){
   seconds--;timerId=setTimeout(tick,1000);
 }
 
-/* Flowers and leaves: float across the screen, then fade smoothly */
 function burst(){
   const symbols=["🎉"  , "🎊" , "🥳" ,  "🌷" ,  "💐"  ,  "💗"  , "💝" ,   "🎀"];
   for(let i=0;i<22;i++){
@@ -951,33 +2067,161 @@ function burst(){
     p.addEventListener("animationend",()=>p.remove(),{once:true});
   }
 }
+
+// --- ENHANCED AUDIO, VOLUME & HAPTICS ENGINE ---
+const AppAudio = {
+  ctx: null,
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      this.ctx = new AudioCtx();
+    }
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  },
+  playTap() {
+    try {
+      this.init();
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      
+      const now = this.ctx.currentTime;
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(420, now);
+      osc.frequency.exponentialRampToValueAtTime(150, now + 0.06);
+      
+      gain.gain.setValueAtTime(0.35, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+      
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } catch(e) {}
+  },
+  playSelect() {
+    try {
+      this.init();
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(587.33, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.1);
+
+      gain.gain.setValueAtTime(0.4, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+
+      osc.start(now);
+      osc.stop(now + 0.1);
+    } catch(e) {}
+  },
+  playCorrect() {
+    try {
+      this.init();
+      const now = this.ctx.currentTime;
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+        gain.gain.setValueAtTime(0.45, now + idx * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.18);
+        
+        osc.start(now + idx * 0.07);
+        osc.stop(now + idx * 0.07 + 0.18);
+      });
+    } catch(e) {}
+  },
+  playWrong() {
+    try {
+      this.init();
+      const now = this.ctx.currentTime;
+      [180, 130].forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+        gain.gain.setValueAtTime(0.4, now + idx * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.2);
+        
+        osc.start(now + idx * 0.1);
+        osc.stop(now + idx * 0.1 + 0.2);
+      });
+    } catch(e) {}
+  }
+};
+
+document.addEventListener("pointerdown", (e) => {
+  const interactive = e.target.closest("button, select, input, .navcard, .choice, .stage, .tab");
+  if (interactive) {
+    AppAudio.playTap();
+    if (navigator.vibrate) navigator.vibrate(15);
+  }
+});
+
+
 function checkAnswer(v,button){
   if(answered||finished)return;
   answered=true;stopTimer();
   const q=questions[qi],ok=v!==null&&String(v)===String(q.answer);
+  
   $("answerGrid").querySelectorAll("button").forEach(b=>{
     b.disabled=true;
     if(b.textContent.replace(/^[A-D]\.\s*/,"")===String(q.answer))b.classList.add("correct");
   });
+
   if(ok){
     right++;streak++;bestStreak=Math.max(bestStreak,streak);
     const pts=10+(subject==="math"?difficulty*3:2)+Math.min(15,(streak-1)*2);
     score+=pts;
+    
+    AppAudio.playCorrect();
+    if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+    
+    if(button) {
+      button.classList.add("correct-anim");
+    }
+    
     $("answerFeedback").textContent="✅ Correct! +"+pts+" XP";
     $("answerFeedback").className="feedback good";
     if(streak>=3&&streak%3===0){score+=5;$("answerFeedback").textContent="🌸 COMBO! +5 bonus XP";}
     burst();
   }else{
-    streak=0;if(button)button.classList.add("wrong");
+    streak=0;
+    
+    AppAudio.playWrong();
+    if (navigator.vibrate) navigator.vibrate([70, 50, 70]);
+    
+    if(button) {
+      button.classList.add("wrong-anim");
+    }
+    $("questionCard").classList.add("shake-card");
+    setTimeout(() => $("questionCard").classList.remove("shake-card"), 400);
+
+    if(button)button.classList.add("wrong");
     if(mode==="survival"&&subject==="math")lives--;
     $("answerFeedback").textContent=v===null?"⏰ Time's up! Answer: "+q.answer:"❌ Correct answer: "+q.answer;
     $("answerFeedback").className="feedback bad";
   }
+  
   $("currentStreak").textContent=streak;
   $("lifeBadge").textContent=mode==="survival"&&subject==="math"?"❤️".repeat(lives)+"🖤".repeat(3-lives):"✨ Keep going!";
   $("quizProgress").style.width=((qi+1)/COUNT*100)+"%";
   $("nextButton").disabled=false;
 }
+
+
 $("hintButton").onclick=()=>{
   if(!answered&&!hintShown){hintShown=true;$("questionHint").textContent="💡 Hint: "+questions[qi].hint;}
 };
@@ -991,11 +2235,8 @@ function addBadge(k,a){if(!profile.badges.includes(k)){profile.badges.push(k);a.
 function finishQuiz(){
   if(finished)return;finished=true;stopTimer();
   const accuracy=Math.round(right/COUNT*100),coins=Math.floor(score/10),added=[];
-  profile.xp+=score;profile.coins+=coins;profile.games++;profile.correct+=right;
+  profile.xp+=score;profile.coins+=coins;profile.games+=1;profile.correct+=right;
   profile.bestStreak=Math.max(profile.bestStreak,bestStreak);profile.bestScore=Math.max(profile.bestScore,score);
-  addBadge("first",added);if(accuracy===100)addBadge("perfect",added);
-  if(bestStreak>=5)addBadge("streak",added);if(profile.games>=10)addBadge("ten",added);
-  if(profile.correct>=100)addBadge("scholar",added);addBadge("marathon",added);
   save();renderProfile();
   $("resultEmoji").textContent=accuracy>=80?"🏆":accuracy>=50?"🌟":"💪";
   $("resultTitle").textContent=accuracy>=80?"Outstanding!":accuracy>=50?"Quest Complete!":"Keep Practising!";
@@ -1010,7 +2251,6 @@ function finishQuiz(){
 }
 $("againButton").onclick=()=>subject==="chem"&&activeChemModel?startChemistryQuiz(activeChemModel):go("quizSetup");
 
-/* Atomic model information with 20 unique questions each */
 const models={
 dalton:{era:"Early atomic theory • 1803",title:"Dalton's Atomic Model",subtitle:"Atoms were represented as tiny solid spheres.",idea:"Dalton proposed that matter is made of atoms and treated them as indivisible particles.",points:["Matter consists of atoms.","Atoms of different elements were considered different.","Atoms combine in simple whole-number ratios.","Chemical reactions rearrange atoms.","Later discoveries showed atoms contain smaller particles."],hint:"Picture a tiny solid ball. This model has no electrons or nucleus.",qs:[
   ["How did Dalton represent atoms?",["Solid spheres","Positive spheres with electrons","Nuclei with shells","Electron clouds"],0,"Think of a tiny solid ball."],
@@ -1124,7 +2364,6 @@ quantum:{era:"Modern quantum mechanics • 1920s onward",title:"Modern Quantum M
 ]}
 };
 
-/* Elements: first 20 */
 const elements=[
 ["Hydrogen","H",1,1,[1]],["Helium","He",2,4,[2]],["Lithium","Li",3,7,[2,1]],["Beryllium","Be",4,9,[2,2]],["Boron","B",5,11,[2,3]],["Carbon","C",6,12,[2,4]],["Nitrogen","N",7,14,[2,5]],["Oxygen","O",8,16,[2,6]],["Fluorine","F",9,19,[2,7]],["Neon","Ne",10,20,[2,8]],["Sodium","Na",11,23,[2,8,1]],["Magnesium","Mg",12,24,[2,8,2]],["Aluminium","Al",13,27,[2,8,3]],["Silicon","Si",14,28,[2,8,4]],["Phosphorus","P",15,31,[2,8,5]],["Sulfur","S",16,32,[2,8,6]],["Chlorine","Cl",17,35,[2,8,7]],["Argon","Ar",18,40,[2,8,8]],["Potassium","K",19,39,[2,8,8,1]],["Calcium","Ca",20,40,[2,8,8,2]]
 ];
@@ -1159,9 +2398,6 @@ const animStyle=document.createElement("style");
 animStyle.textContent="@keyframes shellSpin{to{transform:rotate(360deg)}}";
 document.head.appendChild(animStyle);
 
-/* Rutherford model: elliptical paths with moving electrons */
-
-/* Rutherford model: four elliptical orbits and eight blue electrons */
 function drawRutherford(stage) {
   const canvas = document.createElement("canvas");
   canvas.style.display = "block";
@@ -1169,8 +2405,7 @@ function drawRutherford(stage) {
   canvas.style.height = "100%";
   canvas.style.position = "absolute";
   canvas.style.inset = "0";
-  canvas.setAttribute("aria-label",
-    "Animated Rutherford atomic model with four elliptical orbits");
+  canvas.setAttribute("aria-label", "Animated Rutherford atomic model with four elliptical orbits");
   stage.appendChild(canvas);
 
   const ctx = canvas.getContext("2d");
@@ -1185,113 +2420,72 @@ function drawRutherford(stage) {
 
   let animationAngle = 0;
   const speed = 0.015;
-  let lastWidth = 0;
-  let lastHeight = 0;
-  let lastDpr = 0;
+  let lastWidth = 0, lastHeight = 0, lastDpr = 0;
 
   function animate() {
-    // Stop animating when the user leaves this model.
     if (!canvas.isConnected) return;
-
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-    if (!width || !height) {
-      requestAnimationFrame(animate);
-      return;
-    }
+    const width = canvas.clientWidth, height = canvas.clientHeight;
+    if (!width || !height) { requestAnimationFrame(animate); return; }
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    // Resize the drawing surface only when its size changes.
     if (width !== lastWidth || height !== lastHeight || dpr !== lastDpr) {
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
-      lastWidth = width;
-      lastHeight = height;
-      lastDpr = dpr;
+      lastWidth = width; lastHeight = height; lastDpr = dpr;
     }
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, width, height);
 
-    const centerX = width / 2;
-    const centerY = height / 2;
+    const centerX = width / 2, centerY = height / 2;
     const scale = Math.min(width, height) * 0.38;
-    const rx = scale;
-    const ry = scale * 0.32;
+    const rx = scale, ry = scale * 0.32;
 
     animationAngle += speed;
 
-    // 1. Four symmetrical elliptical orbits.
     orbits.forEach(orbit => {
       ctx.save();
       ctx.translate(centerX, centerY);
       ctx.rotate(orbit.angle);
-
       ctx.beginPath();
       ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
       ctx.strokeStyle = "rgba(147, 197, 253, 0.9)";
       ctx.lineWidth = 1.5;
       ctx.stroke();
-
       ctx.restore();
     });
 
-    // 2. Glowing red-orange nucleus.
     const nucleusRadius = scale * 0.16;
-
-    const outerGlow = ctx.createRadialGradient(
-      centerX, centerY, nucleusRadius * 0.5,
-      centerX, centerY, nucleusRadius * 1.5
-    );
+    const outerGlow = ctx.createRadialGradient(centerX, centerY, nucleusRadius * 0.5, centerX, centerY, nucleusRadius * 1.5);
     outerGlow.addColorStop(0, "rgba(235, 60, 0, 0.4)");
     outerGlow.addColorStop(1, "rgba(235, 60, 0, 0)");
-
     ctx.beginPath();
     ctx.arc(centerX, centerY, nucleusRadius * 1.5, 0, Math.PI * 2);
     ctx.fillStyle = outerGlow;
     ctx.fill();
 
-    const nucleusGrad = ctx.createRadialGradient(
-      centerX - nucleusRadius * 0.35,
-      centerY - nucleusRadius * 0.35,
-      nucleusRadius * 0.1,
-      centerX, centerY, nucleusRadius
-    );
+    const nucleusGrad = ctx.createRadialGradient(centerX - nucleusRadius * 0.35, centerY - nucleusRadius * 0.35, nucleusRadius * 0.1, centerX, centerY, nucleusRadius);
     nucleusGrad.addColorStop(0, "#ff9900");
     nucleusGrad.addColorStop(0.5, "#ea3800");
     nucleusGrad.addColorStop(1, "#990000");
-
     ctx.beginPath();
     ctx.arc(centerX, centerY, nucleusRadius, 0, Math.PI * 2);
     ctx.fillStyle = nucleusGrad;
     ctx.fill();
 
-    // 3. Two revolving blue electrons on each orbit.
     const electronRadius = Math.max(3, scale * 0.055);
-
     orbits.forEach(orbit => {
       [orbit.e1Offset, orbit.e2Offset].forEach(offset => {
         const t = animationAngle + offset;
-
-        const localX = rx * Math.cos(t);
-        const localY = ry * Math.sin(t);
-
-        const cosA = Math.cos(orbit.angle);
-        const sinA = Math.sin(orbit.angle);
-
+        const localX = rx * Math.cos(t), localY = ry * Math.sin(t);
+        const cosA = Math.cos(orbit.angle), sinA = Math.sin(orbit.angle);
         const x = centerX + localX * cosA - localY * sinA;
         const y = centerY + localX * sinA + localY * cosA;
 
-        const electronGrad = ctx.createRadialGradient(
-          x - electronRadius * 0.3,
-          y - electronRadius * 0.3,
-          electronRadius * 0.1,
-          x, y, electronRadius
-        );
-        electronGrad.addColorStop(0, "#4477ff");
-        electronGrad.addColorStop(0.6, "#0011cc");
-        electronGrad.addColorStop(1, "#000066");
+        const electronGrad = ctx.createRadialGradient(x - electronRadius * 0.3, y - electronRadius * 0.3, electronRadius * 0.1, x, y, electronRadius);
+        electronGrad.addColorStop(0, "#e0ffff");
+        electronGrad.addColorStop(0.6, "#67f5ff");
+        electronGrad.addColorStop(1, "#00839e");
 
         ctx.beginPath();
         ctx.arc(x, y, electronRadius, 0, Math.PI * 2);
@@ -1302,7 +2496,6 @@ function drawRutherford(stage) {
 
     requestAnimationFrame(animate);
   }
-
   requestAnimationFrame(animate);
 }
 
@@ -1323,359 +2516,190 @@ function drawModel(kind){
   const stage=document.createElement("div");stage.className="atom-stage";
   if(kind==="rutherford"){drawRutherford(stage);target.appendChild(stage);return;}
   if (kind === "bohr") {
-  const canvas = document.createElement("canvas");
-  canvas.style.display = "block";
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  canvas.style.position = "absolute";
-  canvas.style.inset = "0";
-  canvas.setAttribute("aria-label", "Animated Bohr atomic model with K, L, M and N shells");
-  stage.appendChild(canvas);
-  
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-  
-  const shells = [
-    { name: "K", n: 1, maxElectrons: 2, radiusFactor: 0.25, speed: 0.015 },
-    { name: "L", n: 2, maxElectrons: 8, radiusFactor: 0.45, speed: -0.01 },
-    { name: "M", n: 3, maxElectrons: 18, radiusFactor: 0.65, speed: 0.007 },
-    { name: "N", n: 4, maxElectrons: 32, radiusFactor: 0.85, speed: -0.004 }
-  ];
-  
-  const angles = [0, 0, 0, 0];
-  let lastWidth = 0,
-    lastHeight = 0,
-    lastDpr = 0;
-  
-  function animateBohr() {
-    if (!canvas.isConnected) return;
+    const canvas = document.createElement("canvas");
+    canvas.style.display = "block"; canvas.style.width = "100%"; canvas.style.height = "100%"; canvas.style.position = "absolute"; canvas.style.inset = "0";
+    canvas.setAttribute("aria-label", "Animated Bohr atomic model with K, L, M and N shells");
+    stage.appendChild(canvas);
     
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     
-    if (!width || !height) {
-      requestAnimationFrame(animateBohr);
-      return;
-    }
+    const shells = [
+      { name: "K", n: 1, maxElectrons: 2, radiusFactor: 0.25, speed: 0.015 },
+      { name: "L", n: 2, maxElectrons: 8, radiusFactor: 0.45, speed: -0.01 },
+      { name: "M", n: 3, maxElectrons: 18, radiusFactor: 0.65, speed: 0.007 },
+      { name: "N", n: 4, maxElectrons: 32, radiusFactor: 0.85, speed: -0.004 }
+    ];
     
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const angles = [0, 0, 0, 0];
+    let lastWidth = 0, lastHeight = 0, lastDpr = 0;
     
-    if (width !== lastWidth || height !== lastHeight || dpr !== lastDpr) {
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
-      lastWidth = width;
-      lastHeight = height;
-      lastDpr = dpr;
-    }
-    
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, width, height);
-    
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const scale = Math.min(width, height) * 0.42;
-    
-    // 1. Draw four shells and their labels.
-    shells.forEach(shell => {
-      const r = scale * shell.radiusFactor;
+    function animateBohr() {
+      if (!canvas.isConnected) return;
+      const width = canvas.clientWidth, height = canvas.clientHeight;
+      if (!width || !height) { requestAnimationFrame(animateBohr); return; }
       
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
-      ctx.strokeStyle = "#d0d5dd";
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-      
-      ctx.fillStyle = "#dbeafe";
-      ctx.font = "bold 10px system-ui, Arial, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "alphabetic";
-      
-      const labelY = Math.max(13, centerY - r - 5);
-      ctx.fillText(
-        `${shell.name} Shell (n=${shell.n}, max: ${shell.maxElectrons})`,
-        centerX,
-        labelY
-      );
-    });
-    
-    // 2. Draw the glowing nucleus.
-    const nucleusRadius = scale * 0.14;
-    
-    const glow = ctx.createRadialGradient(
-      centerX, centerY, nucleusRadius * 0.4,
-      centerX, centerY, nucleusRadius * 1.6
-    );
-    glow.addColorStop(0, "rgba(235,60,0,0.3)");
-    glow.addColorStop(1, "rgba(235,60,0,0)");
-    
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, nucleusRadius * 1.6, 0, Math.PI * 2);
-    ctx.fillStyle = glow;
-    ctx.fill();
-    
-    const nucleusGrad = ctx.createRadialGradient(
-      centerX - nucleusRadius * 0.35,
-      centerY - nucleusRadius * 0.35,
-      nucleusRadius * 0.1,
-      centerX, centerY, nucleusRadius
-    );
-    nucleusGrad.addColorStop(0, "#ff9900");
-    nucleusGrad.addColorStop(0.5, "#ea3800");
-    nucleusGrad.addColorStop(1, "#990000");
-    
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, nucleusRadius, 0, Math.PI * 2);
-    ctx.fillStyle = nucleusGrad;
-    ctx.fill();
-    
-    // White positive-charge sign.
-    ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = 3;
-    ctx.lineCap = "round";
-    ctx.beginPath();
-    ctx.moveTo(centerX - 7, centerY);
-    ctx.lineTo(centerX + 7, centerY);
-    ctx.moveTo(centerX, centerY - 7);
-    ctx.lineTo(centerX, centerY + 7);
-    ctx.stroke();
-    
-    // Nucleus label.
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 11px system-ui, Arial, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(
-      "Nucleus",
-      centerX,
-      centerY + nucleusRadius + 15
-    );
-    
-    // 3. Draw revolving electrons.
-    shells.forEach((shell, index) => {
-      const r = scale * shell.radiusFactor;
-      angles[index] += shell.speed;
-      
-      // Show a clear subset on the outermost shell.
-      const electronCount = Math.min(
-        shell.maxElectrons,
-        shell.n === 4 ? 16 : shell.maxElectrons
-      );
-      
-      const electronRadius = Math.max(3, scale * 0.025);
-      
-      for (let i = 0; i < electronCount; i++) {
-        const theta = angles[index] + i * 2 * Math.PI / electronCount;
-        const ex = centerX + r * Math.cos(theta);
-        const ey = centerY + r * Math.sin(theta);
-        
-        const electronGrad = ctx.createRadialGradient(
-          ex - electronRadius * 0.3,
-          ey - electronRadius * 0.3,
-          electronRadius * 0.1,
-          ex, ey, electronRadius
-        );
-        electronGrad.addColorStop(0, "#4477ff");
-        electronGrad.addColorStop(0.6, "#0011cc");
-        electronGrad.addColorStop(1, "#000066");
-        
-        ctx.beginPath();
-        ctx.arc(ex, ey, electronRadius, 0, Math.PI * 2);
-        ctx.fillStyle = electronGrad;
-        ctx.fill();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (width !== lastWidth || height !== lastHeight || dpr !== lastDpr) {
+        canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+        lastWidth = width; lastHeight = height; lastDpr = dpr;
       }
-    });
-    
+      
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+      
+      const centerX = width / 2, centerY = height / 2;
+      const scale = Math.min(width, height) * 0.42;
+      
+      shells.forEach(shell => {
+        const r = scale * shell.radiusFactor;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
+        ctx.strokeStyle = "#d0d5dd"; ctx.lineWidth = 1.5; ctx.stroke();
+        
+        ctx.fillStyle = "#dbeafe";
+        ctx.font = "bold 10px system-ui, Arial, sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+        const labelY = Math.max(13, centerY - r - 5);
+        ctx.fillText(`${shell.name} Shell (n=${shell.n}, max: ${shell.maxElectrons})`, centerX, labelY);
+      });
+      
+      const nucleusRadius = scale * 0.14;
+      const glow = ctx.createRadialGradient(centerX, centerY, nucleusRadius * 0.4, centerX, centerY, nucleusRadius * 1.6);
+      glow.addColorStop(0, "rgba(235,60,0,0.3)"); glow.addColorStop(1, "rgba(235,60,0,0)");
+      ctx.beginPath(); ctx.arc(centerX, centerY, nucleusRadius * 1.6, 0, Math.PI * 2); ctx.fillStyle = glow; ctx.fill();
+      
+      const nucleusGrad = ctx.createRadialGradient(centerX - nucleusRadius * 0.35, centerY - nucleusRadius * 0.35, nucleusRadius * 0.1, centerX, centerY, nucleusRadius);
+      nucleusGrad.addColorStop(0, "#ff9900"); nucleusGrad.addColorStop(0.5, "#ea3800"); nucleusGrad.addColorStop(1, "#990000");
+      ctx.beginPath(); ctx.arc(centerX, centerY, nucleusRadius, 0, Math.PI * 2); ctx.fillStyle = nucleusGrad; ctx.fill();
+      
+      ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 3; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(centerX - 7, centerY); ctx.lineTo(centerX + 7, centerY);
+      ctx.moveTo(centerX, centerY - 7); ctx.lineTo(centerX, centerY + 7); ctx.stroke();
+      
+      ctx.fillStyle = "#ffffff"; ctx.font = "bold 11px system-ui, Arial, sans-serif"; ctx.textAlign = "center";
+      ctx.fillText("Nucleus", centerX, centerY + nucleusRadius + 15);
+      
+      shells.forEach((shell, index) => {
+        const r = scale * shell.radiusFactor;
+        angles[index] += shell.speed;
+        const electronCount = Math.min(shell.maxElectrons, shell.n === 4 ? 16 : shell.maxElectrons);
+        const electronRadius = Math.max(3, scale * 0.025);
+        
+        for (let i = 0; i < electronCount; i++) {
+          const theta = angles[index] + i * 2 * Math.PI / electronCount;
+          const ex = centerX + r * Math.cos(theta), ey = centerY + r * Math.sin(theta);
+          const electronGrad = ctx.createRadialGradient(ex - electronRadius * 0.3, ey - electronRadius * 0.3, electronRadius * 0.1, ex, ey, electronRadius);
+          electronGrad.addColorStop(0, "#e0ffff"); 
+          electronGrad.addColorStop(0.6, "#67f5ff"); 
+          electronGrad.addColorStop(1, "#00839e");
+
+          ctx.beginPath(); ctx.arc(ex, ey, electronRadius, 0, Math.PI * 2); ctx.fillStyle = electronGrad; ctx.fill();
+        }
+      });
+      
+      requestAnimationFrame(animateBohr);
+    }
     requestAnimationFrame(animateBohr);
+    target.appendChild(stage);
+    return;
   }
   
-  requestAnimationFrame(animateBohr);
-  target.appendChild(stage);
-  return;
-}
-  
-if(kind==="quantum"){
-  const canvas=document.createElement("canvas");
-  canvas.style.display="block";
-  canvas.style.width="100%";
-  canvas.style.height="100%";
-  canvas.style.position="absolute";
-  canvas.style.inset="0";
-  canvas.setAttribute(
-    "aria-label",
-    "Animated quantum mechanical model with electron probability cloud"
-  );
-  stage.appendChild(canvas);
+  if(kind==="quantum"){
+    const canvas=document.createElement("canvas");
+    canvas.style.display="block"; canvas.style.width="100%"; canvas.style.height="100%"; canvas.style.position="absolute"; canvas.style.inset="0";
+    canvas.setAttribute("aria-label", "Animated quantum mechanical model with electron probability cloud");
+    stage.appendChild(canvas);
 
-  const ctx=canvas.getContext("2d");
-  if(!ctx)return;
+    const ctx=canvas.getContext("2d");
+    if(!ctx)return;
 
-  let width=0,height=0,scale=0;
-  let lastWidth=0,lastHeight=0,lastDpr=0;
+    let width=0,height=0,scale=0;
+    let lastWidth=0,lastHeight=0,lastDpr=0;
 
-  function resize(){
-    width=canvas.clientWidth;
-    height=canvas.clientHeight;
-    if(!width||!height)return;
-
-    const dpr=Math.min(window.devicePixelRatio||1,2);
-
-    if(width!==lastWidth||height!==lastHeight||dpr!==lastDpr){
-      canvas.width=Math.round(width*dpr);
-      canvas.height=Math.round(height*dpr);
-      lastWidth=width;
-      lastHeight=height;
-      lastDpr=dpr;
+    function resize(){
+      width=canvas.clientWidth; height=canvas.clientHeight;
+      if(!width||!height)return;
+      const dpr=Math.min(window.devicePixelRatio||1,2);
+      if(width!==lastWidth||height!==lastHeight||dpr!==lastDpr){
+        canvas.width=Math.round(width*dpr); canvas.height=Math.round(height*dpr);
+        lastWidth=width; lastHeight=height; lastDpr=dpr;
+      }
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      scale=Math.min(width,height)*0.4;
     }
 
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    scale=Math.min(width,height)*0.4;
-  }
+    const particles=[];
+    for(let i=0;i<450;i++){
+      particles.push({
+        baseR:(Math.random()*0.7+Math.random()*0.3)*Math.min(stage.clientWidth||300,stage.clientHeight||300)*0.4,
+        theta:Math.random()*Math.PI*2,
+        phi:Math.acos(Math.random()*2-1),
+        speed:(Math.random()-0.5)*0.02,
+        size:Math.random()*2.2+0.8,
+        alpha:Math.random()*0.7+0.2
+      });
+    }
 
-  // Generate 450 probability-cloud particles.
-  const particles=[];
-  for(let i=0;i<450;i++){
-    particles.push({
-      baseR:(Math.random()*0.7+Math.random()*0.3)*Math.min(
-        stage.clientWidth||300,
-        stage.clientHeight||300
-      )*0.4,
-      theta:Math.random()*Math.PI*2,
-      phi:Math.acos(Math.random()*2-1),
-      speed:(Math.random()-0.5)*0.02,
-      size:Math.random()*2.2+0.8,
-      alpha:Math.random()*0.7+0.2
-    });
-  }
+    let time=0;
+    function animateQuantum(){
+      if(!canvas.isConnected)return;
+      resize();
+      if(!width||!height){ requestAnimationFrame(animateQuantum); return; }
+      ctx.clearRect(0,0,width,height);
 
-  let time=0;
+      const centerX=width/2, centerY=height/2;
+      time+=0.012;
 
-  function animateQuantum(){
-    // Stop the animation when this model is closed.
-    if(!canvas.isConnected)return;
+      for(let r=scale*0.85;r>scale*0.2;r-=scale*0.12){
+        const alphaFactor=(1-r/(scale*0.9))*0.15;
+        const pulseR=r+Math.sin(time*2+r)*6;
+        const cloudGradient=ctx.createRadialGradient(centerX,centerY,pulseR*0.2,centerX,centerY,pulseR);
+        cloudGradient.addColorStop(0,"rgba(167,139,250,0)");
+        cloudGradient.addColorStop(0.7,`rgba(96,165,250,${alphaFactor})`);
+        cloudGradient.addColorStop(1,"rgba(59,130,246,0)");
+        ctx.beginPath(); ctx.arc(centerX,centerY,pulseR,0,Math.PI*2); ctx.fillStyle=cloudGradient; ctx.fill();
+      }
 
-    resize();
+      particles.forEach(p=>{
+        p.theta+=p.speed;
+        const currentR=p.baseR*(1+0.08*Math.sin(time*3+p.theta));
+        const x=centerX+currentR*Math.cos(p.theta)*Math.cos(p.phi);
+        const y=centerY+currentR*Math.sin(p.theta)*Math.sin(p.phi)*0.85;
 
-    if(!width||!height){
+        ctx.beginPath(); ctx.arc(x,y,p.size,0,Math.PI*2);
+        const distRatio=currentR/Math.max(scale,1);
+        const red=Math.floor(100+155*distRatio);
+        const green=Math.floor(200+55*(1-distRatio));
+        const alpha=p.alpha*(0.6+0.4*Math.sin(time+p.theta));
+        ctx.fillStyle=`rgba(${red},${green},255,${alpha})`;
+        ctx.fill();
+      });
+
+      const nucleusRadius=scale*0.15;
+      const outerGlow=ctx.createRadialGradient(centerX,centerY,nucleusRadius*0.2,centerX,centerY,nucleusRadius*2.2);
+      outerGlow.addColorStop(0,"rgba(244,63,94,0.5)"); outerGlow.addColorStop(0.5,"rgba(168,85,247,0.2)"); outerGlow.addColorStop(1,"rgba(0,0,0,0)");
+      ctx.beginPath(); ctx.arc(centerX,centerY,nucleusRadius*2.2,0,Math.PI*2); ctx.fillStyle=outerGlow; ctx.fill();
+
+      const nucleusGrad=ctx.createRadialGradient(centerX-nucleusRadius*0.35,centerY-nucleusRadius*0.35,nucleusRadius*0.05,centerX,centerY,nucleusRadius);
+      nucleusGrad.addColorStop(0,"#fbcfe8"); nucleusGrad.addColorStop(0.4,"#f43f5e"); nucleusGrad.addColorStop(1,"#881337");
+      ctx.beginPath(); ctx.arc(centerX,centerY,nucleusRadius,0,Math.PI*2); ctx.fillStyle=nucleusGrad; ctx.fill();
+
+      ctx.fillStyle="rgba(255,255,255,0.35)";
+      for(let i=0;i<7;i++){
+        const angle=i/7*Math.PI*2+time*0.5;
+        const dist=nucleusRadius*0.45;
+        ctx.beginPath(); ctx.arc(centerX+Math.cos(angle)*dist, centerY+Math.sin(angle)*dist, nucleusRadius*0.22, 0, Math.PI*2); ctx.fill();
+      }
+
       requestAnimationFrame(animateQuantum);
-      return;
     }
-
-    ctx.clearRect(0,0,width,height);
-
-    const centerX=width/2;
-    const centerY=height/2;
-    time+=0.012;
-
-    // 1. Pulsing quantum probability clouds.
-    for(let r=scale*0.85;r>scale*0.2;r-=scale*0.12){
-      const alphaFactor=(1-r/(scale*0.9))*0.15;
-      const pulseR=r+Math.sin(time*2+r)*6;
-
-      const cloudGradient=ctx.createRadialGradient(
-        centerX,centerY,pulseR*0.2,
-        centerX,centerY,pulseR
-      );
-      cloudGradient.addColorStop(0,"rgba(167,139,250,0)");
-      cloudGradient.addColorStop(
-        0.7,
-        `rgba(96,165,250,${alphaFactor})`
-      );
-      cloudGradient.addColorStop(1,"rgba(59,130,246,0)");
-
-      ctx.beginPath();
-      ctx.arc(centerX,centerY,pulseR,0,Math.PI*2);
-      ctx.fillStyle=cloudGradient;
-      ctx.fill();
-    }
-
-    // 2. Moving electron-probability specks.
-    particles.forEach(p=>{
-      p.theta+=p.speed;
-
-      const currentR=p.baseR*(
-        1+0.08*Math.sin(time*3+p.theta)
-      );
-
-      const x=centerX+
-        currentR*Math.cos(p.theta)*Math.cos(p.phi);
-
-      const y=centerY+
-        currentR*Math.sin(p.theta)*Math.sin(p.phi)*0.85;
-
-      ctx.beginPath();
-      ctx.arc(x,y,p.size,0,Math.PI*2);
-
-      const distRatio=currentR/Math.max(scale,1);
-      const red=Math.floor(100+155*distRatio);
-      const green=Math.floor(200+55*(1-distRatio));
-      const alpha=p.alpha*(
-        0.6+0.4*Math.sin(time+p.theta)
-      );
-
-      ctx.fillStyle=
-        `rgba(${red},${green},255,${alpha})`;
-      ctx.fill();
-    });
-
-    // 3. Glowing central nucleus.
-    const nucleusRadius=scale*0.15;
-
-    const outerGlow=ctx.createRadialGradient(
-      centerX,centerY,nucleusRadius*0.2,
-      centerX,centerY,nucleusRadius*2.2
-    );
-    outerGlow.addColorStop(0,"rgba(244,63,94,0.5)");
-    outerGlow.addColorStop(0.5,"rgba(168,85,247,0.2)");
-    outerGlow.addColorStop(1,"rgba(0,0,0,0)");
-
-    ctx.beginPath();
-    ctx.arc(
-      centerX,centerY,nucleusRadius*2.2,0,Math.PI*2
-    );
-    ctx.fillStyle=outerGlow;
-    ctx.fill();
-
-    const nucleusGrad=ctx.createRadialGradient(
-      centerX-nucleusRadius*0.35,
-      centerY-nucleusRadius*0.35,
-      nucleusRadius*0.05,
-      centerX,centerY,nucleusRadius
-    );
-    nucleusGrad.addColorStop(0,"#fbcfe8");
-    nucleusGrad.addColorStop(0.4,"#f43f5e");
-    nucleusGrad.addColorStop(1,"#881337");
-
-    ctx.beginPath();
-    ctx.arc(centerX,centerY,nucleusRadius,0,Math.PI*2);
-    ctx.fillStyle=nucleusGrad;
-    ctx.fill();
-
-    // 4. Rotating details inside the nucleus.
-    ctx.fillStyle="rgba(255,255,255,0.35)";
-
-    for(let i=0;i<7;i++){
-      const angle=i/7*Math.PI*2+time*0.5;
-      const dist=nucleusRadius*0.45;
-
-      ctx.beginPath();
-      ctx.arc(
-        centerX+Math.cos(angle)*dist,
-        centerY+Math.sin(angle)*dist,
-        nucleusRadius*0.22,
-        0,
-        Math.PI*2
-      );
-      ctx.fill();
-    }
-
     requestAnimationFrame(animateQuantum);
+    target.appendChild(stage);
+    return;
   }
-
-  requestAnimationFrame(animateQuantum);
-  target.appendChild(stage);
-  return;
 }
 
-}
 function openModel(kind){
   const m=models[kind];if(!m)return;activeChemModel=kind;
   $("atomEra").textContent=m.era;$("atomTitle").textContent=m.title;$("atomSubtitle").textContent=m.subtitle;
@@ -1696,7 +2720,6 @@ $("atomElementSelect").onchange=showElement;
 function startChemistryQuiz(kind){
   const m=models[kind];if(!m)return;
   subject="chem";activeChemModel=kind;mode="practice";
-  // Shuffle all 20 unique questions for this model
   const modelQs = shuffle(m.qs.slice());
   questions = modelQs.map(q => ({
     text: q[0],
@@ -1708,12 +2731,9 @@ function startChemistryQuiz(kind){
 }
 renderProfile();renderFormulas();renderTable("trig");showElement();
 
-
 const feedbackForm = document.getElementById("feedbackForm");
-
 feedbackForm.addEventListener("submit", function (event) {
   event.preventDefault();
-
   const type = document.getElementById("feedbackType").value;
   const message = document.getElementById("feedbackMessage").value.trim();
 
@@ -1722,22 +2742,367 @@ feedbackForm.addEventListener("submit", function (event) {
     return;
   }
 
-  const nickname =
-    document.getElementById("playerName").value.trim() ||
-    "Anonymous player";
-
-  const text =
-    "Science Nexus Feedback\n\n" +
-    "Player: " + nickname + "\n" +
-    "Type: " + type + "\n\n" +
-    "Message:\n" + message;
-
+  const nickname = document.getElementById("playerName").value.trim() || "Anonymous player";
+  const text = "Science Nexus Feedback\n\nPlayer: " + nickname + "\nType: " + type + "\n\nMessage:\n" + message;
   const whatsappNumber = "918168109125";
-  const whatsappURL =
-    "https://wa.me/" + whatsappNumber +
-    "?text=" + encodeURIComponent(text);
+  const whatsappURL = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(text);
 
   window.open(whatsappURL, "_blank");
+});
+
+/* --- PERIODIC TABLE SCRIPT INTEGRATION --- */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+function playPeriodicAudio(type) {
+  try {
+    if (!audioCtx) audioCtx = new AudioCtx();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    const now = audioCtx.currentTime;
+    
+    if (type === 'hover') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, now);
+      osc.frequency.exponentialRampToValueAtTime(1040, now + 0.05);
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+      osc.start(now);
+      osc.stop(now + 0.05);
+    } else if (type === 'select') {
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(440, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+      gain.gain.setValueAtTime(0.35, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(659.25, now);
+      osc2.frequency.exponentialRampToValueAtTime(1318.5, now + 0.15);
+      gain2.gain.setValueAtTime(0.25, now);
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+
+      osc.start(now); osc2.start(now);
+      osc.stop(now + 0.15); osc2.stop(now + 0.15);
+    }
+  } catch(e) {}
+}
+
+const ptableRawData = [
+  [1,"H","Hydrogen",1.008,"nonmetal",1,1], [2,"He","Helium",4.0026,"noble",18,1],
+  [3,"Li","Lithium",6.94,"alkali",1,2], [4,"Be","Beryllium",9.0122,"alkaline",2,2],
+  [5,"B","Boron",10.81,"metalloid",13,2], [6,"C","Carbon",12.011,"nonmetal",14,2],
+  [7,"N","Nitrogen",14.007,"nonmetal",15,2], [8,"O","Oxygen",15.999,"nonmetal",16,2],
+  [9,"F","Fluorine",18.998,"halogen",17,2], [10,"Ne","Neon",20.180,"noble",18,2],
+  [11,"Na","Sodium",22.990,"alkali",1,3], [12,"Mg","Magnesium",24.305,"alkaline",2,3],
+  [13,"Al","Aluminium",26.982,"post",13,3], [14,"Si","Silicon",28.085,"metalloid",14,3],
+  [15,"P","Phosphorus",30.974,"nonmetal",15,3], [16,"S","Sulfur",32.06,"nonmetal",16,3],
+  [17,"Cl","Chlorine",35.45,"halogen",17,3], [18,"Ar","Argon",39.948,"noble",18,3],
+  [19,"K","Potassium",39.098,"alkali",1,4], [20,"Ca","Calcium",40.078,"alkaline",2,4],
+  [21,"Sc","Scandium",44.956,"transition",3,4], [22,"Ti","Titanium",47.867,"transition",4,4],
+  [23,"V","Vanadium",50.942,"transition",5,4], [24,"Cr","Chromium",51.996,"transition",6,4],
+  [25,"Mn","Manganese",54.938,"transition",7,4], [26,"Fe","Iron",55.845,"transition",8,4],
+  [27,"Co","Cobalt",58.933,"transition",9,4], [28,"Ni","Nickel",58.693,"transition",10,4],
+  [29,"Cu","Copper",63.546,"transition",11,4], [30,"Zn","Zinc",65.38,"transition",12,4],
+  [31,"Ga","Gallium",69.723,"post",13,4], [32,"Ge","Germanium",72.630,"metalloid",14,4],
+  [33,"As","Arsenic",74.922,"metalloid",15,4], [34,"Se","Selenium",78.971,"nonmetal",16,4],
+  [35,"Br","Bromine",79.904,"halogen",17,4], [36,"Kr","Krypton",83.798,"noble",18,4],
+  [37,"Rb","Rubidium",85.468,"alkali",1,5], [38,"Sr","Strontium",87.62,"alkaline",2,5],
+  [39,"Y","Yttrium",88.906,"transition",3,5], [40,"Zr","Zirconium",91.224,"transition",4,5],
+  [41,"Nb","Niobium",92.906,"transition",5,5], [42,"Mo","Molybdenum",95.95,"transition",6,5],
+  [43,"Tc","Technetium",98,"transition",7,5], [44,"Ru","Ruthenium",101.07,"transition",8,5],
+  [45,"Rh","Rhodium",102.906,"transition",9,5], [46,"Pd","Palladium",106.42,"transition",10,5],
+  [47,"Ag","Silver",107.868,"transition",11,5], [48,"Cd","Cadmium",112.414,"transition",12,5],
+  [49,"In","Indium",114.818,"post",13,5], [50,"Sn","Tin",118.710,"post",14,5],
+  [51,"Sb","Antimony",121.760,"metalloid",15,5], [52,"Te","Tellurium",127.60,"metalloid",16,5],
+  [53,"I","Iodine",126.904,"halogen",17,5], [54,"Xe","Xenon",131.293,"noble",18,5],
+  [55,"Cs","Caesium",132.905,"alkali",1,6], [56,"Ba","Barium",137.327,"alkaline",2,6],
+  [57,"La","Lanthanum",138.905,"lanth",3,6], [58,"Ce","Cerium",140.116,"lanth",null,6],
+  [59,"Pr","Praseodymium",140.908,"lanth",null,6], [60,"Nd","Neodymium",144.242,"lanth",null,6],
+  [61,"Pm","Promethium",145,"lanth",null,6], [62,"Sm","Samarium",150.36,"lanth",null,6],
+  [63,"Eu","Europium",151.964,"lanth",null,6], [64,"Gd","Gadolinium",157.25,"lanth",null,6],
+  [65,"Tb","Terbium",158.925,"lanth",null,6], [66,"Dy","Dysprosium",162.500,"lanth",null,6],
+  [67,"Ho","Holmium",164.930,"lanth",null,6], [68,"Er","Erbium",167.259,"lanth",null,6],
+  [69,"Tm","Thulium",168.934,"lanth",null,6], [70,"Yb","Ytterbium",173.045,"lanth",null,6],
+  [71,"Lu","Lutetium",174.967,"lanth",null,6], [72,"Hf","Hafnium",178.49,"transition",4,6],
+  [73,"Ta","Tantalum",180.948,"transition",5,6], [74,"W","Tungsten",183.84,"transition",6,6],
+  [75,"Re","Rhenium",186.207,"transition",7,6], [76,"Os","Osmium",190.23,"transition",8,6],
+  [77,"Ir","Iridium",192.217,"transition",9,6], [78,"Pt","Platinum",195.084,"transition",10,6],
+  [79,"Au","Gold",196.967,"transition",11,6], [80,"Hg","Mercury",200.592,"transition",12,6],
+  [81,"Tl","Thallium",204.38,"post",13,6], [82,"Pb","Lead",207.2,"post",14,6],
+  [83,"Bi","Bismuth",208.980,"post",15,6], [84,"Po","Polonium",209,"post",16,6],
+  [85,"At","Astatine",210,"halogen",17,6], [86,"Rn","Radon",222,"noble",18,6],
+  [87,"Fr","Francium",223,"alkali",1,7], [88,"Ra","Radium",226,"alkaline",2,7],
+  [89,"Ac","Actinium",227,"act",3,7], [90,"Th","Thorium",232.038,"act",null,7],
+  [91,"Pa","Protactinium",231.036,"act",null,7], [92,"U","Uranium",238.029,"act",null,7],
+  [93,"Np","Neptunium",237,"act",null,7], [94,"Pu","Plutonium",244,"act",null,7],
+  [95,"Am","Americium",243,"act",null,7], [96,"Cm","Curium",247,"act",null,7],
+  [97,"Bk","Berkelium",247,"act",null,7], [98,"Cf","Californium",251,"act",null,7],
+  [99,"Es","Einsteinium",252,"act",null,7], [100,"Fm","Fermium",257,"act",null,7],
+  [101,"Md","Mendelevium",258,"act",null,7], [102,"No","Nobelium",259,"act",null,7],
+  [103,"Lr","Lawrencium",266,"act",null,7], [104,"Rf","Rutherfordium",267,"transition",4,7],
+  [105,"Db","Dubnium",268,"transition",5,7], [106,"Sg","Seaborgium",269,"transition",6,7],
+  [107,"Bh","Bohrium",270,"transition",7,7], [108,"Hs","Hassium",269,"transition",8,7],
+  [109,"Mt","Meitnerium",278,"unknown",9,7], [110,"Ds","Darmstadtium",281,"unknown",10,7],
+  [111,"Rg","Roentgenium",282,"unknown",11,7], [112,"Cn","Copernicium",285,"transition",12,7],
+  [113,"Nh","Nihonium",286,"unknown",13,7], [114,"Fl","Flerovium",289,"unknown",14,7],
+  [115,"Mc","Moscovium",290,"unknown",15,7], [116,"Lv","Livermorium",293,"unknown",16,7],
+  [117,"Ts","Tennessine",294,"unknown",17,7], [118,"Og","Oganesson",294,"unknown",18,7]
+];
+
+const ptableCategoryNames = {
+  alkali: "Alkali metal", alkaline: "Alkaline earth metal", transition: "Transition metal",
+  post: "Post-transition metal", metalloid: "Metalloid", nonmetal: "Reactive nonmetal",
+  halogen: "Halogen", noble: "Noble gas", lanth: "Lanthanide", act: "Actinide", unknown: "Properties not fully established"
+};
+
+const ptableCategoryGlows = {
+  alkali: "rgba(225, 29, 72, 0.6)", alkaline: "rgba(234, 88, 12, 0.6)", transition: "rgba(37, 99, 235, 0.6)",
+  post: "rgba(2, 132, 199, 0.6)", metalloid: "rgba(101, 163, 13, 0.6)", nonmetal: "rgba(5, 150, 105, 0.6)",
+  halogen: "rgba(124, 58, 237, 0.6)", noble: "rgba(192, 38, 211, 0.6)", lanth: "rgba(217, 119, 6, 0.6)",
+  act: "rgba(220, 38, 38, 0.6)", unknown: "rgba(71, 85, 105, 0.6)"
+};
+
+const ptableElementsList = ptableRawData.map(a => ({
+  number: a[0], symbol: a[1], name: a[2], mass: a[3], category: a[4], group: a[5], period: a[6]
+}));
+
+let ptableBuiltFlag = false;
+
+function buildPeriodicTableUI() {
+  if (ptableBuiltFlag) return;
+  ptableBuiltFlag = true;
+
+  const main = $("ptableGrid");
+  const lan = $("ptableLanthanides");
+  const act = $("ptableActinides");
+  if (!main) return;
+
+  ptableElementsList.forEach((el, idx) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "ptable-cell " + el.category;
+    b.dataset.atomic = el.number;
+    b.style.animationDelay = `${(idx % 18) * 0.025}s`;
+    b.setAttribute("aria-label", `${el.number} ${el.name}, ${el.symbol}`);
+
+    b.innerHTML = `
+      <span class="num">${el.number}</span>
+      <span class="sym">${el.symbol}</span>
+      <span class="ename">${el.name}</span>
+      <span class="mass">${el.mass}</span>
+    `;
+
+    b.addEventListener("mouseenter", () => playPeriodicAudio('hover'));
+    b.addEventListener("click", () => {
+      playPeriodicAudio('select');
+      selectPeriodicElement(el.number);
+    });
+
+    if (el.number >= 58 && el.number <= 71) lan.appendChild(b);
+    else if (el.number >= 90 && el.number <= 103) act.appendChild(b);
+    else {
+      b.style.gridColumn = el.group;
+      b.style.gridRow = el.period;
+      main.appendChild(b);
+    }
+  });
+}
+
+function filterPeriodicTable() {
+  const q = ($("ptableSearch").value || "").trim().toLowerCase();
+  const selectedCat = $("ptableCategoryFilter") ? $("ptableCategoryFilter").value : "all";
+  let shown = 0;
+
+  document.querySelectorAll("#ptableGrid .ptable-cell, #ptableLanthanides .ptable-cell, #ptableActinides .ptable-cell").forEach(b => {
+    const el = ptableElementsList[Number(b.dataset.atomic) - 1];
+    
+    const matchQ = !q || el.name.toLowerCase().includes(q) || el.symbol.toLowerCase().includes(q) || String(el.number) === q;
+    const matchCat = (selectedCat === "all" || el.category === selectedCat);
+
+    if (matchQ && matchCat) { 
+      b.classList.remove("dimmed"); 
+      shown++; 
+    } else { 
+      b.classList.add("dimmed"); 
+    }
+  });
+
+  $("ptableCountText").textContent = `Showing ${shown} of 118 elements`;
+}
+
+const ptableSearchInput = $("ptableSearch");
+if (ptableSearchInput) {
+  ptableSearchInput.addEventListener("input", filterPeriodicTable);
+}
+
+const ptableCategoryFilterInput = $("ptableCategoryFilter");
+if (ptableCategoryFilterInput) {
+  ptableCategoryFilterInput.addEventListener("change", () => {
+    playPeriodicAudio('select');
+    filterPeriodicTable();
+  });
+}
+
+const ptableOrbitalsList = [
+  [1,"s",2],[2,"s",2],[2,"p",6],[3,"s",2],
+  [3,"p",6],[4,"s",2],[3,"d",10],[4,"p",6],
+  [5,"s",2],[4,"d",10],[5,"p",6],[6,"s",2],
+  [4,"f",14],[5,"d",10],[6,"p",6],[7,"s",2],
+  [5,"f",14],[6,"d",10],[7,"p",6]
+];
+
+function getPeriodicElectronConfig(n) {
+  let left = n;
+  let parts = [];
+  for (const [shell, subshell, cap] of ptableOrbitalsList) {
+    if (left <= 0) break;
+    const take = Math.min(left, cap);
+    parts.push(`${shell}${subshell}<sup>${take}</sup>`);
+    left -= take;
+  }
+  return parts.join(" ");
+}
+
+function getPeriodicShellArray(n) {
+  const counts = [0,0,0,0,0,0,0];
+  let left = n;
+  const orbitals = [
+    [1,2],[2,2],[2,6],[3,2],[3,6],
+    [4,2],[3,10],[4,6],[5,2],[4,10],
+    [5,6],[6,2],[4,14],[5,10],[6,6],
+    [7,2],[5,14],[6,10],[7,6]
+  ];
+  orbitals.forEach(([shell, cap]) => {
+    const take = Math.min(left, cap);
+    counts[shell-1] += take;
+    left -= take;
+  });
+  return counts.filter(v => v > 0);
+}
+
+function selectPeriodicElement(number) {
+  const el = ptableElementsList[number-1];
+  if (!el) return;
+
+  document.querySelectorAll(".ptable-cell.selected").forEach(x => x.classList.remove("selected"));
+  const chosen = document.querySelector(`.ptable-cell[data-atomic="${number}"]`);
+  if (chosen) {
+    chosen.classList.add("selected");
+    chosen.style.setProperty('--glow-color', ptableCategoryGlows[el.category] || "rgba(255,255,255,0.6)");
+  }
+
+  const mass = Number.isInteger(el.mass) ? el.mass : el.mass.toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
+  const shellArray = getPeriodicShellArray(el.number);
+  const maxShellCap = [2, 8, 18, 32, 32, 18, 8];
+  
+  const shellBarsHtml = shellArray.map((count, i) => {
+    const pct = Math.round((count / (maxShellCap[i] || 32)) * 100);
+    return `<div class="shell-bar" style="width: ${pct}%;" title="Shell ${i+1}: ${count} electrons"></div>`;
+  }).join('');
+
+  $("ptableDetail").innerHTML = `
+    <div class="ptable-detail-card">
+      <div class="ptable-detail-top">
+        <div class="ptable-big-symbol ${el.category}">${el.symbol}</div>
+        <div>
+          <h2>${el.name}</h2>
+          <div class="ptable-name">${ptableCategoryNames[el.category]}</div>
+          <div class="small">Element ${el.number} • Standard Properties</div>
+        </div>
+      </div>
+
+      <div class="ptable-facts">
+        <div class="ptable-fact"><strong>${el.number}</strong><span>Atomic number</span></div>
+        <div class="ptable-fact"><strong>${mass}</strong><span>Atomic mass (u)</span></div>
+        <div class="ptable-fact"><strong>${el.group || "—"}</strong><span>Group</span></div>
+        <div class="ptable-fact"><strong>${el.period}</strong><span>Period</span></div>
+        <div class="ptable-fact"><strong>${ptableCategoryNames[el.category]}</strong><span>Category</span></div>
+        <div class="ptable-fact">
+          <strong>${shellArray.join(" • ")}</strong><span>Electrons per shell</span>
+          <div class="shell-bars">${shellBarsHtml}</div>
+        </div>
+      </div>
+
+      <div class="ptable-config">
+        <b>Electron configuration (simplified Aufbau sequence)</b>
+        <span>${getPeriodicElectronConfig(el.number)}</span>
+      </div>
+    </div>
+  `;
+}
+
+document.addEventListener("click", (e) => {
+  const item = e.target.closest("#ptableLegend span");
+  if (!item) return;
+  const cat = item.dataset.cat;
+  if (cat) {
+    playPeriodicAudio('select');
+    const filterSelect = $("ptableCategoryFilter");
+    if (filterSelect) {
+      filterSelect.value = (filterSelect.value === cat) ? "all" : cat;
+      filterPeriodicTable();
+    }
+  }
+});
+
+document.querySelectorAll('[data-go]').forEach(btn => {
+  if (btn.getAttribute('data-go') === 'periodicTableScreen') {
+    btn.addEventListener('click', () => {
+      setTimeout(buildPeriodicTableUI, 50);
+    });
+  }
+});
+
+const AppAudio2 = {
+  ctx: null,
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      this.ctx = new AudioCtx();
+    }
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  },
+  playTap() {
+    try {
+      this.init();
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      
+      const now = this.ctx.currentTime;
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
+      
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+      
+      osc.start(now);
+      osc.stop(now + 0.04);
+    } catch(e) {}
+  }
+};
+
+document.addEventListener("pointerdown", (e) => {
+  const interactive = e.target.closest("button, select, input, .navcard, .choice, .stage, .tab");
+  if (interactive) {
+    AppAudio2.playTap();
+    if (navigator.vibrate) navigator.vibrate(15);
+  }
 });
 
 </script>
