@@ -3175,3 +3175,3145 @@ document.querySelectorAll('[data-go]').forEach(btn => {
 </script>
 </body>
 </html>
+
+}
+
+/* Accessibility Focus Rings */
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.5);
+}
+
+button { 
+  color: inherit; 
+  cursor: pointer; 
+  transition: .2s; 
+}
+
+button:active { 
+  transform: scale(.98); 
+}
+
+button:disabled { 
+  opacity: .55; 
+  cursor: not-allowed; 
+}
+
+/* --- LAYOUT & STRUCTURE --- */
+.app { 
+  max-width: 1000px; 
+  margin: auto; 
+  padding: 14px; 
+}
+
+header { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 15px; 
+  gap: 8px; 
+}
+
+.brand { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  font-weight: 900; 
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  background: linear-gradient(135deg, #a78bfa, #3b82f6);
+  animation: float 3s infinite;
+}
+
+.screen { 
+  display: none; 
+}
+
+.screen.active { 
+  display: block; 
+  animation: enter .3s; 
+}
+
+/* --- BASE CARD STYLES --- */
+.navcard, .model-card {
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(167, 139, 250, 0.4);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.navcard:hover, .model-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(167, 139, 250, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(167, 139, 250, 0.25);
+}
+
+/* Text readable over vibrant images */
+.navcard .bigicon, .navcard strong, .navcard small,
+.model-card h3, .model-card h4, .model-card p, .model-card span, .model-card div {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+/* --- 1. EXPLORE SCIENCE NEXUS: 8 NAVIGATION CARDS (Thin Color Gradient) --- */
+.navcard[data-go="help"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(96, 165, 250, 0.35)),
+              url('https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="quizSetup"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(167, 139, 250, 0.35)),
+              url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="library"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(74, 222, 128, 0.35)),
+              url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="tables"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(250, 204, 21, 0.35)),
+              url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="chemistry"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(251, 113, 133, 0.35)),
+              url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="atomExplorer"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(74, 222, 128, 0.35)),
+              url('https://upload.wikimedia.org/wikipedia/commons/e/e2/Cadena_de_ADN.jpg') center/cover no-repeat !important;
+}
+
+.navcard[data-go="periodicTableScreen"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(167, 139, 250, 0.35)),
+              url('https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="universeScreen"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(96, 165, 250, 0.35)),
+              url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+/* --- 2. CHEMISTRY LAB: 5 ATOMIC MODEL CARDS (Accurate Model Photos) --- */
+.navcard[data-atommodel="dalton"] {
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
+  border: 2px solid #10b981;
+}
+
+.navcard[data-atommodel="thomson"] {
+  background: linear-gradient(135deg, rgba(120, 53, 15, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
+  border: 2px solid #f59e0b;
+}
+
+.navcard[data-atommodel="rutherford"] {
+  background: linear-gradient(135deg, rgba(12, 74, 110, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
+  border: 2px solid #06b6d4;
+}
+
+.navcard[data-atommodel="bohr"] {
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
+  border: 2px solid #a855f7;
+}
+
+.navcard[data-atommodel="quantum"] {
+  background: linear-gradient(135deg, rgba(131, 24, 67, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
+  border: 2px solid #ec4899;
+}
+
+.panel {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.55), rgba(24, 31, 61, 0.65)),
+              url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 20px;
+  padding: 17px;
+  margin-bottom: 15px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+#help .panel {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.55), rgba(24, 31, 61, 0.65)),
+              url('https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+}
+
+#library .panel,
+#tables .panel {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.55), rgba(24, 31, 61, 0.65)),
+    url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+}
+
+.hero { 
+  text-align: center;
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(30, 20, 60, 0.40)),
+              url('https://img.freepik.com/free-vector/hand-drawn-science-education-background_23-2148499325.jpg') center/cover no-repeat;
+  padding: 26px 16px; 
+  border: 1.5px solid rgba(167, 139, 250, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1, .hero p, .hero .eyebrow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 15px rgba(167, 139, 250, 0.4);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  margin: 10px 0;
+  background: linear-gradient(90deg, #fff, #fde68a, #fff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero p { 
+  color: #e0e7ff; 
+  line-height: 1.6; 
+}
+
+.eyebrow { 
+  font-size: .75rem; 
+  letter-spacing: 2px; 
+  text-transform: uppercase; 
+  color: #ddd6fe; 
+  font-weight: 800; 
+}
+
+/* --- TYPOGRAPHY & INPUTS --- */
+h2 { font-size: 1.2rem; margin: 0 0 13px; }
+h3 { margin: 0 0 8px; }
+p { line-height: 1.55; }
+.small { color: var(--muted); font-size: .85rem; }
+
+.primary {
+  width: 100%;
+  background: linear-gradient(135deg, #8b5cf6, #4f46e5);
+  padding: 14px;
+  border: 0;
+  border-radius: 13px;
+  font-weight: 850;
+}
+
+.secondary { 
+  background: #ffffff12; 
+  border: 1px solid #ffffff22; 
+  padding: 10px 14px; 
+  border-radius: 12px; 
+  font-weight: 700; 
+}
+
+input, select { 
+  width: 100%; 
+  padding: 12px; 
+  border-radius: 12px; 
+  border: 1px solid #ffffff25; 
+  background: #101831; 
+  color: white; 
+}
+
+label { 
+  display: block; 
+  color: var(--muted); 
+  font-size: .88rem; 
+  margin-bottom: 7px; 
+}
+
+.field { margin-bottom: 13px; }
+
+/* --- GRIDS & CARDS --- */
+.grid2, .navgrid, .mode-grid { 
+  display: grid; 
+  grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  gap: 11px; 
+}
+
+.stats { 
+  display: grid; 
+  grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  gap: 8px; 
+}
+
+.stat { 
+  padding: 11px 5px; 
+  background: #ffffff0b; 
+  border: 1px solid #ffffff12; 
+  border-radius: 13px; 
+  text-align: center; 
+}
+
+.stat strong { display: block; font-size: 1.3rem; }
+.stat span { font-size: .75rem; color: var(--muted); }
+
+.profile { display: flex; align-items: center; gap: 11px; }
+.avatar { width: 50px; height: 50px; display: grid; place-items: center; font-size: 2rem; background: #ffffff12; border-radius: 14px; }
+.profile-info { flex: 1; min-width: 0; }
+
+.bar { height: 8px; border-radius: 20px; background: #ffffff18; overflow: hidden; margin-top: 8px; }
+.barfill { height: 100%; background: linear-gradient(90deg, #a78bfa, #60a5fa, #4ade80); width: 0; transition: .3s; }
+
+.choice, .stage {
+  padding: 14px; 
+  border: 1px solid rgba(255, 255, 255, 0.18); 
+  border-radius: 16px;
+  background: linear-gradient(145deg, #2b3363, #1c2246); 
+  text-align: left; 
+  min-width: 0;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.navcard {
+  padding: 14px; 
+  border: 1.5px solid rgba(167, 139, 250, 0.4); 
+  border-radius: 16px;
+  text-align: left; 
+  min-width: 0; 
+  position: relative; 
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  min-height: 115px;
+  animation: cardFloat 4.5s ease-in-out infinite;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* Staggered Floating Animation Delays */
+.navcard:nth-child(2) { animation-delay: 0.6s; }
+.navcard:nth-child(3) { animation-delay: 1.2s; }
+.navcard:nth-child(4) { animation-delay: 1.8s; }
+.navcard:nth-child(5) { animation-delay: 2.4s; }
+.navcard:nth-child(6) { animation-delay: 3.0s; }
+.navcard:nth-child(7) { animation-delay: 3.6s; }
+.navcard:nth-child(8) { animation-delay: 4.2s; }
+
+.navcard:hover, .choice:hover {
+  border-color: rgba(167, 139, 250, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(167, 139, 250, 0.25);
+  transform: translateY(-2px);
+}
+
+.navcard .bigicon { font-size: 1.9rem; display: block; margin-bottom: 7px; }
+.navcard strong, .choice strong { display: block; }
+.navcard small, .choice small { display: block; color: var(--muted); margin-top: 5px; line-height: 1.45; }
+
+/* --- FORMULAS & TABLES --- */
+.tabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 12px; }
+.tab { white-space: nowrap; background: #ffffff0c; border: 1px solid #ffffff20; border-radius: 25px; padding: 9px 12px; }
+.tab.active { background: #7c3aed; border-color: #c4b5fd; }
+
+.formula-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.formula { 
+  background: #ffffff09; 
+  border: 1px solid #ffffff17; 
+  border-radius: 13px; 
+  padding: 13px; 
+  min-width: 0; 
+  animation: cardFloat 5s ease-in-out infinite;
+}
+.formula:nth-child(even) { animation-delay: 1.5s; }
+.formula-title { font-size: .8rem; color: #c4b5fd; font-weight: 800; margin-bottom: 7px; }
+.equation { font-size: 1.08rem; font-weight: 850; overflow-wrap: anywhere; line-height: 1.65; }
+.explain { font-size: .82rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+.tablewrap { overflow-x: auto; margin: 10px 0 16px; border-radius: 12px; border: 1px solid #ffffff20; }
+table { border-collapse: collapse; width: 100%; min-width: 400px; font-size: .82rem; }
+th, td { padding: 9px; text-align: center; border-bottom: 1px solid #ffffff15; }
+th { background: #343064; color: #e9d5ff; }
+td { background: #ffffff06; }
+
+.note { padding: 12px; background: #60a5fa12; border-left: 3px solid var(--blue); border-radius: 8px; color: #dbeafe; font-size: .88rem; line-height: 1.55; }
+.choice { border: 2px solid #ffffff20; }
+.choice.selected { border-color: #a78bfa; background: #342e68; }
+.choice .emoji { font-size: 1.7rem; display: block; margin-bottom: 7px; }
+
+.stage { text-align: center; padding: 12px 5px; min-width: 0; }
+.stage span { font-size: 1.5rem; display: block; }
+.stage.selected { border: 2px solid var(--gold); }
+#difficultyChoices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+
+/* --- QUIZ ARENA --- */
+.quiztop { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+
+.question { 
+  background: linear-gradient(145deg, rgba(41, 47, 91, 0.88), rgba(27, 33, 66, 0.92)),
+              url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+  border: 1px solid #ffffff20;
+  border-radius: 20px;
+  text-align: center;
+  padding: 22px 14px;
+  margin-bottom: 13px;
+  animation: enter .3s; 
+}
+.question.boss { border: 2px solid var(--red); }
+.question.shake-card { animation: answerWrongShake 0.4s ease-in-out; }
+
+.qtext { font-size: clamp(1.25rem, 5vw, 2rem); font-weight: 900; margin: 15px 0; overflow-wrap: anywhere; }
+.answers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+
+.answer { 
+  min-height: 55px;
+  padding: 11px 7px;
+  background: #252d55;
+  border: 2px solid #ffffff18;
+  border-radius: 12px;
+  font-weight: 800;
+  overflow-wrap: anywhere; 
+}
+.answer.correct { background: #166534; border-color: var(--green); }
+.answer.wrong { background: #881337; border-color: var(--red); }
+.answer.correct-anim { animation: answerCorrectPulse 0.4s ease-in-out; }
+.answer.wrong-anim { animation: answerWrongShake 0.4s ease-in-out; }
+
+.feedback { text-align: center; font-weight: 800; min-height: 28px; margin: 12px 0; }
+.good { color: var(--green); }
+.bad { color: var(--red); }
+
+.actions { display: flex; gap: 9px; }
+.actions > * { flex: 1; }
+
+.timer { text-align: center; padding: 11px; background: #ffffff0b; border-radius: 12px; font-weight: 850; margin: 10px 0; }
+.timer.danger { background: #991b1b; animation: timerBlink .65s steps(2, start) infinite; }
+
+.badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.badge { padding: 8px 10px; border-radius: 12px; background: #ffffff10; border: 1px solid #ffffff20; font-size: .82rem; }
+
+.resultbig { text-align: center; font-size: 3rem; }
+.resultscore { text-align: center; font-size: 2.5rem; color: var(--gold); font-weight: 950; }
+.footer { text-align: center; color: var(--muted); font-size: .78rem; padding: 14px; }
+.hidden { display: none !important; }
+.pill { padding: 7px 10px; border-radius: 20px; background: #ffffff12; border: 1px solid #ffffff20; white-space: nowrap; }
+
+/* --- ATOMIC MODELS --- */
+.atom-visual {
+  min-height: 320px; padding: 10px; margin: 12px 0; display: flex; align-items: center; justify-content: center;
+  overflow: hidden; border-radius: 18px; border: 1px solid #ffffff20;
+  background: radial-gradient(circle, rgba(32, 44, 85, 0.75), rgba(16, 20, 45, 0.9) 75%),
+              url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+}
+
+.atom-stage { width: min(88vw, 350px); aspect-ratio: 1; position: relative; flex: 0 0 auto; overflow: visible; }
+.atom-shell { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 1px solid #9bb9ff90; border-radius: 50%; }
+.electron { position: absolute; width: 11px; height: 11px; border-radius: 50%; background: #67f5ff; box-shadow: 0 0 9px #67f5ff, 0 0 18px #67f5ff99; transform: translate(-50%, -50%); }
+
+.nucleus {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: clamp(54px, 21%, 78px); height: clamp(54px, 21%, 78px); padding: 5px;
+  border-radius: 50%; border: 2px solid #d8b4fe; background: radial-gradient(circle, #30234e, #151a38);
+  box-shadow: 0 0 18px #a78bfa70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  place-items: center; align-content: center; gap: 2px; overflow: hidden; z-index: 5;
+}
+
+.nucleon { border-radius: 50%; aspect-ratio: 1; box-shadow: inset -2px -2px 3px #0005; }
+.proton { background: #fb637e; }
+.neutron { background: #a78bfa; }
+
+.legend { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; color: var(--muted); font-size: .8rem; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+
+.solid-atom { width: 135px; aspect-ratio: 1; border-radius: 50%; margin: auto; background: radial-gradient(circle at 35% 30%, #ddd6fe, #8b5cf6 48%, #4c1d95); box-shadow: 0 0 35px #a78bfa50; animation: float 3s infinite; }
+.plum { width: min(65vw, 240px); aspect-ratio: 1; position: relative; border-radius: 50%; margin: auto; border: 2px solid #facc15; background: #facc1520; }
+.plum-electron { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #67f5ff; box-shadow: 0 0 10px #67f5ff; }
+
+/* Celebrations */
+.celebration {
+  position: fixed; z-index: 1000; pointer-events: none; left: 0; top: 0;
+  animation: celebrateFade 1.8s ease-out forwards;
+  filter: drop-shadow(0 2px 6px #0006);
+}
+
+/* --- KEYFRAME ANIMATIONS --- */
+@keyframes answerCorrectPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); box-shadow: 0 0 25px rgba(74, 222, 128, 0.6); }
+  100% { transform: scale(1); }
+}
+
+@keyframes answerWrongShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes celebrateFade {
+  0% { opacity: 0; transform: translate(0, 15px) rotate(0deg) scale(.55); }
+  12% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--drift), -120px) rotate(var(--spin)) scale(1.15); }
+}
+
+@keyframes enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes float { 50% { transform: translateY(-5px); } }
+@keyframes timerBlink { to { visibility: hidden; } }
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* --- COSMIC UNIVERSE SCREEN --- */
+#universeScreen {
+  position: relative;
+  background: #000005;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 0;
+  border: 2px solid rgba(110, 231, 255, 0.35);
+  border-radius: 20px;
+  box-shadow: inset 0 0 30px rgba(96, 165, 250, 0.15), 0 12px 40px rgba(0, 0, 0, 0.8);
+}
+#universeScreen canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+#universeScreen .ui-layer { position: relative; z-index: 10; pointer-events: none; }
+#universeScreen button, #universeScreen input, #universeScreen select { pointer-events: auto; }
+
+#universeTopBar {
+  position: absolute;
+  top: 12px; left: 12px; right: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+  z-index: 25;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+.universe-top-row { display: flex; align-items: center; justify-content: flex-start; gap: 8px; width: 100%; }
+
+#universeOverlay {
+  position: absolute; top: 96px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #eaf6ff;
+  padding: 0 12px;
+}
+#universeOverlay h1 {
+  margin: 4px 0 2px;
+  font-size: 18px; font-weight: 700; letter-spacing: 0.5px;
+  text-shadow: 0 0 20px rgba(80, 200, 255, 0.6);
+}
+#universeOverlay p { margin: 0; font-size: 10px; color: #7fb8d9; letter-spacing: 1px; text-transform: uppercase; }
+
+#universeShapeLabel {
+  position: absolute; bottom: 22px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #6ee7ff; font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+  opacity: 0.85;
+  text-shadow: 0 0 12px rgba(100, 220, 255, 0.7);
+}
+
+#universeNavBar { display: flex; justify-content: center; gap: 6px; width: 100%; max-width: 420px; margin: 0 auto; }
+.universe-nav-btn {
+  background: rgba(10, 10, 20, 0.85);
+  border: 1px solid rgba(110, 231, 255, 0.3);
+  backdrop-filter: blur(10px);
+  color: #9fd3e8; font-size: 11px; letter-spacing: 0.5px;
+  padding: 8px 10px; border-radius: 18px; cursor: pointer;
+  white-space: nowrap; flex: 1; text-align: center;
+}
+.universe-nav-btn.active {
+  background: rgba(110, 231, 255, 0.28);
+  border-color: rgba(110, 231, 255, 0.8);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(110, 231, 255, 0.3);
+}
+
+#universeColorPanel {
+  position: absolute; top: 270px; right: 0px;
+  background: rgba(10, 10, 20, 0.85);
+  border: 1px solid rgba(110, 231, 255, 0.25);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  padding: 8px 10px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #ffffff; user-select: none; max-width: 140px;
+}
+.universe-cp-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+.universe-cp-row:last-of-type { margin-bottom: 6px; }
+.universe-cp-row label { font-size: 10px; opacity: 0.85; min-width: 28px; margin-bottom: 0; }
+.universe-cp-row input[type="color"] { width: 28px; height: 18px; border: none; border-radius: 4px; background: none; cursor: pointer; padding: 0; }
+.universe-cp-presets { display: flex; flex-wrap: wrap; gap: 4px; padding-top: 4px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.universe-cp-swatch { width: 15px; height: 15px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.35); cursor: pointer; padding: 0; }
+
+#universePlanetMenu {
+  position: absolute; top: 165px; left: 12px;
+  background: rgba(10, 10, 20, 0.9);
+  border: 1px solid rgba(110, 231, 255, 0.28);
+  border-radius: 14px; backdrop-filter: blur(10px);
+  padding: 6px; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  max-height: 30vh; width: 130px; overflow-y: auto;
+}
+.universe-planet-btn {
+  display: flex; align-items: center; gap: 6px; width: 100%;
+  background: none; border: none; color: #cfeaf5; font-size: 11px;
+  padding: 5px 6px; border-radius: 6px; cursor: pointer; text-align: left;
+}
+.universe-planet-btn.active { background: rgba(110, 231, 255, 0.22); color: #fff; }
+.universe-planet-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 5px currentColor; }
+
+#universePlanetInfo {
+  position: fixed; bottom: -180px; left: 12px; right: auto; width: 260px;        
+  background: rgba(10, 10, 20, 0.92); border: 1px solid rgba(110, 231, 255, 0.35);
+  border-radius: 12px; backdrop-filter: blur(10px); padding: 8px 12px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #eaf6ff; display: none; max-height: 22vh; overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7); z-index: 100;        
+}
+#universePlanetInfo h2 { margin: 0 0 2px; font-size: 13px; }
+#universePlanetInfo .au { font-size: 9px; color: #7fb8d9; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+#universePlanetInfo p { margin: 0; font-size: 10px; line-height: 1.3; color: #d8ecf5; }
+
+/* --- PERIODIC TABLE UI --- */
+.ptable-filter-select {
+  min-width: 0; background: #090d16; color: #f8fafc; border: 1px solid rgba(255,255,255,0.15);
+  padding: 11px 14px; border-radius: 12px; outline: none; font-size: 0.9rem; transition: all 0.3s ease;
+  cursor: pointer;
+}
+.ptable-filter-select:focus {
+  border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25), 0 0 12px rgba(129, 140, 248, 0.3);
+}
+
+.ptable-hero { background: linear-gradient(135deg,#0f172a,#1e3a8a,#312e81) !important; }
+.ptable-tools { padding: 16px !important; }
+.ptable-search-row { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
+.ptable-search-row input, .ptable-search-row select {
+  min-width: 0; background: #090d16; color: #f8fafc; border: 1px solid rgba(255,255,255,0.15);
+  padding: 11px 14px; border-radius: 12px; outline: none; font-size: 0.9rem; transition: all 0.3s ease;
+}
+.ptable-search-row input:focus, .ptable-search-row select:focus {
+  border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25), 0 0 12px rgba(129, 140, 248, 0.3);
+}
+
+.ptable-legend {
+  display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 10px 0 16px; font-size: 10.5px;
+  color: #cbd5e1; background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05);
+}
+.ptable-legend span { display: flex; align-items: center; gap: 5px; white-space: nowrap; cursor: pointer; padding: 3px 6px; border-radius: 6px; transition: background 0.2s ease, transform 0.2s ease; }
+.ptable-legend span:hover { background: rgba(255,255,255,0.08); transform: translateY(-1px); }
+.ptable-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; box-shadow: 0 0 6px rgba(255,255,255,0.3); }
+
+.ptable-scroll { overflow-x: auto; padding: 8px 2px 10px 2px; overscroll-behavior-x: contain; }
+.ptable-grid { display: grid; grid-template-columns: repeat(18, minmax(44px, 1fr)); grid-template-rows: repeat(7, 72px); gap: 5px; min-width: 860px; }
+
+.ptable-cell {
+  position: relative; min-width: 0; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px;
+  padding: 4px 3px; text-align: center; color: #f8fafc; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.25), 0 4px 10px rgba(0,0,0,0.3); backdrop-filter: blur(6px); user-select: none;
+}
+.ptable-cell:active { transform: scale(0.92) !important; }
+.ptable-cell:hover { transform: translateY(-5px) scale(1.1); filter: brightness(1.3); z-index: 30; box-shadow: 0 10px 20px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.5); }
+.ptable-cell.selected {
+  transform: translateY(-5px) scale(1.1); outline: 2px solid #ffffff; outline-offset: 2px; filter: brightness(1.35); z-index: 40;
+  box-shadow: 0 0 25px var(--glow-color, rgba(255,255,255,0.6)), 0 10px 20px rgba(0,0,0,0.6);
+}
+.ptable-cell.dimmed { opacity: 0.15; filter: grayscale(0.8); transform: scale(0.95); }
+
+.ptable-cell .num { font-size: 9px; align-self: flex-start; margin-left: 2px; opacity: 0.85; font-weight: 700; }
+.ptable-cell .sym { font-size: 20px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+.ptable-cell .ename { font-size: 8px; line-height: 1; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.9; font-weight: 500; }
+.ptable-cell .mass { font-size: 7px; opacity: 0.75; }
+
+.ptable-fblocks { margin-top: 14px; display: grid; gap: 6px; background: rgba(0,0,0,0.25); padding: 10px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); }
+.ptable-row-label { font-size: 10px; color: #c4b5fd; font-weight: 800; margin-top: 2px; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+.ptable-row-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+.ptable-fgrid { display: grid; grid-template-columns: repeat(15, minmax(44px, 1fr)); gap: 5px; overflow-x: auto; padding: 2px 0 6px; }
+.ptable-fgrid .ptable-cell { height: 62px; }
+.ptable-count { font-size: 11.5px; color: #a5b4fc; margin-top: 10px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; }
+
+/* Periodic Element Group Colors */
+.ptable-cell.alkali, .ptable-legend i.alkali { background: linear-gradient(135deg, #e11d48, #9f1239); }
+.ptable-cell.alkaline, .ptable-legend i.alkaline { background: linear-gradient(135deg, #ea580c, #9a3412); }
+.ptable-cell.transition, .ptable-legend i.transition { background: linear-gradient(135deg, #2563eb, #1e40af); }
+.ptable-cell.post, .ptable-legend i.post { background: linear-gradient(135deg, #0284c7, #0369a1); }
+.ptable-cell.metalloid, .ptable-legend i.metalloid { background: linear-gradient(135deg, #65a30d, #3f6212); }
+.ptable-cell.nonmetal, .ptable-legend i.nonmetal { background: linear-gradient(135deg, #059669, #047857); }
+.ptable-cell.halogen, .ptable-legend i.halogen { background: linear-gradient(135deg, #7c3aed, #5b21b6); }
+.ptable-cell.noble, .ptable-legend i.noble { background: linear-gradient(135deg, #c026d3, #86198f); }
+.ptable-cell.lanth, .ptable-legend i.lanth { background: linear-gradient(135deg, #d97706, #92400e); }
+.ptable-cell.act, .ptable-legend i.act { background: linear-gradient(135deg, #dc2626, #991b1b); }
+.ptable-cell.unknown, .ptable-legend i.unknown { background: linear-gradient(135deg, #475569, #334155); }
+
+.ptable-detail { min-height: 160px; padding: 14px 16px !important; position: relative; overflow: hidden; }
+.ptable-detail-top { display: flex; gap: 14px; align-items: center; }
+.ptable-big-symbol {
+  width: 75px; height: 75px; flex: 0 0 75px; border-radius: 16px; display: grid; place-items: center;
+  font-size: 34px; font-weight: 950; border: 1.5px solid rgba(255,255,255,0.3);
+  box-shadow: inset 0 0 20px rgba(255,255,255,0.25), 0 8px 20px rgba(0,0,0,0.5); position: relative;
+}
+.ptable-detail h2 { margin: 0 0 2px; font-size: 21px; font-weight: 800; }
+.ptable-detail .ptable-name { color: #c4b5fd; font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+
+.ptable-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin-top: 12px; }
+.ptable-fact { background: rgba(11,15,25,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 8px 10px; }
+.ptable-fact strong { display: block; font-size: 14.5px; color: #f1f5f9; font-weight: 800; line-height: 1.2; }
+.ptable-fact span { font-size: 9.5px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+
+.shell-bars { display: flex; gap: 3px; height: 4px; margin-top: 5px; background: rgba(255,255,255,0.05); border-radius: 3px; padding: 1px; }
+.shell-bar { height: 100%; background: #818cf8; border-radius: 2px; }
+
+.ptable-config { margin-top: 10px; background: rgba(11,15,25,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px 12px; }
+.ptable-config b { display: block; color: #c4b5fd; font-size: 11px; margin-bottom: 4px; }
+.ptable-config span { font-family: ui-monospace, monospace; font-size: 12px; color: #38bdf8; letter-spacing: 0.4px; }
+
+.ptable-detail-empty { text-align: center; padding: 18px 10px; }
+.ptable-empty-symbol { font-size: 38px; color: #a78bfa; margin-bottom: 6px; display: inline-block; }
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media (max-width: 440px) {
+  .app { padding: 9px; }
+  .panel { padding: 13px; }
+  .formula-grid { grid-template-columns: 1fr; }
+  .navgrid { gap: 8px; }
+  .navcard { padding: 12px; }
+  .stats { gap: 5px; }
+  .stat strong { font-size: 1.1rem; }
+  .answers { grid-template-columns: 1fr; }
+  .atom-stage { width: min(82vw, 300px); }
+  #difficultyChoices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stage { font-size: .82rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *:before, *:after { 
+    animation: none !important; 
+    transition: none !important; 
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="logo">🧪</div><div>Science Nexus</div></div>
+  <div class="pill">🪙 <span id="coinsTop">0</span></div>
+</header>
+
+<section id="home" class="screen active">
+  <div class="panel hero"><div class="eyebrow">Learn • Practise • Discover</div><h1>Science Nexus</h1><p>Your universe for mathematics, chemistry, formulas and challenges.</p></div>
+  <div class="panel">
+    <div class="profile"><div class="avatar" id="avatarDisplay">🚀</div><div class="profile-info"><strong id="nameDisplay">Math Champion</strong><div class="small" id="levelDisplay">Level 1 • 0 XP</div><div class="bar"><div class="barfill" id="xpBar"></div></div></div><div class="pill">🏆 <span id="bestDisplay">0</span></div></div>
+    <div class="field" style="margin-top:14px"><label for="playerName">Nickname</label><input id="playerName" maxlength="20" placeholder="Your nickname"></div>
+    <div class="grid2"><div class="field"><label for="avatarChoice">Avatar</label><select id="avatarChoice"><option>🚀</option><option>🦊</option><option>🐼</option><option>🐯</option><option>🦄</option><option>🤖</option><option>🐲</option><option>⭐</option></select></div><div class="field"><label for="homeClass">Your class</label><select id="homeClass"></select></div></div>
+    <button class="secondary" id="saveProfile" style="width:100%">Save My Profile</button>
+  </div>
+  <div class="panel"><h2>📊 Your Journey</h2><div class="stats"><div class="stat"><strong id="gamesDisplay">0</strong><span>Games</span></div><div class="stat"><strong id="correctDisplay">0</strong><span>Correct</span></div><div class="stat"><strong id="streakDisplay">0</strong><span>Best streak</span></div></div><h3 style="margin-top:15px">🎖️ Achievements</h3><div id="badgesDisplay" class="badges"></div></div>
+  <div class="panel"><h2>🪐 Explore Science Nexus</h2><div class="navgrid">
+    <button class="navcard" data-go="help"><span class="bigicon">📚</span><strong>Math Help Centre</strong><small>Tables, formulas, identities and theorems.</small></button>
+    <button class="navcard" data-go="quizSetup"><span class="bigicon">🎮</span><strong>Quiz Arena</strong><small>20 questions, four modes and three difficulties.</small></button>
+    <button class="navcard" data-go="library"><span class="bigicon">🧮</span><strong>Formula Library</strong><small>Browse maths by class and topic.</small></button>
+    <button class="navcard" data-go="tables"><span class="bigicon">📈</span><strong>Math Tables</strong><small>Trigonometry, logarithms, squares and cubes.</small></button>
+    <button class="navcard" data-go="chemistry"><span class="bigicon">⚛️</span><strong>Chemistry Lab</strong><small>Explore five atomic models.</small></button>
+    <button class="navcard" data-go="atomExplorer"><span class="bigicon">🧬</span><strong>First 20 Elements</strong><small>Explore elements, nuclei and electron shells.</small></button>
+    <button class="navcard" data-go="periodicTableScreen"><span class="bigicon">🧪</span><strong>Periodic Table</strong><small>Explore all 118 chemical elements interactively.</small></button>
+    <button class="navcard" data-go="universeScreen" id="openUniverseBtn">
+        <span class="bigicon">🌌</span><strong>Cosmic Universe</strong><small>Interactive 3D galaxies, black holes, and solar system.</small></button>
+  </div></div>
+
+<div class="panel" id="feedbackPanel">
+  <h2>💬 Feedback & Ideas</h2>
+  <p class="small">
+    Help us improve Science Nexus! Share an idea, report a bug,
+    or tell us what feature you want next.
+  </p>
+
+  <form id="feedbackForm">
+    <div class="field">
+      <label for="feedbackType">Feedback type</label>
+      <select id="feedbackType" required>
+        <option value="💡 New idea">💡 New idea</option>
+        <option value="🐛 Bug report">🐛 Report a bug</option>
+        <option value="📚 Maths questions">📚 Maths questions</option>
+        <option value="🧪 Chemistry Lab">🧪 Chemistry Lab</option>
+        <option value="⭐ General feedback">⭐ General feedback</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="feedbackMessage">Your message</label>
+      <textarea id="feedbackMessage"
+        placeholder="Write your feedback or idea here..."
+        required maxlength="1500" rows="2"
+        style="width:100%;padding:12px;border-radius:12px;
+        border:1px solid #ffffff25;background:#101831;color:white;
+        font:inherit;resize:vertical"></textarea>
+    </div>
+
+    <button class="primary" type="submit">
+      📲 Send Feedback on WhatsApp
+    </button>
+    <p class="small">
+      WhatsApp will open with your message ready to send.
+      Please tap Send in WhatsApp to submit it.
+    </p>
+  </form>
+</div>
+
+<div class="footer">© 2026 Science Nexus | Created & Developed by Kushal Soni | Learn • Explore • Innovate</div>
+</section>
+
+<section id="periodicTableScreen" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+
+  <div class="panel hero ptable-hero" style="margin-top:12px;">
+    <div class="eyebrow">Interactive Matrix • Audio-Visual Dynamic</div>
+    <h1>Periodic Table of Elements</h1>
+    <p>Explore 118 chemical elements with loud synthesized audio effects, real-time search, and deep atomic properties.</p>
+  </div>
+
+  <div class="panel ptable-tools">
+    <div class="ptable-search-row">
+      <input id="ptableSearch" type="search" placeholder="Search by element name, symbol, or atomic number…" autocomplete="off">
+      
+      <select id="ptableCategoryFilter" class="ptable-filter-select">
+        <option value="all">All Categories</option>
+        <option value="alkali">Alkali metals</option>
+        <option value="alkaline">Alkaline earth metals</option>
+        <option value="transition">Transition metals</option>
+        <option value="post">Post-transition metals</option>
+        <option value="metalloid">Metalloids</option>
+        <option value="nonmetal">Reactive nonmetals</option>
+        <option value="halogen">Halogens</option>
+        <option value="noble">Noble gases</option>
+        <option value="lanth">Lanthanides</option>
+        <option value="act">Actinides</option>
+        <option value="unknown">Unknown properties</option>
+      </select>
+    </div>
+
+    <div class="ptable-legend" id="ptableLegend">
+      <span data-cat="alkali"><i class="alkali"></i>Alkali</span>
+      <span data-cat="alkaline"><i class="alkaline"></i>Alkaline earth</span>
+      <span data-cat="transition"><i class="transition"></i>Transition</span>
+      <span data-cat="post"><i class="post"></i>Post-transition</span>
+      <span data-cat="metalloid"><i class="metalloid"></i>Metalloid</span>
+      <span data-cat="nonmetal"><i class="nonmetal"></i>Nonmetal</span>
+      <span data-cat="halogen"><i class="halogen"></i>Halogen</span>
+      <span data-cat="noble"><i class="noble"></i>Noble gas</span>
+      <span data-cat="lanth"><i class="lanth"></i>Lanthanide</span>
+      <span data-cat="act"><i class="act"></i>Actinide</span>
+      <span data-cat="unknown"><i class="unknown"></i>Unknown</span>
+    </div>
+
+    <div class="ptable-scroll">
+      <div id="ptableGrid" class="ptable-grid"></div>
+    </div>
+
+    <div class="ptable-fblocks">
+      <div class="ptable-row-label">Lanthanides</div>
+      <div id="ptableLanthanides" class="ptable-fgrid"></div>
+      <div class="ptable-row-label">Actinides</div>
+      <div id="ptableActinides" class="ptable-fgrid"></div>
+    </div>
+
+    <div class="ptable-count">
+      <span id="ptableCountText">Showing 118 of 118 elements</span>
+      <span id="activeFilterBadge" style="opacity:0.7; font-size:10.5px;"></span>
+    </div>
+  </div>
+
+  <div class="panel ptable-detail" id="ptableDetail">
+    <div class="ptable-detail-empty">
+      <div class="ptable-empty-symbol">⚛</div>
+      <h2>Select an element</h2>
+      <p class="small">Click or tap any element card above to inspect its atomic structure, mass, group, period, and shell breakdown compactly.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    *Electron configurations follow a simplified Aufbau filling model. Atomic masses reflect standard IUPAC values.
+  </div>
+</section>
+
+<section id="help" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+  <div class="panel hero"><div class="eyebrow">Your personal maths companion</div><h1>Math Help Centre</h1><p>Look up formulas, understand theorems, and revise tables.</p></div>
+  <div class="panel"><div class="grid2"><button class="navcard" data-go="library"><span class="bigicon">📐</span><strong>Formulas & Theorems</strong><small>Geometry, algebra and advanced maths.</small></button><button class="navcard" data-go="tables"><span class="bigicon">📊</span><strong>Reference Tables</strong><small>Trigonometry, logarithms and squares.</small></button></div></div>
+  <div class="panel"><h2>⚡ Quick Formula Cards</h2><div class="formula-grid">
+    <div class="formula"><div class="formula-title">RECTANGLE AREA</div><div class="equation">A = l × b</div></div>
+    <div class="formula"><div class="formula-title">TRIANGLE AREA</div><div class="equation">A = ½bh</div></div>
+    <div class="formula"><div class="formula-title">PYTHAGORAS</div><div class="equation">a² + b² = c²</div></div>
+    <div class="formula"><div class="formula-title">QUADRATIC FORMULA</div><div class="equation">x = (−b ± √(b²−4ac))/(2a)</div></div>
+  </div></div>
+</section>
+
+<section id="library" class="screen">
+  <button class="secondary" data-go="help">← Math Help</button>
+  <div class="panel hero"><div class="eyebrow">Understand the rules</div><h1>Formula Library</h1><p>Search equations, identities and theorems.</p></div>
+  <div class="panel"><div class="field"><label for="formulaClass">Learning level</label><select id="formulaClass"><option value="1">Classes 1–5 • Foundations</option><option value="6" selected>Classes 6–8 • Middle school</option><option value="9">Classes 9–10 • Secondary</option><option value="11">Classes 11–12 • Advanced</option><option value="all">All levels</option></select></div>
+  <input id="formulaSearch" placeholder="🔎 Search formulas..." style="margin-bottom:12px">
+
+<div class="tabs" id="formulaTabs">
+  <button class="tab active" data-cat="all">All Topics</button>
+  <button class="tab" data-cat="Arithmetic">Arithmetic</button>
+  <button class="tab" data-cat="Fractions">Fractions</button>
+  <button class="tab" data-cat="Algebra">Algebra</button>
+  <button class="tab" data-cat="Geometry">Geometry</button>
+  <button class="tab" data-cat="Mensuration">Mensuration</button>
+  <button class="tab" data-cat="Coordinate Geometry">Coordinate Geometry</button>
+  <button class="tab" data-cat="Trigonometry">Trigonometry</button>
+  <button class="tab" data-cat="Logarithms">Logarithms</button>
+  <button class="tab" data-cat="Statistics">Statistics</button>
+  <button class="tab" data-cat="Probability">Probability</button>
+  <button class="tab" data-cat="Sets">Sets</button>
+  <button class="tab" data-cat="Functions">Functions</button>
+  <button class="tab" data-cat="Sequences">Sequences</button>
+  <button class="tab" data-cat="Complex Numbers">Complex Numbers</button>
+  <button class="tab" data-cat="Matrices">Matrices</button>
+  <button class="tab" data-cat="Vectors">Vectors</button>
+  <button class="tab" data-cat="Calculus">Calculus</button>
+  <button class="tab" data-cat="Advanced">Advanced</button>
+</div>
+
+  <div class="formula-grid" id="formulaResults"></div></div>
+</section>
+
+<section id="tables" class="screen">
+  <button class="secondary" data-go="help">← Math Help</button>
+  <div class="panel hero"><div class="eyebrow">Keep these nearby</div><h1>Math Tables</h1><p>Reference tables for revision and calculations.</p></div>
+  <div class="panel"><div class="tabs" id="tableTabs"><button class="tab active" data-table="trig">Trigonometry</button><button class="tab" data-table="logs">Logarithms</button><button class="tab" data-table="squares">Squares & Cubes</button><button class="tab" data-table="powers">Powers of 10</button></div><div id="tableContent"></div></div>
+</section>
+
+<section id="quizSetup" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+  <div class="panel hero"><div class="eyebrow">Choose your challenge</div><h1>Quiz Arena</h1><p>Test your skills and aim for a new high score!</p></div>
+  <div class="panel">
+    <h2>🎓 1. Select class</h2><div class="field"><label for="quizClass">Question level</label><select id="quizClass"></select></div>
+    <h2>🎮 2. Choose your mode</h2>
+    <div class="mode-grid" id="modeChoices">
+      <button class="choice selected" data-mode="practice"><span class="emoji">📘</span><strong>Practice</strong><small>Learn without a timer.</small></button>
+      <button class="choice" data-mode="timed"><span class="emoji">⏱️</span><strong>Timed Challenge</strong><small>Beat the clock.</small></button>
+      <button class="choice" data-mode="survival"><span class="emoji">❤️</span><strong>Survival</strong><small>You have three lives.</small></button>
+      <button class="choice" data-mode="mixed"><span class="emoji">🌪️</span><strong>Mixed Master</strong><small>Questions from different classes.</small></button>
+    </div>
+    <h2 style="margin-top:20px">🚪 3. Choose difficulty</h2>
+    <div class="grid2" id="difficultyChoices">
+      <button class="stage selected" data-diff="1"><span>🌱</span><strong>Easy</strong><small>Warm up</small></button>
+      <button class="stage" data-diff="2"><span>🔥</span><strong>Medium</strong><small>Level up</small></button>
+      <button class="stage" data-diff="3"><span>👑</span><strong>Hard</strong><small>Boss challenge</small></button>
+    </div>
+    <div class="note" style="margin-top:15px">Every maths game has 20 questions. Question 20 is the boss challenge.</div>
+    <button class="primary" id="beginQuiz" style="margin-top:16px">🚀 START ADVENTURE</button>
+  </div>
+</section>
+
+<section id="quiz" class="screen">
+  <div class="quiztop"><button class="secondary" id="quitQuiz">← Exit</button><div class="pill" id="modeBadge">Practice</div><div class="pill" id="lifeBadge">✨ Ready</div></div>
+  <div class="panel"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong id="quizLevelLabel">Class 7</strong><span class="small" id="questionCounter">Question 1/20</span><span class="pill">🔥 <span id="currentStreak">0</span></span></div><div class="bar"><div class="barfill" id="quizProgress"></div></div><div class="timer hidden" id="quizTimer"></div></div>
+  <div class="question" id="questionCard"><div id="questionTag">QUESTION 1</div><div class="qtext" id="questionText">Ready?</div><div class="small" id="questionHint">Choose the correct answer.</div></div>
+  <div class="answers" id="answerGrid"></div><div class="feedback" id="answerFeedback"></div>
+  <div class="actions"><button class="secondary" id="hintButton">💡 Hint</button><button class="primary" id="nextButton" disabled>Next →</button></div>
+</section>
+
+<section id="results" class="screen">
+  <div class="panel"><button class="secondary" data-go="home">← Dashboard</button><div class="resultbig" id="resultEmoji">🏆</div><h1 id="resultTitle" style="text-align:center">Quest complete!</h1><div class="resultscore" id="resultXP">0 XP</div><p id="resultMessage" class="small" style="text-align:center"></p>
+  <div class="stats"><div class="stat"><strong id="resCorrect">0/20</strong><span>Correct</span></div><div class="stat"><strong id="resAccuracy">0%</strong><span>Accuracy</span></div><div class="stat"><strong id="resCoins">+0</strong><span>Coins</span></div></div>
+  <div class="stat" style="margin-top:10px"><strong id="resStreak">0</strong><span>Best streak</span></div>
+  <h3 style="margin-top:18px">🎖️ New achievements</h3><div class="badges" id="newBadges"></div>
+  <button class="primary" id="againButton" style="margin-top:17px">🔁 Play Again</button><button class="secondary" data-go="help" style="width:100%;margin-top:10px">📚 Review Formulas</button></div>
+</section>
+
+<section id="chemistry" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+  <div class="panel hero"><div class="eyebrow">Discover the building blocks of matter</div><h1>Chemistry Lab</h1><p>Explore five atomic models and take chemistry quizzes.</p></div>
+  <div class="panel"><h2>🧪 Choose an atomic model</h2><div class="navgrid">
+    <button class="navcard" data-atommodel="dalton"><span class="bigicon">⚫</span><strong>1. Dalton Model</strong><small>Atoms as solid spheres.</small></button>
+    <button class="navcard" data-atommodel="thomson"><span class="bigicon">🍪</span><strong>2. Thomson Model</strong><small>Electrons embedded in positive matter.</small></button>
+    <button class="navcard" data-atommodel="rutherford"><span class="bigicon">🎯</span><strong>3. Rutherford Model</strong><small>Tiny nucleus and mostly empty space.</small></button>
+    <button class="navcard" data-atommodel="bohr"><span class="bigicon">⚛️</span><strong>4. Bohr Model</strong><small>Electrons in defined energy levels.</small></button>
+    <button class="navcard" data-atommodel="quantum"><span class="bigicon">☁️</span><strong>5. Quantum Model</strong><small>Electron orbitals and probability clouds.</small></button>
+  </div></div>
+  <div class="panel"><h2>📘 Chemistry quick facts</h2><div class="formula-grid">
+    <div class="formula"><div class="formula-title">ATOMIC NUMBER</div><div class="equation">Z = protons</div></div>
+    <div class="formula"><div class="formula-title">MASS NUMBER</div><div class="equation">A = protons + neutrons</div></div>
+    <div class="formula"><div class="formula-title">NEUTRAL ATOM</div><div class="equation">Electrons = protons</div></div>
+    <div class="formula"><div class="formula-title">PARTICLE CHARGES</div><div class="equation">p: +1 • n: 0 • e: −1</div></div>
+  </div></div>
+</section>
+
+<section id="atomModel" class="screen">
+  <button class="secondary" data-go="chemistry">← Chemistry Lab</button>
+  <div class="panel hero"><div class="eyebrow" id="atomEra"></div><h1 id="atomTitle"></h1><p id="atomSubtitle"></p></div>
+  <div class="panel"><h2>🔬 Model illustration</h2><div id="atomModelVisual" class="atom-visual"></div>
+  <div class="legend"><span><i class="proton"></i> Proton (+)</span><span><i class="neutron"></i> Neutron (0)</span><span><i style="background:#67f5ff"></i> Electron (−)</span></div>
+  <h2 style="margin-top:18px">💡 Main idea</h2><p id="atomIdea"></p><h2>📚 Important points</h2><ul id="atomPoints"></ul><div class="note" id="atomHint"></div>
+  <button class="primary" id="atomQuizButton" style="margin-top:14px">🧠 Take this model's MCQ quiz</button></div>
+</section>
+
+<section id="atomExplorer" class="screen">
+  <button class="secondary" data-go="home">← Dashboard</button>
+  <div class="panel hero"><div class="eyebrow">Periodic table explorer</div><h1>First 20 Elements</h1><p>Choose an element to view its electron shells and nucleus.</p></div>
+  <div class="panel"><div class="field"><label for="atomElementSelect">Choose element</label><select id="atomElementSelect"></select></div>
+  <div id="elementAtomVisual" class="atom-visual"></div>
+  <div class="legend"><span><i class="proton"></i> Proton (+)</span><span><i class="neutron"></i> Neutron (0)</span><span><i style="background:#67f5ff"></i> Electron (−)</span></div>
+  <div class="stats" style="margin-top:14px"><div class="stat"><strong id="elementAtomicNumber">1</strong><span>Atomic number</span></div><div class="stat"><strong id="elementMassNumber">1</strong><span>Mass number*</span></div><div class="stat"><strong id="elementNeutrons">0</strong><span>Neutrons*</span></div></div>
+  <div class="formula" style="margin-top:12px"><div class="formula-title">ELECTRON SHELL CONFIGURATION</div><div class="equation" id="elementConfiguration">K: 1</div><div class="explain" id="elementDescription"></div></div>
+  <div class="note">*Mass numbers show common isotopes. Isotopes may have different neutron counts. Nucleus illustrations are schematic and not to scale.</div>
+  </div>
+</section>
+
+<!-- Cosmic Universe Screen -->
+<section id="universeScreen" class="screen">
+  <div id="universeLoading" style="position:fixed; inset:0; display:flex; align-items:center; justify-content:center; color:#7fb8d9; font-family:'Segoe UI',system-ui,sans-serif; font-size:14px; letter-spacing:2px; z-index:25; background:#000005;">LOADING UNIVERSE…</div>
+  
+  <div id="universeTopBar" class="ui-layer">
+    <div class="universe-top-row">
+      <button class="secondary" data-go="home" style="padding: 6px 12px; font-size: 11px;">← Dashboard</button>
+    </div>
+    <div id="universeNavBar" class="ui-layer">
+      <button class="universe-nav-btn active" data-mode="galaxy">Galaxy</button>
+      <button class="universe-nav-btn" data-mode="blackhole">Black Hole</button>
+      <button class="universe-nav-btn" data-mode="planets">Solar System</button>
+    </div>
+  </div>
+  
+  <div id="universeOverlay" class="ui-layer">
+    <h1 id="universeOverlayTitle">Cosmic Universe</h1>
+    <p id="universeOverlaySub">Drag to rotate · Scroll to zoom</p>
+  </div>
+  
+  <div id="universeShapeLabel" class="ui-layer">Spiral Galaxy</div>
+  
+  <div id="universeColorPanel" class="ui-layer">
+    <div class="universe-cp-row"><label>Core</label><input type="color" id="uniCpCore" value="#ffffff" /></div>
+    <div class="universe-cp-row"><label>Glow</label><input type="color" id="uniCpMid" value="#6ee7ff" /></div>
+    <div class="universe-cp-row"><label>Edge</label><input type="color" id="uniCpEdge" value="#1450a8" /></div>
+    <div class="universe-cp-presets">
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#6ee7ff,#1450a8)" data-core="#ffffff" data-mid="#6ee7ff" data-edge="#1450a8" title="Cyan"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#ff6ec7,#7a0e6e)" data-core="#ffffff" data-mid="#ff6ec7" data-edge="#7a0e6e" title="Pink"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#b388ff,#3a0ca3)" data-core="#ffffff" data-mid="#b388ff" data-edge="#3a0ca3" title="Purple"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#ffd166,#a85200)" data-core="#ffffff" data-mid="#ffd166" data-edge="#a85200" title="Gold"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#6effa3,#0a6e3a)" data-core="#ffffff" data-mid="#6effa3" data-edge="#0a6e3a" title="Green"></button>
+      <button class="universe-cp-swatch" style="background:linear-gradient(90deg,#fff,#ff6e6e,#7a0e0e)" data-core="#ffffff" data-mid="#ff6e6e" data-edge="#7a0e0e" title="Red"></button>
+    </div>
+  </div>
+  
+  <div id="universePlanetMenu" class="ui-layer" style="display:none;"></div>
+  <div id="universePlanetInfo" class="ui-layer">
+    <h2 id="uniPiName">—</h2>
+    <div class="au" id="uniPiAu">—</div>
+    <p id="uniPiFact">—</p>
+  </div>
+</section>
+
+<div id="toast" style="display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fde68a;color:#292044;padding:12px 17px;border-radius:30px;font-weight:850;z-index:50;max-width:90%"></div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+let universeInitialized = false;
+let uniScene, uniCamera, uniRenderer, uniControls, uniComposer;
+let universeAnimationId = null;
+
+function initCosmicUniverse() {
+  if (universeInitialized) return;
+  universeInitialized = true;
+
+  const container = document.getElementById('universeScreen');
+  
+  uniScene = new THREE.Scene();
+  uniCamera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 400);
+  uniCamera.position.set(0, 3.2, 9);
+  
+  uniRenderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
+  uniRenderer.setSize(window.innerWidth, window.innerHeight);
+  uniRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  uniRenderer.setClearColor(0x000001);
+  container.appendChild(uniRenderer.domElement);
+  
+  uniControls = new OrbitControls(uniCamera, uniRenderer.domElement);
+  uniControls.enableDamping = true;
+  uniControls.dampingFactor = 0.05;
+  uniControls.enablePan = false;
+  uniControls.minDistance = 1.5;
+  uniControls.maxDistance = 60;
+  uniControls.autoRotate = true;
+  uniControls.autoRotateSpeed = 0.4;
+  
+  uniComposer = new EffectComposer(uniRenderer);
+  uniComposer.addPass(new RenderPass(uniScene, uniCamera));
+  const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.55, 0.4, 0.35);
+  uniComposer.addPass(bloomPass);
+  uniComposer.addPass(new OutputPass());
+  
+  uniScene.add(new THREE.AmbientLight(0x223355, 1.1));
+  const sunLight = new THREE.PointLight(0xfff2cc, 3.2, 60, 1.6);
+  uniScene.add(sunLight);
+  
+  function makeSprite() {
+    const size = 64;
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    g.addColorStop(0, 'rgba(255,255,255,0.85)');
+    g.addColorStop(0.35, 'rgba(255,255,255,0.35)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(c);
+  }
+  const sprite = makeSprite();
+  
+  function makeDotSprite() {
+    const size = 64;
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    g.addColorStop(0, 'rgba(255,255,255,1)');
+    g.addColorStop(0.5, 'rgba(255,255,255,0.65)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(c);
+  }
+  const dotSprite = makeDotSprite();
+  
+  // Background starfield
+  (function addStarfield() {
+    const dimCount = 9000;
+    const dimPos = new Float32Array(dimCount * 3);
+    for (let i = 0; i < dimCount; i++) {
+      const r = 50 + Math.random() * 150;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      dimPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      dimPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      dimPos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const dimGeo = new THREE.BufferGeometry();
+    dimGeo.setAttribute('position', new THREE.BufferAttribute(dimPos, 3));
+    const dimMat = new THREE.PointsMaterial({
+      size: 0.028, map: sprite, transparent: true, depthWrite: false, color: 0xbfe0f2, opacity: 0.75, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+    });
+    uniScene.add(new THREE.Points(dimGeo, dimMat));
+    
+    const brightCount = 500;
+    const brightPos = new Float32Array(brightCount * 3);
+    for (let i = 0; i < brightCount; i++) {
+      const r = 45 + Math.random() * 140;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      brightPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      brightPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      brightPos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const brightGeo = new THREE.BufferGeometry();
+    brightGeo.setAttribute('position', new THREE.BufferAttribute(brightPos, 3));
+    const brightMat = new THREE.PointsMaterial({
+      size: 0.09, map: sprite, transparent: true, depthWrite: false, color: 0xffffff, opacity: 0.9, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+    });
+    uniScene.add(new THREE.Points(brightGeo, brightMat));
+    
+    const bokehCount = 40;
+    const bokehPos = new Float32Array(bokehCount * 3);
+    for (let i = 0; i < bokehCount; i++) {
+      const r = 9 + Math.random() * 26;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      bokehPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      bokehPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      bokehPos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const bokehGeo = new THREE.BufferGeometry();
+    bokehGeo.setAttribute('position', new THREE.BufferAttribute(bokehPos, 3));
+    const bokehMat = new THREE.PointsMaterial({
+      size: 0.55, map: sprite, transparent: true, depthWrite: false, color: 0x9fe0ff, opacity: 0.3, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+    });
+    uniScene.add(new THREE.Points(bokehGeo, bokehMat));
+  })();
+  
+  let galaxyBokehPoints;
+  (function addGalaxyBokeh() {
+    const count = 220;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = 6 + Math.random() * 34;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const mat = new THREE.PointsMaterial({
+      size: 1.6, map: sprite, transparent: true, depthWrite: false, color: 0x9fe0ff, opacity: 0.4, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+    });
+    galaxyBokehPoints = new THREE.Points(geo, mat);
+    uniScene.add(galaxyBokehPoints);
+  })();
+  
+  // Galaxy Mode
+  const GALAXY_COUNT = 40000;
+  let colorCore = new THREE.Color(0xffffff);
+  let colorMid = new THREE.Color(0x6ee7ff);
+  let colorEdge = new THREE.Color(0x1450a8);
+  
+  function lerpColor(a, b, t) { return a.clone().lerp(b, t); }
+  function colorForT(t) {
+    return t < 0.5 ? lerpColor(colorCore, colorMid, t * 2) : lerpColor(colorMid, colorEdge, (t - 0.5) * 2);
+  }
+  
+  function buildGalaxy(n) {
+    const positions = new Float32Array(n * 3), colors = new Float32Array(n * 3), tVals = new Float32Array(n);
+    const branches = 4, radius = 5.2, spin = 1.6, randomness = 0.32, randomnessPower = 2.6;
+    for (let i = 0; i < n; i++) {
+      const r = Math.pow(Math.random(), 0.7) * radius;
+      const branchAngle = ((i % branches) / branches) * Math.PI * 2;
+      const spinAngle = r * spin;
+      const rand = () => Math.pow(Math.random(), randomnessPower) * (Math.random() < 0.5 ? 1 : -1);
+      const rx = rand() * randomness * r, ry = rand() * randomness * r * 0.25, rz = rand() * randomness * r;
+      const angle = branchAngle + spinAngle;
+      positions[i * 3] = Math.cos(angle) * r + rx;
+      positions[i * 3 + 1] = ry;
+      positions[i * 3 + 2] = Math.sin(angle) * r + rz;
+      const t = r / radius;
+      tVals[i] = t;
+      const col = colorForT(t);
+      colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+    }
+    return { positions, colors, tVals };
+  }
+  
+  function buildOrbJets(n) {
+    const positions = new Float32Array(n * 3), colors = new Float32Array(n * 3), tVals = new Float32Array(n);
+    const jetCount = Math.floor(n * 0.35), sphereCount = n - jetCount;
+    for (let i = 0; i < n; i++) {
+      let x, y, z, t;
+      if (i < sphereCount) {
+        const rad = 0.6 + Math.random() * 0.7;
+        const u = Math.random(), v = Math.random();
+        const theta = 2 * Math.PI * u, phi = Math.acos(2 * v - 1);
+        x = rad * Math.sin(phi) * Math.cos(theta);
+        y = rad * Math.sin(phi) * Math.sin(theta) * 0.4;
+        z = rad * Math.cos(phi);
+        t = rad / 1.3;
+      } else {
+        const side = (i % 2 === 0) ? 1 : -1;
+        const along = Math.pow(Math.random(), 1.8) * 4.6;
+        const spread = (0.04 + along * 0.05) * (Math.random() - 0.5) * 2;
+        const spread2 = (0.04 + along * 0.05) * (Math.random() - 0.5) * 2;
+        x = spread; y = side * (0.6 + along); z = spread2;
+        t = Math.min(along / 4.6, 1);
+      }
+      positions[i * 3] = x; positions[i * 3 + 1] = y; positions[i * 3 + 2] = z;
+      tVals[i] = t;
+      const col = colorForT(t);
+      colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+    }
+    return { positions, colors, tVals };
+  }
+  
+  function buildTorusKnot(n) {
+    const positions = new Float32Array(n * 3), colors = new Float32Array(n * 3), tVals = new Float32Array(n);
+    const p = 2, q = 3, R = 3.4, r = 1.1, tube = 0.22;
+    for (let i = 0; i < n; i++) {
+      const u = Math.random() * Math.PI * 2;
+      const cx = (R + r * Math.cos(q * u)) * Math.cos(p * u);
+      const cy = (R + r * Math.cos(q * u)) * Math.sin(p * u);
+      const cz = r * Math.sin(q * u);
+      const ox = (Math.random() - 0.5) * tube, oy = (Math.random() - 0.5) * tube, oz = (Math.random() - 0.5) * tube;
+      positions[i * 3] = cx + ox; positions[i * 3 + 1] = cz + oy; positions[i * 3 + 2] = cy + oz;
+      const t = Math.sin(q * u) * 0.5 + 0.5;
+      tVals[i] = t;
+      const col = colorForT(t);
+      colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+    }
+    return { positions, colors, tVals };
+  }
+  
+  const GALAXY_SHAPES = [
+    { name: 'Spiral Galaxy', data: buildGalaxy(GALAXY_COUNT) },
+    { name: 'Collapsing Star', data: buildOrbJets(GALAXY_COUNT) },
+    { name: 'Torus Knot', data: buildTorusKnot(GALAXY_COUNT) },
+  ];
+  
+  const galaxyGeometry = new THREE.BufferGeometry();
+  const galaxyLivePositions = new Float32Array(GALAXY_SHAPES[0].data.positions);
+  const galaxyLiveColors = new Float32Array(GALAXY_SHAPES[0].data.colors);
+  galaxyGeometry.setAttribute('position', new THREE.BufferAttribute(galaxyLivePositions, 3));
+  galaxyGeometry.setAttribute('color', new THREE.BufferAttribute(galaxyLiveColors, 3));
+  const galaxyMaterial = new THREE.PointsMaterial({
+    size: 0.022, map: dotSprite, vertexColors: true, transparent: true, opacity: 0.9, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+  });
+  const galaxyPoints = new THREE.Points(galaxyGeometry, galaxyMaterial);
+  uniScene.add(galaxyPoints);
+  
+  let galCurrent = 0, galNext = 1, galMorphing = false, galMorphT = 0;
+  const GAL_MORPH_DURATION = 2.2, GAL_HOLD_DURATION = 3.2;
+  let galHoldTimer = GAL_HOLD_DURATION;
+  const shapeLabel = document.getElementById('universeShapeLabel');
+  
+  function easeInOutCubic(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  
+  function startGalaxyMorph() {
+    galMorphing = true; galMorphT = 0;
+    galNext = (galCurrent + 1) % GALAXY_SHAPES.length;
+    shapeLabel.textContent = GALAXY_SHAPES[galNext].name;
+  }
+  
+  function regenerateGalaxyColors() {
+    for (const shape of GALAXY_SHAPES) {
+      const { colors, tVals } = shape.data;
+      for (let i = 0; i < GALAXY_COUNT; i++) {
+        const col = colorForT(tVals[i]);
+        colors[i * 3] = col.r; colors[i * 3 + 1] = col.g; colors[i * 3 + 2] = col.b;
+      }
+    }
+    if (galMorphing) {
+      const e = easeInOutCubic(Math.min(galMorphT, 1));
+      const from = GALAXY_SHAPES[galCurrent].data, to = GALAXY_SHAPES[galNext].data;
+      for (let i = 0; i < GALAXY_COUNT * 3; i++) galaxyLiveColors[i] = from.colors[i] + (to.colors[i] - from.colors[i]) * e;
+    } else {
+      galaxyLiveColors.set(GALAXY_SHAPES[galCurrent].data.colors);
+    }
+    galaxyGeometry.attributes.color.needsUpdate = true;
+  }
+  
+  function updateGalaxy(dt) {
+    if (galMorphing) {
+      galMorphT += dt / GAL_MORPH_DURATION;
+      const e = easeInOutCubic(Math.min(galMorphT, 1));
+      const from = GALAXY_SHAPES[galCurrent].data, to = GALAXY_SHAPES[galNext].data;
+      for (let i = 0; i < GALAXY_COUNT * 3; i++) {
+        galaxyLivePositions[i] = from.positions[i] + (to.positions[i] - from.positions[i]) * e;
+        galaxyLiveColors[i] = from.colors[i] + (to.colors[i] - from.colors[i]) * e;
+      }
+      galaxyGeometry.attributes.position.needsUpdate = true;
+      galaxyGeometry.attributes.color.needsUpdate = true;
+      if (galMorphT >= 1) { galMorphing = false; galCurrent = galNext; galHoldTimer = GAL_HOLD_DURATION; }
+    } else {
+      galHoldTimer -= dt;
+      if (galHoldTimer <= 0) startGalaxyMorph();
+    }
+    galaxyPoints.rotation.y += dt * 0.05;
+  }
+  
+  // Black Hole Mode
+  const blackholeGroup = new THREE.Group();
+  const horizon = new THREE.Mesh(
+    new THREE.SphereGeometry(0.22, 32, 32),
+    new THREE.MeshBasicMaterial({ color: 0x000000 })
+  );
+  blackholeGroup.add(horizon);
+  
+  const DISK_COUNT = 16000;
+  const diskRadius = new Float32Array(DISK_COUNT);
+  const diskAngle0 = new Float32Array(DISK_COUNT);
+  const diskSpeed = new Float32Array(DISK_COUNT);
+  const diskHeight = new Float32Array(DISK_COUNT);
+  const diskColors = new Float32Array(DISK_COUNT * 3);
+  const diskPositions = new Float32Array(DISK_COUNT * 3);
+  
+  const diskInner = new THREE.Color(0xfff8e0);
+  const diskMid = new THREE.Color(0xff8a2e);
+  const diskOuter = new THREE.Color(0x8a1010);
+  
+  const CORE_COUNT = Math.floor(DISK_COUNT * 0.4);
+  const ARM_BRANCHES = 2, ARM_SPIN = 2.4;
+  
+  for (let i = 0; i < DISK_COUNT; i++) {
+    let rr, angle0, height, t;
+    if (i < CORE_COUNT) {
+      rr = 0.28 + Math.pow(Math.random(), 1.6) * 1.6;
+      angle0 = Math.random() * Math.PI * 2;
+      height = (Math.random() - 0.5) * 0.1;
+      t = rr / 1.9;
+    } else {
+      rr = 1.5 + Math.pow(Math.random(), 0.75) * 7.5;
+      const branchAngle = ((i % ARM_BRANCHES) / ARM_BRANCHES) * Math.PI * 2;
+      const spinAngle = rr * ARM_SPIN * 0.18;
+      const scatter = (Math.pow(Math.random(), 2) * (Math.random() < 0.5 ? 1 : -1)) * 0.55;
+      angle0 = branchAngle + spinAngle + scatter;
+      height = (Math.random() - 0.5) * (0.04 + rr * 0.05);
+      t = Math.min((rr - 1.5) / 7.5, 1);
+    }
+    diskRadius[i] = rr; diskAngle0[i] = angle0;
+    diskSpeed[i] = 1.3 / Math.sqrt(rr);
+    diskHeight[i] = height;
+    const col = t < 0.5 ? diskInner.clone().lerp(diskMid, t * 2) : diskMid.clone().lerp(diskOuter, (t - 0.5) * 2);
+    diskColors[i * 3] = col.r; diskColors[i * 3 + 1] = col.g; diskColors[i * 3 + 2] = col.b;
+  }
+  const diskGeometry = new THREE.BufferGeometry();
+  diskGeometry.setAttribute('position', new THREE.BufferAttribute(diskPositions, 3));
+  diskGeometry.setAttribute('color', new THREE.BufferAttribute(diskColors, 3));
+  const diskMaterial = new THREE.PointsMaterial({
+    size: 0.045, map: sprite, vertexColors: true, transparent: true, opacity: 0.9, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+  });
+  const diskPoints = new THREE.Points(diskGeometry, diskMaterial);
+  diskPoints.rotation.x = Math.PI / 2.6;
+  blackholeGroup.add(diskPoints);
+  
+  let diskTime = 0;
+  function updateBlackhole(dt) {
+    diskTime += dt;
+    for (let i = 0; i < DISK_COUNT; i++) {
+      const a = diskAngle0[i] + diskTime * diskSpeed[i];
+      const r = diskRadius[i];
+      diskPositions[i * 3] = Math.cos(a) * r;
+      diskPositions[i * 3 + 1] = diskHeight[i];
+      diskPositions[i * 3 + 2] = Math.sin(a) * r;
+    }
+    diskGeometry.attributes.position.needsUpdate = true;
+    blackholeGroup.rotation.y += dt * 0.01;
+  }
+  
+  // Solar System Mode
+  function makeTerrestrialTexture(base, spots, count) {
+    const w = 256, h = 128;
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = base; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < count; i++) {
+      const x = Math.random() * w, y = Math.random() * h;
+      const r = 3 + Math.random() * 14;
+      ctx.globalAlpha = 0.18 + Math.random() * 0.35;
+      ctx.fillStyle = spots[Math.floor(Math.random() * spots.length)];
+      ctx.beginPath();
+      ctx.ellipse(x, y, r, r * (0.5 + Math.random() * 0.4), Math.random() * Math.PI, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+  
+  function makeBandedTexture(colorStops) {
+    const w = 256, h = 128;
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    colorStops.forEach((col, i) => grad.addColorStop(i / (colorStops.length - 1), col));
+    ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 55; i++) {
+      const y = Math.random() * h;
+      ctx.strokeStyle = `rgba(255,255,255,${0.03 + Math.random() * 0.07})`;
+      ctx.lineWidth = 1 + Math.random() * 2.5;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      for (let x = 0; x <= w; x += 12) ctx.lineTo(x, y + Math.sin(x * 0.06 + i) * 3);
+      ctx.stroke();
+    }
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+  
+  function makeSunTexture() {
+    const w = 512, h = 256;
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#ffd54f'; ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 1400; i++) {
+      const x = Math.random() * w, y = Math.random() * h;
+      const r = 1 + Math.random() * 5;
+      ctx.globalAlpha = 0.2 + Math.random() * 0.35;
+      ctx.fillStyle = Math.random() < 0.5 ? '#ff8c28' : '#fff6c8';
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }
+  
+  const planetsGroup = new THREE.Group();
+  const sunMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(0.9, 32, 32),
+    new THREE.MeshBasicMaterial({ map: makeSunTexture() })
+  );
+  planetsGroup.add(sunMesh);
+  
+  const PLANET_DATA = [
+    { name: 'Mercury', au: 0.39, size: 0.16, dotColor: '#9c9c9c', fact: 'Closest planet to the Sun and the smallest in the solar system.', tex: () => makeTerrestrialTexture('#9c9c9c', ['#7a7a7a', '#bdbdbd', '#8f8f8f'], 260) },
+    { name: 'Venus', au: 0.72, size: 0.28, dotColor: '#e8cda2', fact: 'The hottest planet — a runaway greenhouse effect traps heat under thick clouds.', tex: () => makeTerrestrialTexture('#e8cda2', ['#d8b878', '#f0e0b8', '#c9a868'], 160) },
+    { name: 'Earth', au: 1.00, size: 0.30, dotColor: '#2f6fed', fact: 'The only known planet with life. About 71% of its surface is water.', tex: () => makeTerrestrialTexture('#1c4fa0', ['#2f7d32', '#5a8f3c', '#e8e8e8', '#3a6bc9'], 220) },
+    { name: 'Mars', au: 1.52, size: 0.20, dotColor: '#b1440e', fact: 'The Red Planet, colored by iron oxide dust. Home to Olympus Mons, the tallest volcano.', tex: () => makeTerrestrialTexture('#b1440e', ['#8a3208', '#d97a4a', '#c65a20'], 220) },
+    { name: 'Jupiter', au: 5.20, size: 0.85, dotColor: '#d8ae76', fact: 'The largest planet. Its Great Red Spot is a storm bigger than Earth.', tex: () => makeBandedTexture(['#a97a4e', '#e3c9a0', '#c9a26a', '#f0dfc0', '#b98a5c', '#e3c9a0']) },
+    { name: 'Saturn', au: 9.58, size: 0.72, dotColor: '#e3c98f', fact: 'Famous for its spectacular ring system made of ice and rock.', ring: true, tex: () => makeBandedTexture(['#d9c088', '#f2e6c2', '#e8d3a0', '#f2e6c2']) },
+    { name: 'Uranus', au: 19.2, size: 0.48, dotColor: '#9fe3e0', fact: 'Rotates almost on its side, likely from an ancient collision.', tex: () => makeBandedTexture(['#8fd6d3', '#bdf0ee', '#9fe3e0']) },
+    { name: 'Neptune', au: 30.1, size: 0.46, dotColor: '#3f5efb', fact: 'The windiest planet, with storms reaching over 2,000 km/h.', tex: () => makeBandedTexture(['#2f4ad0', '#5f7dfc', '#3f5efb']) },
+    { name: 'Pluto', au: 39.5, size: 0.12, dotColor: '#b8a58c', fact: 'A dwarf planet in the Kuiper Belt, with a heart-shaped glacier region.', tex: () => makeTerrestrialTexture('#b8a58c', ['#9c8770', '#cdbba0', '#a89478'], 180) },
+  ];
+  
+  function orbitRadiusFor(au) { return 2.4 + Math.sqrt(au) * 2.0; }
+  
+  const planets = PLANET_DATA.map((p, idx) => {
+    const orbitR = orbitRadiusFor(p.au);
+    const mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(p.size, 32, 32),
+      new THREE.MeshStandardMaterial({ map: p.tex(), roughness: 0.85, metalness: 0.03 })
+    );
+    planetsGroup.add(mesh);
+    
+    if (p.ring) {
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(p.size * 1.4, p.size * 2.2, 48),
+        new THREE.MeshBasicMaterial({ color: 0xd8c79a, side: THREE.DoubleSide, transparent: true, opacity: 0.7 })
+      );
+      ring.rotation.x = Math.PI / 2.3;
+      mesh.add(ring);
+    }
+    
+    const orbitCurve = new THREE.EllipseCurve(0, 0, orbitR, orbitR, 0, Math.PI * 2, false, 0);
+    const orbitPts = orbitCurve.getPoints(128).map(pt => new THREE.Vector3(pt.x, 0, pt.y));
+    const orbitLine = new THREE.LineLoop(
+      new THREE.BufferGeometry().setFromPoints(orbitPts),
+      new THREE.LineBasicMaterial({ color: 0x33475e, transparent: true, opacity: 0.28 })
+    );
+    planetsGroup.add(orbitLine);
+    
+    return { ...p, mesh, orbitR, angle: Math.random() * Math.PI * 2, speed: 0.35 / Math.sqrt(p.au), idx };
+  });
+  
+  function updatePlanets(dt) {
+    for (const p of planets) {
+      p.angle += dt * p.speed;
+      p.mesh.position.set(Math.cos(p.angle) * p.orbitR, 0, Math.sin(p.angle) * p.orbitR);
+      p.mesh.rotation.y += dt * 0.6;
+    }
+    sunMesh.rotation.y += dt * 0.05;
+  }
+  
+  const planetMenuEl = document.getElementById('universePlanetMenu');
+  const planetInfoEl = document.getElementById('universePlanetInfo');
+  const piName = document.getElementById('uniPiName');
+  const piAu = document.getElementById('uniPiAu');
+  const piFact = document.getElementById('uniPiFact');
+  
+  let selectedPlanet = null;
+  
+  function buildPlanetMenu() {
+    planetMenuEl.innerHTML = '';
+    const overviewBtn = document.createElement('button');
+    overviewBtn.className = 'universe-planet-btn active';
+    overviewBtn.innerHTML = `<span class="universe-planet-dot" style="background:#6ee7ff;color:#6ee7ff"></span>Overview`;
+    overviewBtn.addEventListener('click', () => selectPlanet(null, overviewBtn));
+    planetMenuEl.appendChild(overviewBtn);
+    
+    planets.forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'universe-planet-btn';
+      const hex = p.dotColor;
+      btn.innerHTML = `<span class="universe-planet-dot" style="background:${hex};color:${hex}"></span>${p.name}`;
+      btn.addEventListener('click', () => selectPlanet(p, btn));
+      planetMenuEl.appendChild(btn);
+    });
+  }
+  buildPlanetMenu();
+  
+  function selectPlanet(p, btnEl) {
+    selectedPlanet = p;
+    document.querySelectorAll('.universe-planet-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+    if (p) {
+      planetInfoEl.style.display = 'block';
+      piName.textContent = p.name;
+      piAu.textContent = `${p.au} AU from the Sun`;
+      piFact.textContent = p.fact;
+      requestFocus(p.size * 6 + 2.5);
+    } else {
+      planetInfoEl.style.display = 'none';
+      requestFocus(20);
+    }
+  }
+  
+  let currentMode = 'galaxy';
+  const overlayTitle = document.getElementById('universeOverlayTitle');
+  const overlaySub = document.getElementById('universeOverlaySub');
+  const colorPanelEl = document.getElementById('universeColorPanel');
+  
+  function setUniverseMode(mode) {
+    currentMode = mode;
+    galaxyPoints.visible = (mode === 'galaxy');
+    blackholeGroup.visible = (mode === 'blackhole');
+    planetsGroup.visible = (mode === 'planets');
+    if (galaxyBokehPoints) galaxyBokehPoints.visible = (mode === 'galaxy');
+    
+    document.getElementById('universeShapeLabel').style.display = (mode === 'galaxy') ? 'block' : 'none';
+    colorPanelEl.style.display = (mode === 'galaxy') ? 'block' : 'none';
+    planetMenuEl.style.display = (mode === 'planets') ? 'block' : 'none';
+    planetInfoEl.style.display = (mode === 'planets' && selectedPlanet) ? 'block' : 'none';
+    
+    document.querySelectorAll('.universe-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+    
+    if (mode === 'galaxy') {
+      overlayTitle.textContent = 'Cosmic Universe';
+      overlaySub.textContent = 'Drag to rotate · Scroll to zoom';
+      requestFocus(9);
+    } else if (mode === 'blackhole') {
+      overlayTitle.textContent = 'Black Hole';
+      overlaySub.textContent = 'A star’s light bends around the event horizon';
+      requestFocus(7);
+    } else {
+      overlayTitle.textContent = 'Solar System';
+      overlaySub.textContent = 'Tap a planet to explore';
+      requestFocus(20);
+    }
+  }
+  
+  document.querySelectorAll('.universe-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => setUniverseMode(btn.dataset.mode));
+  });
+  
+  blackholeGroup.visible = false;
+  planetsGroup.visible = false;
+  uniScene.add(blackholeGroup);
+  uniScene.add(planetsGroup);
+  
+  let focusTimer = 0, focusDistance = 9;
+  function requestFocus(distance, duration = 1.4) { focusDistance = distance; focusTimer = duration; }
+  function desiredTarget() {
+    if (currentMode === 'planets' && selectedPlanet) return selectedPlanet.mesh.position;
+    return new THREE.Vector3(0, 0, 0);
+  }
+  
+  const cpCore = document.getElementById('uniCpCore');
+  const cpMid = document.getElementById('uniCpMid');
+  const cpEdge = document.getElementById('uniCpEdge');
+  
+  function applyColors(coreHex, midHex, edgeHex) {
+    colorCore = new THREE.Color(coreHex);
+    colorMid = new THREE.Color(midHex);
+    colorEdge = new THREE.Color(edgeHex);
+    regenerateGalaxyColors();
+  }
+  cpCore.addEventListener('input', () => applyColors(cpCore.value, cpMid.value, cpEdge.value));
+  cpMid.addEventListener('input', () => applyColors(cpCore.value, cpMid.value, cpEdge.value));
+  cpEdge.addEventListener('input', () => applyColors(cpCore.value, cpMid.value, cpEdge.value));
+  document.querySelectorAll('.universe-cp-swatch').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const { core, mid, edge } = btn.dataset;
+      cpCore.value = core; cpMid.value = mid; cpEdge.value = edge;
+      applyColors(core, mid, edge);
+    });
+  });
+  
+  const clock = new THREE.Clock();
+  
+  function animateUniverse() {
+    universeAnimationId = requestAnimationFrame(animateUniverse);
+    const dt = Math.min(clock.getDelta(), 0.05);
+    
+    if (currentMode === 'galaxy') updateGalaxy(dt);
+    else if (currentMode === 'blackhole') updateBlackhole(dt);
+    else updatePlanets(dt);
+    
+    const targetOld = uniControls.target.clone();
+    const trackT = (currentMode === 'planets' && selectedPlanet) ? 0.05 : 0.06;
+    uniControls.target.lerp(desiredTarget(), trackT);
+    const delta = uniControls.target.clone().sub(targetOld);
+    uniCamera.position.add(delta);
+    
+    if (focusTimer > 0) {
+      focusTimer -= dt;
+      const offset = uniCamera.position.clone().sub(uniControls.target);
+      const dist = offset.length();
+      const newDist = THREE.MathUtils.lerp(dist, focusDistance, 0.06);
+      uniCamera.position.copy(uniControls.target).add(offset.setLength(Math.max(newDist, 0.01)));
+    }
+    
+    uniControls.update();
+    uniComposer.render();
+  }
+  
+  window.addEventListener('resize', () => {
+    if (!universeInitialized) return;
+    uniCamera.aspect = window.innerWidth / window.innerHeight;
+    uniCamera.updateProjectionMatrix();
+    uniRenderer.setSize(window.innerWidth, window.innerHeight);
+    uniComposer.setSize(window.innerWidth, window.innerHeight);
+  });
+  
+  document.getElementById('universeLoading').style.display = 'none';
+  shapeLabel.textContent = GALAXY_SHAPES[0].name;
+  setUniverseMode('galaxy');
+  animateUniverse();
+}
+
+// Hook navigation for universe screen
+document.querySelectorAll('[data-go]').forEach(btn => {
+  const targetId = btn.getAttribute('data-go');
+  if (targetId === 'universeScreen') {
+    btn.addEventListener('click', () => {
+      setTimeout(initCosmicUniverse, 100);
+    });
+  }
+});
+</script>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id), PROFILE_KEY="scienceNexusProfile";
+const fresh=()=>({name:"Math Champion",avatar:"🚀",xp:0,coins:0,games:0,correct:0,bestStreak:0,bestScore:0,badges:[]});
+let profile;
+try { profile={...fresh(),...(JSON.parse(localStorage.getItem(PROFILE_KEY))||{})}; }
+catch(e) { profile=fresh(); }
+const badgeNames={first:"🌟 First Quest",perfect:"💯 Perfect Game",streak:"🔥 5 Streak",ten:"🎮 10 Games",scholar:"🧠 100 Correct",marathon:"🏆 20 Questions"};
+let timerId=null, toastId=null;
+function stopTimer(){if(timerId){clearTimeout(timerId);timerId=null;}}
+function go(id){
+  stopTimer();
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b)go(b.dataset.go);});
+function toast(t){
+  $("toast").textContent=t;$("toast").style.display="block";
+  clearTimeout(toastId);toastId=setTimeout(()=>$("toast").style.display="none",2200);
+}
+function save(){try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));}catch(e){}}
+function renderProfile(){
+  $("nameDisplay").textContent=profile.name;$("avatarDisplay").textContent=profile.avatar;
+  $("playerName").value=profile.name;$("avatarChoice").value=profile.avatar;
+  $("coinsTop").textContent=profile.coins;
+  $("levelDisplay").textContent="Level "+(Math.floor(profile.xp/100)+1)+" • "+profile.xp+" XP";
+  $("xpBar").style.width=(profile.xp%100)+"%";$("bestDisplay").textContent=profile.bestScore;
+  $("gamesDisplay").textContent=profile.games;$("correctDisplay").textContent=profile.correct;
+  $("streakDisplay").textContent=profile.bestStreak;$("badgesDisplay").replaceChildren();
+  if(!profile.badges.length){$("badgesDisplay").innerHTML='<span class="small">Play to unlock achievements!</span>';return;}
+  profile.badges.forEach(k=>{let s=document.createElement("span");s.className="badge";s.textContent=badgeNames[k];$("badgesDisplay").appendChild(s);});
+}
+$("saveProfile").onclick=()=>{
+  profile.name=$("playerName").value.trim()||"Math Champion";
+  profile.avatar=$("avatarChoice").value;save();renderProfile();toast("Profile saved!");
+};
+function fillClasses(id){
+  for(let i=1;i<=12;i++){let o=document.createElement("option");o.value=i;o.textContent="Class "+i;if(i===7)o.selected=true;$(id).appendChild(o);}
+}
+fillClasses("homeClass");fillClasses("quizClass");
+
+/* Formula library */
+const formulas = [
+  [1,"Arithmetic","Addition","a + b","Add two numbers."],
+  [1,"Arithmetic","Subtraction","a − b","Find the difference."],
+  [1,"Arithmetic","Multiplication","a × b","Multiply two numbers."],
+  [1,"Arithmetic","Division","a ÷ b","Divide into equal groups."],
+  [1,"Arithmetic","Order of operations","BODMAS","Brackets, orders, division, multiplication, addition, subtraction."],
+  [1,"Fractions","Fraction of a quantity","a/b × N","Multiply the fraction by the quantity."],
+  [1,"Fractions","Equivalent fractions","a/b = ka/kb","Multiply numerator and denominator by the same non-zero number."],
+  [1,"Arithmetic","Average","Sum ÷ number of values","Find the mean."],
+  [1,"Arithmetic","Percentage","Part/whole × 100","Express a part as a percentage."],
+  [1,"Geometry","Perimeter of a square","P = 4s","s is the side length."],
+  [1,"Geometry","Perimeter of a rectangle","P = 2(l + b)","l is length and b is breadth."],
+  [1,"Geometry","Area of a square","A = s²","Square the side length."],
+  [1,"Geometry","Area of a rectangle","A = l × b","Multiply length by breadth."],
+  [1,"Geometry","Area of a triangle","A = ½ × b × h","b is base and h is perpendicular height."],
+  [1,"Geometry","Perimeter of a triangle","P = a + b + c","Add all three sides."],
+  [1,"Geometry","Volume of a cube","V = s³","s is the edge length."],
+  [1,"Geometry","Volume of a cuboid","V = l × b × h","Multiply its three dimensions."],
+  [1,"Arithmetic","Speed","Speed = distance/time","Use matching units."],
+  [6,"Arithmetic","Ratio","a : b = a/b","Compare two quantities."],
+  [6,"Arithmetic","Proportion","a/b = c/d","Two ratios are equal."],
+  [6,"Arithmetic","Percentage change","Change/original × 100%","Use the original value as the base."],
+  [6,"Arithmetic","Profit","Profit = SP − CP","SP is selling price; CP is cost price."],
+  [6,"Arithmetic","Loss","Loss = CP − SP","When cost price exceeds selling price."],
+  [6,"Arithmetic","Profit percentage","Profit/CP × 100%","Calculate profit relative to cost price."],
+  [6,"Arithmetic","Simple interest","SI = PRT/100","R is annual percentage rate and T is time in years."],
+  [6,"Arithmetic","Amount with simple interest","A = P + SI","Principal plus simple interest."],
+  [6,"Fractions","Fraction addition","a/b + c/d = (ad + bc)/bd","Use a common denominator."],
+  [6,"Fractions","Fraction multiplication","a/b × c/d = ac/bd","Multiply numerators and denominators."],
+  [6,"Fractions","Fraction division","(a/b) ÷ (c/d) = ad/bc","Multiply by the reciprocal; b,c,d are non-zero."],
+  [6,"Algebra","Distributive law","a(b + c) = ab + ac","Multiply each term inside brackets."],
+  [6,"Algebra","Linear equation","ax + b = c ⇒ x = (c − b)/a","a must not be zero."],
+  [6,"Algebra","Exponent product rule","aᵐ × aⁿ = aᵐ⁺ⁿ","Same base: add exponents."],
+  [6,"Algebra","Exponent quotient rule","aᵐ/aⁿ = aᵐ⁻ⁿ","For a ≠ 0."],
+  [6,"Algebra","Power of a power","(aᵐ)ⁿ = aᵐⁿ","Multiply the exponents."],
+  [6,"Geometry","Sum of triangle angles","A + B + C = 180°","Interior angles of a triangle."],
+  [6,"Geometry","Sum of quadrilateral angles","360°","Interior angles of a quadrilateral."],
+  [6,"Geometry","Area of a parallelogram","A = b × h","h is perpendicular height."],
+  [6,"Geometry","Area of a trapezium","A = ½(a + b)h","a and b are parallel sides."],
+  [6,"Geometry","Circumference of a circle","C = 2πr = πd","r is radius and d is diameter."],
+  [6,"Geometry","Area of a circle","A = πr²","r is radius."],
+  [6,"Geometry","Volume of a cylinder","V = πr²h","r is radius and h is height."],
+  [6,"Statistics","Mean","Mean = sum of values/count","Add all values and divide by their count."],
+  [6,"Statistics","Range","Range = maximum − minimum","Difference between largest and smallest values."],
+  [6,"Coordinate Geometry","Coordinate point","(x, y)","x is horizontal; y is vertical."],
+  [9,"Algebra","Square of a sum","(a + b)² = a² + 2ab + b²","Algebraic identity."],
+  [9,"Algebra","Square of a difference","(a − b)² = a² − 2ab + b²","Algebraic identity."],
+  [9,"Algebra","Difference of squares","a² − b² = (a − b)(a + b)","Factorisation identity."],
+  [9,"Algebra","Cube of a sum","(a + b)³ = a³ + 3a²b + 3ab² + b³","Expand the cube of a sum."],
+  [9,"Algebra","Cube of a difference","(a − b)³ = a³ − 3a²b + 3ab² − b³","Expand the cube of a difference."],
+  [9,"Algebra","Quadratic formula","x = (−b ± √(b² − 4ac))/(2a)","For ax² + bx + c = 0, where a ≠ 0."],
+  [9,"Algebra","Discriminant","D = b² − 4ac","Determines the nature of quadratic roots."],
+  [9,"Algebra","Sum of quadratic roots","α + β = −b/a","For ax² + bx + c = 0."],
+  [9,"Algebra","Product of quadratic roots","αβ = c/a","For ax² + bx + c = 0."],
+  [9,"Geometry","Pythagorean theorem","a² + b² = c²","For a right-angled triangle; c is the hypotenuse."],
+  [9,"Geometry","Heron's formula","A = √[s(s−a)(s−b)(s−c)]","s = (a + b + c)/2; a,b,c are side lengths."],
+  [9,"Geometry","Sector arc length","L = (θ/360°) × 2πr","θ is the central angle in degrees."],
+  [9,"Geometry","Area of a sector","A = (θ/360°) × πr²","θ is the central angle in degrees."],
+  [9,"Geometry","Curved surface of a cylinder","CSA = 2πrh","r is radius and h is height."],
+  [9,"Geometry","Total surface of a cylinder","TSA = 2πr(h + r)","Includes both circular ends."],
+  [9,"Geometry","Volume of a cone","V = ⅓πr²h","r is radius and h is perpendicular height."],
+  [9,"Geometry","Volume of a sphere","V = ⁴⁄₃πr³","r is radius."],
+  [9,"Geometry","Surface area of a sphere","A = 4πr²","r is radius."],
+  [9,"Coordinate Geometry","Distance formula","d = √[(x₂−x₁)² + (y₂−y₁)²]","Distance between two coordinate points."],
+  [9,"Coordinate Geometry","Midpoint formula","M = ((x₁+x₂)/2, (y₁+y₂)/2)","Midpoint of a line segment."],
+  [9,"Coordinate Geometry","Slope","m = (y₂−y₁)/(x₂−x₁)","For x₂ ≠ x₁."],
+  [9,"Trigonometry","Sine ratio","sin θ = opposite/hypotenuse","Right-angled triangle."],
+  [9,"Trigonometry","Cosine ratio","cos θ = adjacent/hypotenuse","Right-angled triangle."],
+  [9,"Trigonometry","Tangent ratio","tan θ = opposite/adjacent","Right-angled triangle."],
+  [9,"Trigonometry","Cosecant ratio","cosec θ = 1/sin θ","Where sin θ ≠ 0."],
+  [9,"Trigonometry","Secant ratio","sec θ = 1/cos θ","Where cos θ ≠ 0."],
+  [9,"Trigonometry","Cotangent ratio","cot θ = 1/tan θ","Where tan θ is defined and non-zero."],
+  [9,"Trigonometry","Pythagorean identity","sin²θ + cos²θ = 1","Fundamental trigonometric identity."],
+  [9,"Trigonometry","Tangent identity","1 + tan²θ = sec²θ","Where the ratios are defined."],
+  [9,"Trigonometry","Cotangent identity","1 + cot²θ = cosec²θ","Where the ratios are defined."],
+  [9,"Trigonometry","Sine complementary angle","sin(90° − θ) = cos θ","For complementary angles."],
+  [9,"Trigonometry","Cosine complementary angle","cos(90° − θ) = sin θ","For complementary angles."],
+  [9,"Statistics","Probability","P(E) = favourable outcomes/total outcomes","For equally likely outcomes."],
+  [9,"Statistics","Median","Middle value of ordered data","For an even count, average the two middle values."],
+  [9,"Statistics","Mode","Most frequent value","The value occurring most often."],
+  [9,"Statistics","Mean of grouped data","Mean = Σfᵢxᵢ/Σfᵢ","xᵢ is class mark and fᵢ is frequency."],
+  [9,"Logarithms","Product rule","logₐ(xy) = logₐx + logₐy","For positive x,y and a > 0, a ≠ 1."],
+  [9,"Logarithms","Quotient rule","logₐ(x/y) = logₐx − logₐy","For positive x,y and a > 0, a ≠ 1."],
+  [9,"Logarithms","Power rule","logₐ(xⁿ) = n logₐx","For x > 0 and a > 0, a ≠ 1."],
+  [11,"Sets","Union","A ∪ B","Elements in A, B, or both."],
+  [11,"Sets","Intersection","A ∩ B","Elements common to both sets."],
+  [11,"Sets","Complement","A′ = U \\ A","Elements in the universal set U but not in A."],
+  [11,"Sets","Two-set counting","n(A ∪ B) = n(A) + n(B) − n(A ∩ B)","Avoid counting the intersection twice."],
+  [11,"Functions","Composite function","(f ∘ g)(x) = f(g(x))","Apply g first, then f."],
+  [11,"Functions","Inverse function","f⁻¹(f(x)) = x","Where the inverse exists."],
+  [11,"Sequences","Arithmetic progression nth term","aₙ = a + (n−1)d","a is first term and d is common difference."],
+  [11,"Sequences","Arithmetic progression sum","Sₙ = n/2[2a + (n−1)d]","Sum of the first n terms."],
+  [11,"Sequences","Geometric progression nth term","aₙ = arⁿ⁻¹","r is the common ratio."],
+  [11,"Sequences","Geometric progression sum","Sₙ = a(rⁿ−1)/(r−1)","For r ≠ 1."],
+  [11,"Complex Numbers","Imaginary unit","i² = −1","Definition of the imaginary unit."],
+  [11,"Complex Numbers","Modulus","|a + ib| = √(a² + b²)","Magnitude of a complex number."],
+  [11,"Complex Numbers","Conjugate product","(a + ib)(a − ib) = a² + b²","Product of conjugates."],
+  [11,"Trigonometry","Sine addition","sin(A + B) = sin A cos B + cos A sin B","Angle-sum identity."],
+  [11,"Trigonometry","Cosine addition","cos(A + B) = cos A cos B − sin A sin B","Angle-sum identity."],
+  [11,"Trigonometry","Double-angle sine","sin 2A = 2 sin A cos A","Double-angle identity."],
+  [11,"Trigonometry","Double-angle cosine","cos 2A = cos²A − sin²A","Also equals 1 − 2sin²A or 2cos²A − 1."],
+  [11,"Trigonometry","Half-angle identity","sin²(A/2) = (1 − cos A)/2","Useful for half-angle calculations."],
+  [11,"Matrices","2×2 determinant","det(A) = ad − bc","For A = [[a,b],[c,d]]."],
+  [11,"Matrices","2×2 inverse","A⁻¹ = 1/(ad−bc) [[d,−b],[−c,a]]","For ad − bc ≠ 0."],
+  [11,"Vectors","Vector magnitude","|a| = √(a₁² + a₂² + a₃²)","Magnitude of a 3D vector."],
+  [11,"Vectors","Dot product","a · b = |a||b|cos θ","Angle θ between the vectors."],
+  [11,"Vectors","Perpendicular vectors","a · b = 0","For non-zero perpendicular vectors."],
+  [11,"Calculus","Power derivative","d(xⁿ)/dx = nxⁿ⁻¹","Power rule for differentiation."],
+  [11,"Calculus","Derivative of sine","d(sin x)/dx = cos x","x is in radians."],
+  [11,"Calculus","Derivative of cosine","d(cos x)/dx = −sin x","x is in radians."],
+  [11,"Calculus","Derivative of exponential","d(eˣ)/dx = eˣ","Exponential function."],
+  [11,"Calculus","Power integral","∫xⁿ dx = xⁿ⁺¹/(n+1) + C","For n ≠ −1."],
+  [11,"Calculus","Integral of reciprocal","∫(1/x) dx = ln|x| + C","For x ≠ 0."],
+  [11,"Probability","Permutation","nPᵣ = n!/(n−r)!","Arrangements where order matters."],
+  [11,"Probability","Combination","nCᵣ = n!/[r!(n−r)!]","Selections where order does not matter."],
+  [11,"Probability","Conditional probability","P(A|B) = P(A ∩ B)/P(B)","For P(B) > 0."],
+  [11,"Probability","Variance","σ² = Σ(xᵢ − μ)²/N","Population variance; μ is population mean."],
+  [11,"Logarithms","Change of base","logₐx = log_bx/log_ba","For valid positive arguments and bases."],
+  [11,"Advanced","Binomial theorem","(a + b)ⁿ = Σ C(n,r)aⁿ⁻ʳbʳ","For non-negative integer n."],
+  [11,"Advanced","Euler's formula","eⁱˣ = cos x + i sin x","x is in radians."]
+];
+
+let activeCat="all";
+function renderFormulas(){
+  const lev=$("formulaClass").value,q=$("formulaSearch").value.toLowerCase();
+  const list=formulas.filter(f=>(lev==="all"||Number(lev)===11||(Number(lev)===1?f[0]===1:Number(lev)===6?f[0]<=6:f[0]<=9))&&(activeCat==="all"||f[1]===activeCat)&&f.join(" ").toLowerCase().includes(q));
+  $("formulaResults").replaceChildren();
+  if(!list.length){$("formulaResults").textContent="No matching formulas found.";return;}
+  list.forEach(f=>{
+    let c=document.createElement("div");c.className="formula";
+    [f[1].toUpperCase()+" • "+f[2],f[3],f[4]].forEach((v,i)=>{
+      let e=document.createElement("div");e.className=i===0?"formula-title":i===1?"equation":"explain";e.textContent=v;c.appendChild(e);
+    });
+    $("formulaResults").appendChild(c);
+  });
+}
+$("formulaClass").onchange=renderFormulas;$("formulaSearch").oninput=renderFormulas;
+$("formulaTabs").onclick=e=>{
+  let b=e.target.closest("[data-cat]");if(!b)return;activeCat=b.dataset.cat;
+  $("formulaTabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderFormulas();
+};
+
+/* Maths reference tables */
+function renderTable(kind){
+  let html="";
+  if(kind==="trig"){
+    let rows=[["0°","0","1","0","Undefined","1","Undefined"],["30°","1/2","√3/2","1/√3","2","2/√3","√3"],["45°","1/√2","1/√2","1","√2","√2","1"],["60°","√3/2","1/2","√3","2/√3","2","1/√3"],["90°","1","0","Undefined","1","Undefined","0"]];
+    html="<h2>📐 Six trigonometric ratios</h2><div class='tablewrap'><table><tr><th>Angle</th><th>sin</th><th>cos</th><th>tan</th><th>cosec</th><th>sec</th><th>cot</th></tr>"+rows.map(r=>"<tr>"+r.map(v=>"<td>"+v+"</td>").join("")+"</tr>").join("")+"</table></div><div class='note'>cosec θ=1/sin θ; sec θ=1/cos θ; cot θ=1/tan θ, wherever defined.</div>";
+  } else if(kind==="logs"){
+    html="<h2>📈 Common logarithms (base 10)</h2><div class='tablewrap'><table><tr><th>x</th><th>log₁₀x</th><th>x</th><th>log₁₀x</th></tr>";
+    for(let i=1;i<=10;i++)html+="<tr><td>"+i+"</td><td>"+Math.log10(i).toFixed(4)+"</td><td>"+(i+10)+"</td><td>"+Math.log10(i+10).toFixed(4)+"</td></tr>";
+    html+="</table></div>";
+  } else if(kind==="squares"){
+    html="<h2>Squares and cubes</h2><div class='tablewrap'><table><tr><th>n</th><th>n²</th><th>n³</th></tr>";
+    for(let i=1;i<=30;i++)html+="<tr><td>"+i+"</td><td>"+i*i+"</td><td>"+i*i*i+"</td></tr>";
+    html+="</table></div>";
+  } else {
+    html="<h2>Powers of 10</h2><div class='tablewrap'><table><tr><th>Power</th><th>Value</th></tr>";
+    [["10⁻³","0.001"],["10⁻²","0.01"],["10⁻¹","0.1"],["10⁰","1"],["10¹","10"],["10²","100"],["10³","1,000"],["10⁶","1,000,000"],["10⁹","1,000,000,000"]].forEach(r=>html+="<tr>"+r.map(v=>"<td>"+v+"</td>").join("")+"</tr>");
+    html+="</table></div>";
+  }
+  $("tableContent").innerHTML=html;
+}
+$("tableTabs").onclick=e=>{
+  let b=e.target.closest("[data-table]");if(!b)return;
+  $("tableTabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderTable(b.dataset.table);
+};
+
+/* Quiz engine */
+const COUNT=20;
+let difficulty=1,mode="practice",grade=7,questions=[],qi=0,score=0,right=0,streak=0,bestStreak=0,lives=3,answered=false,finished=false,seconds=20,hintShown=false,subject="math",activeChemModel=null;
+$("modeChoices").onclick=e=>{
+  let b=e.target.closest("[data-mode]");if(!b)return;mode=b.dataset.mode;
+  $("modeChoices").querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("selected",x===b));
+};
+$("difficultyChoices").onclick=e=>{
+  let b=e.target.closest("[data-diff]");if(!b)return;difficulty=Number(b.dataset.diff);
+  $("difficultyChoices").querySelectorAll("[data-diff]").forEach(x=>x.classList.toggle("selected",x===b));
+};
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=rand(0,i);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function makeQ(text,answer,hint){
+  answer=Number.isFinite(answer)?Number(answer.toFixed(2)):answer;
+  let opts=[String(answer)],tries=0;
+  while(opts.length<4&&tries++<100){
+    let step=Math.max(2,Math.ceil(Math.abs(Number(answer)||1)*.2));
+    let w=Number.isInteger(answer)?answer+rand(-step,step):Number((answer+rand(-step,step)/10).toFixed(2));
+    if(String(w)!==String(answer)&&!opts.includes(String(w)))opts.push(String(w));
+  }
+  while(opts.length<4)opts.push(String(answer+opts.length+7));
+  return {text,answer:String(answer),options:shuffle(opts),hint:hint||"Work step by step."};
+}
+
+function genQ(c, d) {
+  if (c <= 8) {
+    let a = rand(2, 10 + c * d * 2);
+    let b = rand(2, 10 + c * d * 2);
+    let t = rand(0, 7);
+
+    if (c <= 3) {
+      let x = rand(5, 20 + c * d * 3);
+      let y = rand(2, 15 + c * d * 2);
+      if (t === 0) return makeQ(x+" + "+y+" = ?", x+y, "Add the numbers.");
+      if (t === 1) return makeQ((x+y)+" − "+x+" = ?", y, "Use subtraction.");
+      if (t === 2) return makeQ(x+" × "+y+" = ?", x*y, "Multiply.");
+      if (t === 3) return makeQ((x*y)+" ÷ "+x+" = ?", y, "Use the inverse operation.");
+      if (t === 4) return makeQ("Double "+(x+y)+" = ?", 2*(x+y), "Multiply by 2.");
+      if (t === 5) return makeQ("Half of "+2*x+" = ?", x, "Divide by 2.");
+      if (t === 6) return makeQ(x+" + "+y+" + "+a+" = ?", x+y+a, "Add all three.");
+      return makeQ("What is "+x+" more than "+2*y+"?", x+2*y, "Add the quantities.");
+    }
+
+    if (c <= 5) {
+      if (t === 0) return makeQ(a+" × "+b+" = ?", a*b, "Multiply.");
+      if (t === 1) return makeQ((a*b)+" ÷ "+a+" = ?", b, "Use inverse operations.");
+      if (t === 2) return makeQ("Area of rectangle "+a+" cm × "+b+" cm?", a*b, "Area = length × breadth.");
+      if (t === 3) return makeQ("Perimeter of square side "+a+" cm?", 4*a, "Multiply the side by 4.");
+      if (t === 4) return makeQ("Find "+a*10+"% of "+b*10+".", a*b, "Use the percentage.");
+      if (t === 5) return makeQ("Simplify "+a+" + "+b+" × "+(d+2), a+b*(d+2), "Multiply before adding.");
+      if (t === 6) return makeQ("Find "+a+"² + "+b+".", a*a+b, "Square first.");
+      return makeQ("Find "+a+"/"+(a+b)+" of "+(a+b)+".", a, "Multiply the fraction by the whole.");
+    }
+
+    if (c <= 8) {
+      let x = rand(3, 12+c*d);
+      let y = rand(2, 12+c*d);
+      if (t === 0) return makeQ(x+"² + "+y+" = ?", x*x+y, "Square first.");
+      if (t === 1) return makeQ("Find "+10*d+"% of "+x*y*10+".", x*y*d, "Calculate the percentage.");
+      if (t === 2) return makeQ("Solve "+(d+2)+"x = "+((d+2)*x)+".", x, "Divide both sides.");
+      if (t === 3) return makeQ("Triangle area: base "+2*x+", height "+y+"?", x*y, "Use half × base × height.");
+      if (t === 4) return makeQ(x+" × "+y+" − "+x+" + "+d+" = ?", x*y-x+d, "Multiply first.");
+      if (t === 5) return makeQ("√"+(x*x)+" = ?", x, "Find the square root.");
+      if (t === 6) return makeQ("Solve x + "+x+" = "+2*x+".", x, "Solve the equation.");
+      return makeQ("Perimeter: length "+(x+y)+", breadth "+x+".", 2*(2*x+y), "Add length and breadth, then double.");
+    }
+  }
+
+  if (c <= 10) {
+    let a = rand(2, d===1 ? 6 : d===2 ? 12 : 20);
+    let b = rand(2, d===1 ? 8 : d===2 ? 15 : 25);
+    let x = rand(2, d===1 ? 8 : d===2 ? 15 : 25);
+    let t = rand(0, 7);
+
+    if (t === 0) {
+      let r = rand(2, 8+d*4);
+      return makeQ("If f(x) = x² − "+a+"x + "+b+", find f("+r+").", r*r-a*r+b, "Substitute the given value for every x.");
+    }
+    if (t === 1) {
+      let r = rand(2, 10+d*3);
+      return makeQ("Solve x² − "+(2*r)+"x + "+(r*r)+" = 0. Find x.", r, "Factor the quadratic; this equation has a repeated root.");
+    }
+    if (t === 2) {
+      let n = rand(3, 8+d*2);
+      return makeQ("An AP has first term "+a+" and common difference "+b+". Find term "+n+".", a+(n-1)*b, "Use the nth-term rule.");
+    }
+    if (t === 3) {
+      let r = rand(3, 12+d*3);
+      return makeQ("A right triangle has legs "+r+" and "+(r+1)+". Find the square of its hypotenuse.", r*r+(r+1)*(r+1), "Apply the Pythagorean theorem.");
+    }
+    if (t === 4) {
+      let r = rand(2, 10+d*2);
+      return makeQ("If tan θ = "+r+"/3, find 9 tan²θ.", r*r, "Square the ratio, then multiply by 9.");
+    }
+    if (t === 5) {
+      let r = rand(2, 10+d*2);
+      return makeQ("Find the distance between (0,0) and ("+r+", "+(r+1)+") squared.", r*r+(r+1)*(r+1), "The squared distance is x² + y² from the origin.");
+    }
+    if (t === 6) {
+      let r = rand(2, 8+d*3);
+      return makeQ("For x² − "+(r+3)+"x + "+(r*(r+3))+" = 0, find the sum of its roots.", r+3, "Use the relationship between roots and coefficients.");
+    }
+    let n = rand(3, 10+d*2);
+    return makeQ("A bag has "+n+" red and "+(n+2)+" blue balls. Find the total number of balls.", 2*n+2, "Add the numbers of both colours.");
+  }
+
+  let a = rand(2, d===1 ? 5 : d===2 ? 10 : 16);
+  let b = rand(2, d===1 ? 6 : d===2 ? 12 : 20);
+  let n = rand(3, d===1 ? 6 : d===2 ? 10 : 14);
+  let t = rand(0, 9);
+
+  if (t === 0) {
+    let r = rand(2, 6+d*3);
+    return makeQ("If f(x) = x³ − "+a+"x² + "+b+"x, find f'("+r+").", 3*r*r-2*a*r+b, "Differentiate each term before substituting x.");
+  }
+  if (t === 1) {
+    let r = rand(2, 8+d*2);
+    return makeQ("If f(x) = x³ + "+a+"x² − "+b+"x, find f''("+r+").", 6*r+2*a, "Differentiate twice, then substitute x.");
+  }
+  if (t === 2) {
+    return makeQ("Evaluate ∫₀ⁿ 2x dx, where n = "+n+".", n*n, "Find an antiderivative, then evaluate at both limits.");
+  }
+  if (t === 3) {
+    return makeQ("Find the determinant of [[ "+a+", "+b+" ], [ "+(a+1)+", "+(b+3)+" ]].", a*(b+3)-b*(a+1), "For a 2×2 matrix, multiply the main diagonal and subtract the other diagonal.");
+  }
+  if (t === 4) {
+    return makeQ("Find the dot product of vectors ("+a+", "+b+") and ("+b+", "+a+").", 2*a*b, "Multiply corresponding components and add them.");
+  }
+  if (t === 5) {
+    return makeQ("Find the coefficient of x² in (1 + x)^"+n+".", n*(n-1)/2, "Use the binomial coefficient for the x² term.");
+  }
+  if (t === 6) {
+    let r = rand(2, 5+d*2);
+    return makeQ("A GP starts at "+a+" with common ratio "+r+". Find its third term.", a*r*r, "Multiply the first term by the ratio squared.");
+  }
+  if (t === 7) {
+    return makeQ("How many ways can "+n+" distinct objects be arranged?", factorialSafe(n), "The number of permutations of n distinct objects is n factorial.");
+  }
+  if (t === 8) {
+    let r = rand(2, 8+d*2);
+    return makeQ("If z = "+a+" + "+r+"i, find |z|².", a*a+r*r, "The squared modulus is the sum of the squares of the real and imaginary parts.");
+  }
+  let r = rand(2, 10+d*3);
+  return makeQ("If y = x² − "+a+"x + "+b+", find dy/dx at x = "+r+".", 2*r-a, "Differentiate the polynomial and substitute the given x.");
+}
+
+function factorialSafe(n) {
+  let result = 1;
+  for (let i = 2; i <= n; i++) result *= i;
+  return result;
+}
+
+function bossQ(c, d) {
+  if (c <= 3) {
+    let a = rand(8, 30), b = rand(5, 20);
+    return makeQ("BOSS: (" + a + " + " + b + ") × 3 = ?", (a + b) * 3, "Add first.");
+  }
+  if (c <= 5) {
+    let a = rand(8, 20), b = rand(5, 16);
+    return makeQ("BOSS: rectangle " + a + " × " + b + ". Area?", a * b, "Length × breadth.");
+  }
+  if (c <= 8) {
+    let a = rand(5, 20);
+    return makeQ("BOSS: solve 3x + 7 = " + (3 * a + 7) + ".", a, "Subtract 7, then divide by 3.");
+  }
+  if (c <= 10) {
+    let a = rand(4, 8 + d * 3);
+    let b = rand(3, 8 + d * 2);
+    let x = rand(3, 8 + d * 2);
+    const t = rand(0, 4);
+    if (t === 0) return makeQ("BOSS: Solve x² − " + (2 * a) + "x + " + (a * a) + " = 0. Find x.", a, "Factor the quadratic.");
+    if (t === 1) return makeQ("BOSS: Find the sum of the first " + x + " terms of an AP with first term " + a + " and difference " + b + ".", x * (2 * a + (x - 1) * b) / 2, "Use the arithmetic-series sum formula.");
+    if (t === 2) return makeQ("BOSS: If sin θ = 3/5 and θ is acute, find 25 cos²θ.", 16, "Use the Pythagorean trigonometric identity.");
+    if (t === 3) return makeQ("BOSS: Find the distance between (" + a + ", " + b + ") and (" + a + ", " + (b + x) + ") squared.", x * x, "The x-coordinates are equal.");
+    return makeQ("BOSS: Find the discriminant of x² − " + (2 * a) + "x + " + (a * a - b) + " = 0.", 4 * b, "Calculate b² − 4ac carefully.");
+  }
+  let a = rand(3, 8 + d * 2);
+  let b = rand(2, 7 + d * 2);
+  let n = rand(4, 8 + d * 2);
+  const t = rand(0, 5);
+  if (t === 0) return makeQ("BOSS: If f(x) = x³ − " + a + "x² + " + b + "x, find f'(" + n + ").", 3 * n * n - 2 * a * n + b, "Differentiate first, then substitute x.");
+  if (t === 1) return makeQ("BOSS: Evaluate ∫₀ⁿ 3x² dx, where n = " + n + ".", n * n * n, "Find the antiderivative and apply both limits.");
+  if (t === 2) return makeQ("BOSS: Find the determinant of [[ " + a + ", " + b + " ], [ " + b + ", " + a + " ]].", a * a - b * b, "Multiply the main diagonal and subtract the other diagonal.");
+  if (t === 3) return makeQ("BOSS: Find the coefficient of x³ in (1 + x)^" + n + ".", n * (n - 1) * (n - 2) / 6, "Use the binomial coefficient for the x³ term.");
+  if (t === 4) return makeQ("BOSS: Find the dot product of (" + a + ", " + b + ") and (" + b + ", " + a + ").", 2 * a * b, "Multiply corresponding components and add.");
+  return makeQ("BOSS: How many ways can " + n + " distinct objects be arranged?", factorialSafe(n), "Use the factorial of the number of objects.");
+}
+
+function startMath() {
+  subject = "math";
+  activeChemModel = null;
+  grade = Number($("quizClass").value);
+
+  questions = Array.from(
+    { length: COUNT },
+    () => genQ(mode === "mixed" ? rand(1, 12) : grade, difficulty)
+  );
+
+  questions[COUNT - 1] = bossQ(mode === "mixed" ? rand(1, 12) : grade, difficulty);
+
+  beginGame(mode === "mixed" ? "Mixed Classes 1–12" : "Class " + grade);
+}
+
+$("beginQuiz").onclick = startMath;
+
+function beginGame(title){
+  qi=0;score=0;right=0;streak=0;bestStreak=0;lives=3;finished=false;
+  $("modeBadge").textContent=subject==="chem"?"🧪 Chemistry • Practice":({practice:"📘 Practice",timed:"⏱️ Timed",survival:"❤️ Survival",mixed:"🌪️ Mixed Master"}[mode]);
+  $("quizLevelLabel").textContent=title;go("quiz");renderQuestion();
+}
+function renderQuestion(){
+  stopTimer();answered=false;hintShown=false;
+  const q=questions[qi];
+  $("questionCard").classList.toggle("boss",subject==="math"&&qi===COUNT-1);
+  $("questionTag").textContent=subject==="math"&&qi===COUNT-1?"👑 FINAL BOSS":(subject==="chem"?"🧪 CHEMISTRY QUESTION ":"QUESTION ")+(qi+1);
+  $("questionText").textContent=q.text;$("questionHint").textContent="Choose the correct answer.";
+  $("questionCounter").textContent="Question "+(qi+1)+"/"+COUNT;
+  $("quizProgress").style.width=(qi/COUNT*100)+"%";
+  $("answerFeedback").textContent="";$("answerFeedback").className="feedback";
+  $("nextButton").disabled=true;$("nextButton").textContent=qi===COUNT-1?"Finish 🏆":"Next →";
+  $("answerGrid").replaceChildren();
+  q.options.forEach((v,i)=>{
+    let b=document.createElement("button");b.className="answer";b.textContent=["A. ","B. ","C. ","D. "][i]+v;
+    b.onclick=()=>checkAnswer(v,b);$("answerGrid").appendChild(b);
+  });
+  $("currentStreak").textContent=streak;
+  $("lifeBadge").textContent=mode==="survival"&&subject==="math"?"❤️".repeat(lives)+"🖤".repeat(3-lives):"✨ Keep going!";
+  if(mode==="timed"&&subject==="math"){$("quizTimer").classList.remove("hidden");seconds=15;tick();}
+  else $("quizTimer").classList.add("hidden");
+}
+function tick(){
+  if(answered||finished||mode!=="timed"||subject!=="math")return;
+  $("quizTimer").classList.toggle("danger",seconds<=5);
+  $("quizTimer").textContent=seconds<=5?"⚠️ "+seconds+" seconds left!":"⏱️ Time left: "+seconds+" seconds";
+  if(seconds<=0){checkAnswer(null,null);return;}
+  seconds--;timerId=setTimeout(tick,1000);
+}
+
+function burst(){
+  const symbols=["🎉"  , "🎊" , "🥳" ,  "🌷" ,  "💐"  ,  "💗"  , "💝" ,   "🎀"];
+  for(let i=0;i<22;i++){
+    const p=document.createElement("span");
+    p.className="celebration";
+    p.textContent=symbols[rand(0,symbols.length-1)];
+    p.style.left=rand(2,96)+"vw";
+    p.style.top=rand(35,85)+"vh";
+    p.style.fontSize=rand(18,31)+"px";
+    p.style.setProperty("--drift",rand(-90,90)+"px");
+    p.style.setProperty("--spin",rand(-180,180)+"deg");
+    document.body.appendChild(p);
+    p.addEventListener("animationend",()=>p.remove(),{once:true});
+  }
+}
+
+// --- STREAMLINED AUDIO & HAPTICS ENGINE ---
+const AppAudio = {
+  ctx: null,
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      this.ctx = new AudioCtx();
+    }
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  },
+  playTap() {
+    try {
+      this.init();
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      
+      const now = this.ctx.currentTime;
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
+      
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+      
+      osc.start(now);
+      osc.stop(now + 0.04);
+    } catch(e) {}
+  },
+  playCorrect() {
+    try {
+      this.init();
+      const now = this.ctx.currentTime;
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+        gain.gain.setValueAtTime(0.35, now + idx * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.18);
+        
+        osc.start(now + idx * 0.07);
+        osc.stop(now + idx * 0.07 + 0.18);
+      });
+    } catch(e) {}
+  },
+  playWrong() {
+    try {
+      this.init();
+      const now = this.ctx.currentTime;
+      [180, 130].forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+        gain.gain.setValueAtTime(0.3, now + idx * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.2);
+        
+        osc.start(now + idx * 0.1);
+        osc.stop(now + idx * 0.1 + 0.2);
+      });
+    } catch(e) {}
+  }
+};
+
+document.addEventListener("pointerdown", (e) => {
+  const interactive = e.target.closest("button, select, input, .navcard, .choice, .stage, .tab");
+  if (interactive) {
+    AppAudio.playTap();
+    if (navigator.vibrate) navigator.vibrate(15);
+  }
+});
+
+function checkAnswer(v,button){
+  if(answered||finished)return;
+  answered=true;stopTimer();
+  const q=questions[qi],ok=v!==null&&String(v)===String(q.answer);
+  
+  $("answerGrid").querySelectorAll("button").forEach(b=>{
+    b.disabled=true;
+    if(b.textContent.replace(/^[A-D]\.\s*/,"")===String(q.answer))b.classList.add("correct");
+  });
+
+  if(ok){
+    right++;streak++;bestStreak=Math.max(bestStreak,streak);
+    const pts=10+(subject==="math"?difficulty*3:2)+Math.min(15,(streak-1)*2);
+    score+=pts;
+    
+    AppAudio.playCorrect();
+    if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+    
+    if(button) button.classList.add("correct-anim");
+    
+    $("answerFeedback").textContent="✅ Correct! +"+pts+" XP";
+    $("answerFeedback").className="feedback good";
+    if(streak>=3&&streak%3===0){score+=5;$("answerFeedback").textContent="🌸 COMBO! +5 bonus XP";}
+    burst();
+  }else{
+    streak=0;
+    
+    AppAudio.playWrong();
+    if (navigator.vibrate) navigator.vibrate([70, 50, 70]);
+    
+    if(button) button.classList.add("wrong-anim");
+    $("questionCard").classList.add("shake-card");
+    setTimeout(() => $("questionCard").classList.remove("shake-card"), 400);
+
+    if(button)button.classList.add("wrong");
+    if(mode==="survival"&&subject==="math")lives--;
+    $("answerFeedback").textContent=v===null?"⏰ Time's up! Answer: "+q.answer:"❌ Correct answer: "+q.answer;
+    $("answerFeedback").className="feedback bad";
+  }
+  
+  $("currentStreak").textContent=streak;
+  $("lifeBadge").textContent=mode==="survival"&&subject==="math"?"❤️".repeat(lives)+"🖤".repeat(3-lives):"✨ Keep going!";
+  $("quizProgress").style.width=((qi+1)/COUNT*100)+"%";
+  $("nextButton").disabled=false;
+}
+
+$("hintButton").onclick=()=>{
+  if(!answered&&!hintShown){hintShown=true;$("questionHint").textContent="💡 Hint: "+questions[qi].hint;}
+};
+$("nextButton").onclick=()=>{
+  if(!answered)return;
+  if(qi===COUNT-1||(mode==="survival"&&lives<=0&&subject==="math"))finishQuiz();
+  else{qi++;renderQuestion();}
+};
+$("quitQuiz").onclick=()=>go(subject==="chem"?"chemistry":"home");
+function addBadge(k,a){if(!profile.badges.includes(k)){profile.badges.push(k);a.push(k);}}
+function finishQuiz(){
+  if(finished)return;finished=true;stopTimer();
+  const accuracy=Math.round(right/COUNT*100),coins=Math.floor(score/10),added=[];
+  profile.xp+=score;profile.coins+=coins;profile.games+=1;profile.correct+=right;
+  profile.bestStreak=Math.max(profile.bestStreak,bestStreak);profile.bestScore=Math.max(profile.bestScore,score);
+  save();renderProfile();
+  $("resultEmoji").textContent=accuracy>=80?"🏆":accuracy>=50?"🌟":"💪";
+  $("resultTitle").textContent=accuracy>=80?"Outstanding!":accuracy>=50?"Quest Complete!":"Keep Practising!";
+  $("resultXP").textContent="+"+score+" XP";
+  $("resultMessage").textContent=accuracy>=80?"Excellent work!":accuracy>=50?"Good effort. Practise again to improve.":"Every attempt is a chance to learn.";
+  $("resCorrect").textContent=right+"/"+COUNT;$("resAccuracy").textContent=accuracy+"%";
+  $("resCoins").textContent="+"+coins;$("resStreak").textContent=bestStreak;
+  $("newBadges").replaceChildren();
+  if(!added.length)$("newBadges").innerHTML='<span class="small">No new badges this time.</span>';
+  added.forEach(k=>{let b=document.createElement("span");b.className="badge";b.textContent=badgeNames[k];$("newBadges").appendChild(b);});
+  go("results");burst();
+}
+$("againButton").onclick=()=>subject==="chem"&&activeChemModel?startChemistryQuiz(activeChemModel):go("quizSetup");
+
+const models={
+dalton:{era:"Early atomic theory • 1803",title:"Dalton's Atomic Model",subtitle:"Atoms were represented as tiny solid spheres.",idea:"Dalton proposed that matter is made of atoms and treated them as indivisible particles.",points:["Matter consists of atoms.","Atoms of different elements were considered different.","Atoms combine in simple whole-number ratios.","Chemical reactions rearrange atoms.","Later discoveries showed atoms contain smaller particles."],hint:"Picture a tiny solid ball. This model has no electrons or nucleus.",qs:[
+  ["How did Dalton represent atoms?",["Solid spheres","Positive spheres with electrons","Nuclei with shells","Electron clouds"],0,"Think of a tiny solid ball."],
+  ["Who proposed the solid-sphere model?",["Bohr","Dalton","Thomson","Rutherford"],1,"His theory was proposed in the early 1800s."],
+  ["Compounds form in...",["Any fractional ratio","Simple whole-number ratios","Only groups of ten","Electron shells"],1,"Think of formulas such as H₂O."],
+  ["Which discovery showed atoms contain smaller particles?",["Electron discovery","Shadows","Gravity","Tides"],0,"J. J. Thomson discovered the electron."],
+  ["What did Dalton believe happens to atoms during a chemical reaction?",["They are created","They are destroyed","They are rearranged","They change into other elements"],2,"Atoms are neither created nor destroyed, only rearranged."],
+  ["According to Dalton, all atoms of a given element are...",["Identical in mass and properties","Different in size","Made of electrons","Negatively charged"],0,"Dalton stated atoms of the same element are identical."],
+  ["Dalton's atomic theory was introduced in which year?",["1803","1904","1911","1925"],0,"It was proposed in 1803."],
+  ["Did Dalton's model include a central nucleus?",["Yes, with protons","Yes, with neutrons","No, it had no nucleus","Only in heavy atoms"],2,"The nucleus was discovered much later by Rutherford."],
+  ["Which law does Dalton's theory help explain regarding chemical reactions?",["Law of Conservation of Mass","Law of Gravity","Law of Refraction","Law of Inertia"],0,"Mass is conserved because atoms are rearranged."],
+  ["Dalton described atoms as indivisible. Is this completely true today?",["Yes, completely","No, atoms can be split into subatomic particles","Yes, except in water","No, atoms are made of cells"],1,"Atoms consist of protons, neutrons, and electrons."],
+  ["What is the smallest unit of an element according to Dalton?",["Molecule","Atom","Electron","Proton"],1,"The atom is the fundamental unit."],
+  ["In Dalton's model, can an atom of iron turn into an atom of gold in a chemical reaction?",["Yes, easily","No, chemical reactions cannot transform elements","Only when heated","Yes, with electricity"],1,"Elements maintain their identity in chemical reactions."],
+  ["What feature of Dalton's model is depicted visually in Science Nexus?",["A solid sphere","A solar system","A cloud","A pudding"],0,"It is shown as a solid sphere."],
+  ["Which statement is a limitation of Dalton's model?",["It could not account for isotopes or subatomic particles","It predicted electrons","It used quantum mechanics","It explained spectral lines"],0,"Dalton didn't know about subatomic particles or isotopes."],
+  ["Dalton was a native scientist of which country?",["England","France","Germany","USA"],0,"John Dalton was an English chemist and physicist."],
+  ["What subatomic particle was first discovered after Dalton's death?",["Electron","Quark","Gluon","Positron"],0,"The electron was discovered in 1897."],
+  ["When two elements combine to form more than one compound, the mass ratios are simple whole numbers. This is the Law of...",["Multiple Proportions","Conservation of Energy","Definite Orbitals","Gravitation"],0,"Dalton formulated the Law of Multiple Proportions."],
+  ["Are subatomic charge clouds part of Dalton's original theory?",["Yes","No","Only for gases","Only for metals"],1,"Dalton knew nothing of charge clouds."],
+  ["Dalton's atomic symbols were represented by...",["Single letter codes","Geometric circles and diagrams","Numbers","Greek letters"],1,"He used circle diagrams with symbols inside."],
+  ["Why is Dalton's atomic theory still important today?",["It laid the foundation for modern chemistry","It is 100% accurate","It proved quantum mechanics","It discovered neutrons"],0,"It was the first scientific, quantitative atomic theory."]
+]},
+thomson:{era:"Plum-pudding model • 1904",title:"Thomson's Atomic Model",subtitle:"Electrons are embedded in spread-out positive charge.",idea:"Thomson proposed a positive sphere with negative electrons embedded throughout it, balancing the charge of a neutral atom.",points:["The model includes electrons.","Positive charge is spread through the sphere.","The atom is neutral overall.","There is no central nucleus in this model."],hint:"Imagine negative particles embedded in a positively charged sphere.",qs:[
+  ["Who proposed the plum-pudding model?",["Dalton","Thomson","Rutherford","Bohr"],1,"He is known for discovering the electron."],
+  ["Where was the positive charge in Thomson's model?",["Central nucleus","Spread through the sphere","Outside the atom","Only in electrons"],1,"This model had no central nucleus."],
+  ["What is the charge of an electron?",["Positive","Negative","Neutral","Zero always"],1,"An electron carries negative charge."],
+  ["Which particle did Thomson discover?",["Proton","Neutron","Electron","Nucleus"],2,"It is negatively charged."],
+  ["Thomson discovered the electron using which experimental setup?",["Gold-foil experiment","Cathode ray tube","Particle accelerator","Prism spectrometer"],1,"Cathode ray tubes demonstrated negatively charged rays."],
+  ["What dessert did Thomson compare his atomic model to?",["Apple pie","Plum pudding","Chocolate cake","Ice cream"],1,"The electrons were like raisins in plum pudding."],
+  ["In Thomson's model, the overall charge of the atom is...",["Positive","Negative","Neutral","Variable"],2,"Positive charge balanced the negative electrons."],
+  ["Did Thomson's model contain neutrons?",["Yes","No","Only in heavy elements","Yes, in pairs"],1,"Neutrons were discovered much later in 1932."],
+  ["What happens to cathode rays in an electric field?",["Deflected towards the positive plate","Deflected towards the negative plate","Unchanged","Reflected backwards"],0,"Negatively charged particles are attracted to the positive plate."],
+  ["Thomson's model was proposed in which year?",["1803","1904","1913","1926"],1,"It was introduced in 1904."],
+  ["Why was Thomson's model eventually replaced?",["It couldn't explain the gold-foil experiment results","Electrons were proven not to exist","Atoms were proven to be solid","It was too complicated"],0,"Rutherford's alpha scattering experiment disproved it."],
+  ["What is the mass ratio of an electron compared to a hydrogen atom?",["Equal","About 1/1836","Twice as heavy","Ten times heavier"],1,"Electrons are extremely light."],
+  ["Thomson received the Nobel Prize in Physics in 1906 for...",["Conduction of electricity in gases","Splitting the atom","Quantum mechanics","Radioactivity"],0,"His work on cathode rays and electricity in gases."],
+  ["In the plum-pudding model, electrons are assumed to be...",["Orbiting in circles","Embedded inside positive sphere","In the central nucleus","Floating in deep space"],1,"Embedded like plums or raisins."],
+  ["Did Thomson's model feature a central concentrated nucleus?",["Yes","No","Only for hydrogen","Only for helium"],1,"There was no nucleus in Thomson's model."],
+  ["Cathode rays consist of streams of...",["Protons","Neutrons","Electrons","Alpha particles"],2,"Cathode rays are streams of electrons."],
+  ["Which subatomic particle was known in 1904?",["Electron only","Proton and neutron","Quark","Boson"],0,"Only the electron had been discovered by 1904."],
+  ["The positive sphere in Thomson's model was believed to be...",["Extremely dense","Uniformly distributed mass and charge","Made of protons","Surrounding the atom"],1,"Charge and mass were thought to be spread out uniformly."],
+  ["Thomson's electron was originally called a...",["Corpuscle","Positron","Neutrino","Photon"],0,"Thomson called them corpuscles."],
+  ["What was the main accomplishment of Thomson's model?",["It proved atoms contain smaller subatomic particles","It explained energy shells","It measured neutron mass","It mapped orbitals"],0,"It established that atoms are divisible and contain electrons."]
+]},
+rutherford:{era:"Nuclear model • 1911",title:"Rutherford's Atomic Model",subtitle:"A tiny, dense, positively charged nucleus is at the centre.",idea:"The gold-foil experiment showed most alpha particles passed through, while a few were strongly deflected. Rutherford concluded atoms are mostly empty space.",points:["A small, dense, positive nucleus is at the centre.","Most of the atom is empty space.","Electrons are outside the nucleus.","The classical model did not fully explain atomic stability."],hint:"Most alpha particles passed through the gold foil; a few were strongly deflected.",qs:[
+  ["Which experiment supported Rutherford’s model?",["Gold-foil experiment","Pendulum","Mirror","Cathode ray"],0,"Alpha particles were directed at thin gold foil."],
+  ["Most of an atom is...",["Solid matter","Empty space","A proton","Positive pudding"],1,"Most alpha particles passed through."],
+  ["What lies at the centre of Rutherford's atom?",["An electron","A tiny positive nucleus","A large negative sphere","An empty shell only"],1,"It is small, dense and positively charged."],
+  ["Which particles were fired at the metal foil in Rutherford's experiment?",["Alpha particles","Sound waves","Water drops","Light bulbs"],0,"They are positively charged helium nuclei."],
+  ["Why were a few alpha particles deflected backwards?",["They hit the dense, positive nucleus","They hit electrons","They hit air molecules","They absorbed light"],0,"Like charges repel when coming near the dense positive nucleus."],
+  ["Rutherford's model was proposed in which year?",["1803","1904","1911","1935"],2,"It was proposed in 1911."],
+  ["What charge does the nucleus possess?",["Positive","Negative","Neutral","No charge"],0,"Protons give the nucleus a positive charge."],
+  ["Where are electrons located in Rutherford's model?",["Inside the nucleus","Orbiting outside the nucleus","Embedded in protons","In the neutron core"],1,"Electrons move around the outer space of the nucleus."],
+  ["Alpha particles have what charge?",["Positive (+2)","Negative (-1)","Neutral (0)","Variable"],0,"Alpha particles consist of two protons and two neutrons."],
+  ["What metal was used in Rutherford's famous scattering experiment?",["Gold","Copper","Iron","Lead"],0,"Gold foil can be made extremely thin."],
+  ["What fraction of alpha particles were deflected at very large angles?",["Nearly all","About 1 in 20,000","50%","None"],1,"Only a very tiny fraction bounced back."],
+  ["Rutherford compares the deflection of alpha particles to firing a shell at...",["Tissue paper","A steel plate","A brick wall","Water"],0,"He said it was like firing a 15-inch shell at tissue paper and having it bounce back."],
+  ["What main limitation did Rutherford's model face according to classical physics?",["Accelerating electrons should lose energy and collapse into the nucleus","It was too small","It had no protons","Gold was too expensive"],0,"Classical electrodynamics predicted planetary electrons would crash."],
+  ["Who conducted the gold-foil experiment alongside Rutherford?",["Geiger and Marsden","Thomson and Bohr","Dalton and Faraday","Einstein and Planck"],0,"Hans Geiger and Ernest Marsden executed the experiment."],
+  ["The nucleus contains almost all of the atom's...",["Volume","Mass","Negative charge","Electrons"],1,"Protons and neutrons hold nearly all the atomic mass."],
+  ["Ernest Rutherford is known as the father of...",["Nuclear Physics","Botany","Organic Chemistry","Computer Science"],0,"He pioneered nuclear physics."],
+  ["Compared to the total size of an atom, the nucleus is...",["Extremely small","Half the size","Larger than the atom","Equal in size"],0,"If an atom were a football stadium, the nucleus would be a marble."],
+  ["What subatomic particle was Rutherford credited with discovering/naming?",["Proton","Electron","Photon","Quark"],0,"He proved the existence of the hydrogen nucleus (proton)."],
+  ["Did Rutherford's original 1911 model include neutrons?",["Yes","No","Only for gold","Yes, inside electrons"],1,"Neutrons were proposed later and confirmed in 1932."],
+  ["What screen was used to detect deflected alpha particles?",["Zinc sulfide screen","Glass lens","Digital camera","Copper plate"],0,"Zinc sulfide flashes light (scintillations) when hit by alpha particles."]
+]},
+bohr:{era:"Quantised energy levels • 1913",title:"Bohr's Atomic Model",subtitle:"Electrons occupy specific allowed energy levels.",idea:"Bohr proposed that electrons occupy particular energy levels. Electrons absorb energy to move higher and emit energy when moving lower.",points:["Electrons occupy allowed energy levels or shells.","Absorbing energy can move an electron higher.","Emitting energy can move it lower.","The model explains hydrogen's spectrum well.","It is limited for complex atoms."],hint:"Picture electrons moving around the nucleus on shells in this simplified model.",qs:[
+  ["Who proposed the quantised shell model?",["Dalton","Thomson","Bohr","Chadwick"],2,"His model was published in 1913."],
+  ["When an electron absorbs energy, it...",["Moves to a higher energy level","Becomes a proton","Loses its charge","Falls into the nucleus"],0,"Absorbed energy raises the electron to an excited state."],
+  ["Which element's line spectrum is best explained by Bohr's model?",["Hydrogen","Uranium","Iron","Gold"],0,"Hydrogen has a single electron."],
+  ["What is emitted when an electron jumps from a higher orbit to a lower orbit?",["A photon (light)","A proton","A neutron","An alpha particle"],0,"Energy difference is released as electromagnetic radiation."],
+  ["What letter designates the first (innermost) electron shell?",["K","A","X","L"],0,"Shells are labeled K, L, M, N..."],
+  ["What is the maximum number of electrons in the K shell (n=1)?",["2","8","18","32"],0,"Formula 2n² gives 2(1)² = 2."],
+  ["What is the maximum number of electrons in the L shell (n=2)?",["8","2","18","32"],0,"Formula 2n² gives 2(2)² = 8."],
+  ["In Bohr's model, electron orbits have quantised...",["Angular momentum","Mass","Temperature","Color"],0,"Angular momentum is restricted to integer multiples of h/2π."],
+  ["What is the state of an electron in its lowest allowed energy level?",["Ground state","Excited state","Ionised state","Plasma state"],0,"The ground state is the lowest energy level."],
+  ["Bohr's model was introduced in which year?",["1803","1904","1913","1932"],2,"Niels Bohr published it in 1913."],
+  ["What happens if an electron absorbs energy equal to or greater than its binding energy?",["It leaves the atom (ionisation)","It becomes a neutron","It stops moving","It shrinks"],0,"The atom becomes an ion."],
+  ["Bohr modified whose model by applying quantum theory?",["Rutherford's model","Dalton's model","Thomson's model","Modern wave model"],0,"He added quantised orbits to Rutherford's nuclear atom."],
+  ["Why is Bohr's model insufficient for multi-electron atoms?",["It cannot account for electron-electron repulsions accurately","It denies electrons exist","It requires gold foil","It predicts negative protons"],0,"Complex inter-electron interactions require quantum mechanics."],
+  ["Niels Bohr was a physicist from which country?",["Denmark","USA","Germany","UK"],0,"Bohr was Danish."],
+  ["The energy of an electron in a Bohr orbit is...",["Negative and fixed (quantised)","Positive and infinite","Random","Zero"],0,"Energy levels are negative and discrete."],
+  ["What spectral series of hydrogen falls in the visible light region?",["Balmer series","Lyman series","Paschen series","Brackett series"],0,"Balmer series transitions land on n=2."],
+  ["What parameter determines the radius of a Bohr orbit?",["Principal quantum number (n)","Atomic weight","Number of neutrons","Temperature"],0,"Radius increases with n²."],
+  ["Energy absorption causes an electron transition from...",["Lower to higher shell","Higher to lower shell","Nucleus to electron","Outside to nucleus"],0,"Moving outward requires energy absorption."],
+  ["What constant links photon frequency to energy difference (ΔE = hf)?",["Planck's constant","Avogadro's number","Gas constant","Boltzmann constant"],0,"Planck's constant h."],
+  ["Which shell has the lowest energy level in an atom?",["K shell (n=1)","L shell (n=2)","M shell (n=3)","N shell (n=4)"],0,"The shell closest to the nucleus has the lowest energy."]
+]},
+quantum:{era:"Modern quantum mechanics • 1920s onward",title:"Modern Quantum Mechanical Model",subtitle:"Electrons are described by orbitals and probability clouds.",idea:"The modern model uses quantum mechanics. An orbital describes a probability distribution, not a fixed planet-like path.",points:["Electrons have wave-like and particle-like properties.","Orbitals describe where an electron is likely to be found.","Electron energies are quantised.","It describes complex atoms more accurately than the simple Bohr model."],hint:"An electron cloud shows likely locations, not a definite circular orbit.",qs:[
+  ["What does an atomic orbital describe?",["Electron probability distribution","Fixed planet path","Proton route","Neutron charge"],0,"It describes where an electron is likely to be found."],
+  ["Which principle states you cannot simultaneously know an electron's exact position and momentum?",["Heisenberg Uncertainty Principle","Pauli Exclusion Principle","Aufbau Principle","Hund's Rule"],0,"Heisenberg formulated this uncertainty principle."],
+  ["Which scientist formulated the wave equation for electron orbitals?",["Erwin Schrödinger","Albert Einstein","Isaac Newton","James Chadwick"],0,"Schrödinger developed the wave equation in 1926."],
+  ["What shape is an 's' orbital?",["Spherical","Dumbbell","Double dumbbell","Complex ring"],0,"An s orbital has a spherical shape."],
+  ["What shape is a 'p' orbital?",["Dumbbell","Spherical","Cube","Flat plane"],0,"A p orbital is dumbbell-shaped."],
+  ["How many electrons can occupy a single orbital at most?",["2","6","10","14"],0,"Pauli Exclusion Principle limits each orbital to 2 electrons with opposite spins."],
+  ["The wave-particle duality of electrons was proposed by...",["Louis de Broglie","John Dalton","J.J. Thomson","Robert Millikan"],0,"De Broglie proposed matter waves."],
+  ["How many p orbitals exist in a p subshell?",["3","1","5","7"],0,"There are three degenerate p orbitals (px, py, pz)."],
+  ["How many total electrons can a full 'd' subshell hold?",["10","2","6","14"],0,"There are 5 d orbitals, holding up to 10 electrons."],
+  ["The region of zero probability of finding an electron is called a...",["Node","Peak","Nucleus","Orbit"],0,"Nodes have zero electron probability density."],
+  ["Which quantum number determines the main energy level of an electron?",["Principal quantum number (n)","Azimuthal quantum number (l)","Magnetic quantum number (m)","Spin quantum number (s)"],0,"n defines the principal energy shell."],
+  ["Which quantum number indicates electron spin orientation?",["Spin quantum number (s)","Principal quantum number (n)","Magnetic quantum number (m)","Azimuthal quantum number (l)"],0,"Spin can be +1/2 or -1/2."],
+  ["According to Pauli Exclusion Principle, two electrons in the same orbital must have...",["Opposite spins","Same spin","Different charges","Zero energy"],0,"They must have opposite spin states."],
+  ["Hund's rule states that electrons fill degenerate orbitals...",["Singly before pairing up","In pairs first","Randomly","From highest to lowest energy"],0,"Electrons occupy separate orbitals before pairing."],
+  ["The modern quantum model replaces fixed Bohr circular orbits with...",["3D orbitals (probability clouds)","Solid rings","Rectangular boxes","Static paths"],0,"Orbitals represent 3D probability clouds."],
+  ["What is the maximum capacity of an 'f' subshell?",["14 electrons","6 electrons","10 electrons","2 electrons"],0,"An f subshell has 7 orbitals, holding up to 14 electrons."],
+  ["The Aufbau Principle states that electrons fill orbitals...",["In order of increasing energy","In order of decreasing energy","By charge","Randomly"],0,"Aufbau means 'building up' from lowest to highest energy."],
+  ["Light and electrons exhibiting both wave and particle traits is called...",["Wave-particle duality","Quantum leap","Nuclear fission","Refraction"],0,"Matter and light possess wave-particle duality."],
+  ["Who discovered the neutron in 1932?",["James Chadwick","Ernest Rutherford","Niels Bohr","J.J. Thomson"],0,"Chadwick identified the neutral neutron."],
+  ["In electron configuration notation, what does the superscript in 1s² represent?",["Number of electrons in that orbital","Energy level","Nuclear charge","Spin state"],0,"The superscript shows 2 electrons in the 1s orbital."]
+]}
+};
+
+const elements=[
+["Hydrogen","H",1,1,[1]],["Helium","He",2,4,[2]],["Lithium","Li",3,7,[2,1]],["Beryllium","Be",4,9,[2,2]],["Boron","B",5,11,[2,3]],["Carbon","C",6,12,[2,4]],["Nitrogen","N",7,14,[2,5]],["Oxygen","O",8,16,[2,6]],["Fluorine","F",9,19,[2,7]],["Neon","Ne",10,20,[2,8]],["Sodium","Na",11,23,[2,8,1]],["Magnesium","Mg",12,24,[2,8,2]],["Aluminium","Al",13,27,[2,8,3]],["Silicon","Si",14,28,[2,8,4]],["Phosphorus","P",15,31,[2,8,5]],["Sulfur","S",16,32,[2,8,6]],["Chlorine","Cl",17,35,[2,8,7]],["Argon","Ar",18,40,[2,8,8]],["Potassium","K",19,39,[2,8,8,1]],["Calcium","Ca",20,40,[2,8,8,2]]
+];
+function drawNucleus(stage,pcount=6,ncount=6){
+  const nuc=document.createElement("div");nuc.className="nucleus";
+  const total=pcount+ncount,size=total>30?5:total>20?6:total>12?7:9;
+  for(let i=0;i<total;i++){
+    const p=document.createElement("span");p.className="nucleon "+(i%2===0?"proton":"neutron");
+    p.style.width=size+"px";p.style.maxWidth=size+"px";nuc.appendChild(p);
+  }
+  stage.appendChild(nuc);return nuc;
+}
+function drawAtom(target,el){
+  target.replaceChildren();
+  const stage=document.createElement("div");stage.className="atom-stage";
+  drawNucleus(stage,el[2],el[3]-el[2]);
+  el[4].forEach((count,i)=>{
+    const d=27+i*18,shell=document.createElement("div");shell.className="atom-shell";
+    shell.style.width=d+"%";shell.style.height=d+"%";
+    const track=document.createElement("div");track.style.position="absolute";track.style.inset="0";track.style.borderRadius="50%";
+    track.style.animation="shellSpin "+(5+i*2)+"s linear infinite";
+    for(let j=0;j<count;j++){
+      const e=document.createElement("span");e.className="electron";
+      const a=2*Math.PI*j/count-Math.PI/2;
+      e.style.left=(50+50*Math.cos(a))+"%";e.style.top=(50+50*Math.sin(a))+"%";track.appendChild(e);
+    }
+    shell.appendChild(track);stage.appendChild(shell);
+  });
+  target.appendChild(stage);
+}
+const animStyle=document.createElement("style");
+animStyle.textContent="@keyframes shellSpin{to{transform:rotate(360deg)}}";
+document.head.appendChild(animStyle);
+
+function drawRutherford(stage) {
+  const canvas = document.createElement("canvas");
+  canvas.style.display = "block";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.style.position = "absolute";
+  canvas.style.inset = "0";
+  canvas.setAttribute("aria-label", "Animated Rutherford atomic model with four elliptical orbits");
+  stage.appendChild(canvas);
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const orbits = [
+    { angle: 0,             e1Offset: 0,              e2Offset: Math.PI },
+    { angle: Math.PI / 4,   e1Offset: Math.PI / 3,    e2Offset: Math.PI / 3 + Math.PI },
+    { angle: Math.PI / 2,   e1Offset: Math.PI / 1.5,  e2Offset: Math.PI / 1.5 + Math.PI },
+    { angle: -Math.PI / 4,  e1Offset: Math.PI / 2,    e2Offset: Math.PI / 2 + Math.PI }
+  ];
+
+  let animationAngle = 0;
+  const speed = 0.015;
+  let lastWidth = 0, lastHeight = 0, lastDpr = 0;
+
+  function animate() {
+    if (!canvas.isConnected) return;
+    const width = canvas.clientWidth, height = canvas.clientHeight;
+    if (!width || !height) { requestAnimationFrame(animate); return; }
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (width !== lastWidth || height !== lastHeight || dpr !== lastDpr) {
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      lastWidth = width; lastHeight = height; lastDpr = dpr;
+    }
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const centerX = width / 2, centerY = height / 2;
+    const scale = Math.min(width, height) * 0.38;
+    const rx = scale, ry = scale * 0.32;
+
+    animationAngle += speed;
+
+    orbits.forEach(orbit => {
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(orbit.angle);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = "rgba(147, 197, 253, 0.9)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    const nucleusRadius = scale * 0.16;
+    const outerGlow = ctx.createRadialGradient(centerX, centerY, nucleusRadius * 0.5, centerX, centerY, nucleusRadius * 1.5);
+    outerGlow.addColorStop(0, "rgba(235, 60, 0, 0.4)");
+    outerGlow.addColorStop(1, "rgba(235, 60, 0, 0)");
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, nucleusRadius * 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = outerGlow;
+    ctx.fill();
+
+    const nucleusGrad = ctx.createRadialGradient(centerX - nucleusRadius * 0.35, centerY - nucleusRadius * 0.35, nucleusRadius * 0.1, centerX, centerY, nucleusRadius);
+    nucleusGrad.addColorStop(0, "#ff9900");
+    nucleusGrad.addColorStop(0.5, "#ea3800");
+    nucleusGrad.addColorStop(1, "#990000");
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, nucleusRadius, 0, Math.PI * 2);
+    ctx.fillStyle = nucleusGrad;
+    ctx.fill();
+
+    const electronRadius = Math.max(3, scale * 0.055);
+    orbits.forEach(orbit => {
+      [orbit.e1Offset, orbit.e2Offset].forEach(offset => {
+        const t = animationAngle + offset;
+        const localX = rx * Math.cos(t), localY = ry * Math.sin(t);
+        const cosA = Math.cos(orbit.angle), sinA = Math.sin(orbit.angle);
+        const x = centerX + localX * cosA - localY * sinA;
+        const y = centerY + localX * sinA + localY * cosA;
+
+        const electronGrad = ctx.createRadialGradient(x - electronRadius * 0.3, y - electronRadius * 0.3, electronRadius * 0.1, x, y, electronRadius);
+        electronGrad.addColorStop(0, "#e0ffff");
+        electronGrad.addColorStop(0.6, "#67f5ff");
+        electronGrad.addColorStop(1, "#00839e");
+
+        ctx.beginPath();
+        ctx.arc(x, y, electronRadius, 0, Math.PI * 2);
+        ctx.fillStyle = electronGrad;
+        ctx.fill();
+      });
+    });
+
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+function drawModel(kind){
+  const target=$("atomModelVisual");target.replaceChildren();
+  if(kind==="dalton"){
+    const ball=document.createElement("div");ball.className="solid-atom";target.appendChild(ball);return;
+  }
+  if(kind==="thomson"){
+    const sphere=document.createElement("div");sphere.className="plum";
+    for(let i=0;i<12;i++){
+      const e=document.createElement("span");e.className="plum-electron";
+      const a=2*Math.PI*i/12;e.style.left=(50+40*Math.cos(a))+"%";e.style.top=(50+40*Math.sin(a))+"%";
+      sphere.appendChild(e);
+    }
+    target.appendChild(sphere);return;
+  }
+  const stage=document.createElement("div");stage.className="atom-stage";
+  if(kind==="rutherford"){drawRutherford(stage);target.appendChild(stage);return;}
+  if (kind === "bohr") {
+    const canvas = document.createElement("canvas");
+    canvas.style.display = "block"; canvas.style.width = "100%"; canvas.style.height = "100%"; canvas.style.position = "absolute"; canvas.style.inset = "0";
+    canvas.setAttribute("aria-label", "Animated Bohr atomic model with K, L, M and N shells");
+    stage.appendChild(canvas);
+    
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    
+    const shells = [
+      { name: "K", n: 1, maxElectrons: 2, radiusFactor: 0.25, speed: 0.015 },
+      { name: "L", n: 2, maxElectrons: 8, radiusFactor: 0.45, speed: -0.01 },
+      { name: "M", n: 3, maxElectrons: 18, radiusFactor: 0.65, speed: 0.007 },
+      { name: "N", n: 4, maxElectrons: 32, radiusFactor: 0.85, speed: -0.004 }
+    ];
+    
+    const angles = [0, 0, 0, 0];
+    let lastWidth = 0, lastHeight = 0, lastDpr = 0;
+    
+    function animateBohr() {
+      if (!canvas.isConnected) return;
+      const width = canvas.clientWidth, height = canvas.clientHeight;
+      if (!width || !height) { requestAnimationFrame(animateBohr); return; }
+      
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (width !== lastWidth || height !== lastHeight || dpr !== lastDpr) {
+        canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+        lastWidth = width; lastHeight = height; lastDpr = dpr;
+      }
+      
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+      
+      const centerX = width / 2, centerY = height / 2;
+      const scale = Math.min(width, height) * 0.42;
+      
+      shells.forEach(shell => {
+        const r = scale * shell.radiusFactor;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
+        ctx.strokeStyle = "#d0d5dd"; ctx.lineWidth = 1.5; ctx.stroke();
+        
+        ctx.fillStyle = "#dbeafe";
+        ctx.font = "bold 10px system-ui, Arial, sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+        const labelY = Math.max(13, centerY - r - 5);
+        ctx.fillText(`${shell.name} Shell (n=${shell.n}, max: ${shell.maxElectrons})`, centerX, labelY);
+      });
+      
+      const nucleusRadius = scale * 0.14;
+      const glow = ctx.createRadialGradient(centerX, centerY, nucleusRadius * 0.4, centerX, centerY, nucleusRadius * 1.6);
+      glow.addColorStop(0, "rgba(235,60,0,0.3)"); glow.addColorStop(1, "rgba(235,60,0,0)");
+      ctx.beginPath(); ctx.arc(centerX, centerY, nucleusRadius * 1.6, 0, Math.PI * 2); ctx.fillStyle = glow; ctx.fill();
+      
+      const nucleusGrad = ctx.createRadialGradient(centerX - nucleusRadius * 0.35, centerY - nucleusRadius * 0.35, nucleusRadius * 0.1, centerX, centerY, nucleusRadius);
+      nucleusGrad.addColorStop(0, "#ff9900"); nucleusGrad.addColorStop(0.5, "#ea3800"); nucleusGrad.addColorStop(1, "#990000");
+      ctx.beginPath(); ctx.arc(centerX, centerY, nucleusRadius, 0, Math.PI * 2); ctx.fillStyle = nucleusGrad; ctx.fill();
+      
+      ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 3; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(centerX - 7, centerY); ctx.lineTo(centerX + 7, centerY);
+      ctx.moveTo(centerX, centerY - 7); ctx.lineTo(centerX, centerY + 7); ctx.stroke();
+      
+      ctx.fillStyle = "#ffffff"; ctx.font = "bold 11px system-ui, Arial, sans-serif"; ctx.textAlign = "center";
+      ctx.fillText("Nucleus", centerX, centerY + nucleusRadius + 15);
+      
+      shells.forEach((shell, index) => {
+        const r = scale * shell.radiusFactor;
+        angles[index] += shell.speed;
+        const electronCount = Math.min(shell.maxElectrons, shell.n === 4 ? 16 : shell.maxElectrons);
+        const electronRadius = Math.max(3, scale * 0.025);
+        
+        for (let i = 0; i < electronCount; i++) {
+          const theta = angles[index] + i * 2 * Math.PI / electronCount;
+          const ex = centerX + r * Math.cos(theta), ey = centerY + r * Math.sin(theta);
+          const electronGrad = ctx.createRadialGradient(ex - electronRadius * 0.3, ey - electronRadius * 0.3, electronRadius * 0.1, ex, ey, electronRadius);
+          electronGrad.addColorStop(0, "#e0ffff"); 
+          electronGrad.addColorStop(0.6, "#67f5ff"); 
+          electronGrad.addColorStop(1, "#00839e");
+
+          ctx.beginPath(); ctx.arc(ex, ey, electronRadius, 0, Math.PI * 2); ctx.fillStyle = electronGrad; ctx.fill();
+        }
+      });
+      
+      requestAnimationFrame(animateBohr);
+    }
+    requestAnimationFrame(animateBohr);
+    target.appendChild(stage);
+    return;
+  }
+  
+  if(kind==="quantum"){
+    const canvas=document.createElement("canvas");
+    canvas.style.display="block"; canvas.style.width="100%"; canvas.style.height="100%"; canvas.style.position="absolute"; canvas.style.inset="0";
+    canvas.setAttribute("aria-label", "Animated quantum mechanical model with electron probability cloud");
+    stage.appendChild(canvas);
+
+    const ctx=canvas.getContext("2d");
+    if(!ctx)return;
+
+    let width=0,height=0,scale=0;
+    let lastWidth=0,lastHeight=0,lastDpr=0;
+
+    function resize(){
+      width=canvas.clientWidth; height=canvas.clientHeight;
+      if(!width||!height)return;
+      const dpr=Math.min(window.devicePixelRatio||1,2);
+      if(width!==lastWidth||height!==lastHeight||dpr!==lastDpr){
+        canvas.width=Math.round(width*dpr); canvas.height=Math.round(height*dpr);
+        lastWidth=width; lastHeight=height; lastDpr=dpr;
+      }
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      scale=Math.min(width,height)*0.4;
+    }
+
+    const particles=[];
+    for(let i=0;i<450;i++){
+      particles.push({
+        baseR:(Math.random()*0.7+Math.random()*0.3)*Math.min(stage.clientWidth||300,stage.clientHeight||300)*0.4,
+        theta:Math.random()*Math.PI*2,
+        phi:Math.acos(Math.random()*2-1),
+        speed:(Math.random()-0.5)*0.02,
+        size:Math.random()*2.2+0.8,
+        alpha:Math.random()*0.7+0.2
+      });
+    }
+
+    let time=0;
+    function animateQuantum(){
+      if(!canvas.isConnected)return;
+      resize();
+      if(!width||!height){ requestAnimationFrame(animateQuantum); return; }
+      ctx.clearRect(0,0,width,height);
+
+      const centerX=width/2, centerY=height/2;
+      time+=0.012;
+
+      for(let r=scale*0.85;r>scale*0.2;r-=scale*0.12){
+        const alphaFactor=(1-r/(scale*0.9))*0.15;
+        const pulseR=r+Math.sin(time*2+r)*6;
+        const cloudGradient=ctx.createRadialGradient(centerX,centerY,pulseR*0.2,centerX,centerY,pulseR);
+        cloudGradient.addColorStop(0,"rgba(167,139,250,0)");
+        cloudGradient.addColorStop(0.7,`rgba(96,165,250,${alphaFactor})`);
+        cloudGradient.addColorStop(1,"rgba(59,130,246,0)");
+        ctx.beginPath(); ctx.arc(centerX,centerY,pulseR,0,Math.PI*2); ctx.fillStyle=cloudGradient; ctx.fill();
+      }
+
+      particles.forEach(p=>{
+        p.theta+=p.speed;
+        const currentR=p.baseR*(1+0.08*Math.sin(time*3+p.theta));
+        const x=centerX+currentR*Math.cos(p.theta)*Math.cos(p.phi);
+        const y=centerY+currentR*Math.sin(p.theta)*Math.sin(p.phi)*0.85;
+
+        ctx.beginPath(); ctx.arc(x,y,p.size,0,Math.PI*2);
+        const distRatio=currentR/Math.max(scale,1);
+        const red=Math.floor(100+155*distRatio);
+        const green=Math.floor(200+55*(1-distRatio));
+        const alpha=p.alpha*(0.6+0.4*Math.sin(time+p.theta));
+        ctx.fillStyle=`rgba(${red},${green},255,${alpha})`;
+        ctx.fill();
+      });
+
+      const nucleusRadius=scale*0.15;
+      const outerGlow=ctx.createRadialGradient(centerX,centerY,nucleusRadius*0.2,centerX,centerY,nucleusRadius*2.2);
+      outerGlow.addColorStop(0,"rgba(244,63,94,0.5)"); outerGlow.addColorStop(0.5,"rgba(168,85,247,0.2)"); outerGlow.addColorStop(1,"rgba(0,0,0,0)");
+      ctx.beginPath(); ctx.arc(centerX,centerY,nucleusRadius*2.2,0,Math.PI*2); ctx.fillStyle=outerGlow; ctx.fill();
+
+      const nucleusGrad=ctx.createRadialGradient(centerX-nucleusRadius*0.35,centerY-nucleusRadius*0.35,nucleusRadius*0.05,centerX,centerY,nucleusRadius);
+      nucleusGrad.addColorStop(0,"#fbcfe8"); nucleusGrad.addColorStop(0.4,"#f43f5e"); nucleusGrad.addColorStop(1,"#881337");
+      ctx.beginPath(); ctx.arc(centerX,centerY,nucleusRadius,0,Math.PI*2); ctx.fillStyle=nucleusGrad; ctx.fill();
+
+      ctx.fillStyle="rgba(255,255,255,0.35)";
+      for(let i=0;i<7;i++){
+        const angle=i/7*Math.PI*2+time*0.5;
+        const dist=nucleusRadius*0.45;
+        ctx.beginPath(); ctx.arc(centerX+Math.cos(angle)*dist, centerY+Math.sin(angle)*dist, nucleusRadius*0.22, 0, Math.PI*2); ctx.fill();
+      }
+
+      requestAnimationFrame(animateQuantum);
+    }
+    requestAnimationFrame(animateQuantum);
+    target.appendChild(stage);
+    return;
+  }
+}
+
+function openModel(kind){
+  const m=models[kind];if(!m)return;activeChemModel=kind;
+  $("atomEra").textContent=m.era;$("atomTitle").textContent=m.title;$("atomSubtitle").textContent=m.subtitle;
+  $("atomIdea").textContent=m.idea;$("atomHint").textContent="💡 Hint: "+m.hint;$("atomPoints").replaceChildren();
+  m.points.forEach(t=>{const li=document.createElement("li");li.textContent=t;$("atomPoints").appendChild(li);});
+  drawModel(kind);$("atomQuizButton").onclick=()=>startChemistryQuiz(kind);go("atomModel");
+}
+document.querySelectorAll("[data-atommodel]").forEach(b=>b.onclick=()=>openModel(b.dataset.atommodel));
+elements.forEach(el=>{const o=document.createElement("option");o.value=el[1];o.textContent=el[0]+" ("+el[1]+")";$("atomElementSelect").appendChild(o);});
+function showElement(){
+  const el=elements.find(e=>e[1]===$("atomElementSelect").value)||elements[0];
+  drawAtom($("elementAtomVisual"),el);
+  $("elementAtomicNumber").textContent=el[2];$("elementMassNumber").textContent=el[3];$("elementNeutrons").textContent=el[3]-el[2];
+  $("elementConfiguration").textContent=el[4].map((n,i)=>["K","L","M","N"][i]+": "+n).join(" • ");
+  $("elementDescription").textContent=el[0]+" has "+el[2]+" protons, "+(el[3]-el[2])+" neutrons in the isotope shown, and "+el[2]+" electrons when neutral.";
+}
+$("atomElementSelect").onchange=showElement;
+function startChemistryQuiz(kind){
+  const m=models[kind];if(!m)return;
+  subject="chem";activeChemModel=kind;mode="practice";
+  const modelQs = shuffle(m.qs.slice());
+  questions = modelQs.map(q => ({
+    text: q[0],
+    options: shuffle(q[1].slice()),
+    answer: q[1][q[2]],
+    hint: q[3]
+  }));
+  beginGame(m.title);
+}
+renderProfile();renderFormulas();renderTable("trig");showElement();
+
+const feedbackForm = document.getElementById("feedbackForm");
+feedbackForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const type = document.getElementById("feedbackType").value;
+  const message = document.getElementById("feedbackMessage").value.trim();
+
+  if (!message) {
+    toast("Please write your feedback first.");
+    return;
+  }
+
+  const nickname = document.getElementById("playerName").value.trim() || "Anonymous player";
+  const text = "Science Nexus Feedback\n\nPlayer: " + nickname + "\nType: " + type + "\n\nMessage:\n" + message;
+  const whatsappNumber = "918168109125";
+  const whatsappURL = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(text);
+
+  window.open(whatsappURL, "_blank");
+});
+
+/* --- PERIODIC TABLE SCRIPT INTEGRATION --- */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+function playPeriodicAudio(type) {
+  try {
+    if (!audioCtx) audioCtx = new AudioCtx();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    const now = audioCtx.currentTime;
+    
+    if (type === 'hover') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, now);
+      osc.frequency.exponentialRampToValueAtTime(1040, now + 0.05);
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+      osc.start(now);
+      osc.stop(now + 0.05);
+    } else if (type === 'select') {
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(440, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+      gain.gain.setValueAtTime(0.35, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(659.25, now);
+      osc2.frequency.exponentialRampToValueAtTime(1318.5, now + 0.15);
+      gain2.gain.setValueAtTime(0.25, now);
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+
+      osc.start(now); osc2.start(now);
+      osc.stop(now + 0.15); osc2.stop(now + 0.15);
+    }
+  } catch(e) {}
+}
+
+const ptableRawData = [
+  [1,"H","Hydrogen",1.008,"nonmetal",1,1], [2,"He","Helium",4.0026,"noble",18,1],
+  [3,"Li","Lithium",6.94,"alkali",1,2], [4,"Be","Beryllium",9.0122,"alkaline",2,2],
+  [5,"B","Boron",10.81,"metalloid",13,2], [6,"C","Carbon",12.011,"nonmetal",14,2],
+  [7,"N","Nitrogen",14.007,"nonmetal",15,2], [8,"O","Oxygen",15.999,"nonmetal",16,2],
+  [9,"F","Fluorine",18.998,"halogen",17,2], [10,"Ne","Neon",20.180,"noble",18,2],
+  [11,"Na","Sodium",22.990,"alkali",1,3], [12,"Mg","Magnesium",24.305,"alkaline",2,3],
+  [13,"Al","Aluminium",26.982,"post",13,3], [14,"Si","Silicon",28.085,"metalloid",14,3],
+  [15,"P","Phosphorus",30.974,"nonmetal",15,3], [16,"S","Sulfur",32.06,"nonmetal",16,3],
+  [17,"Cl","Chlorine",35.45,"halogen",17,3], [18,"Ar","Argon",39.948,"noble",18,3],
+  [19,"K","Potassium",39.098,"alkali",1,4], [20,"Ca","Calcium",40.078,"alkaline",2,4],
+  [21,"Sc","Scandium",44.956,"transition",3,4], [22,"Ti","Titanium",47.867,"transition",4,4],
+  [23,"V","Vanadium",50.942,"transition",5,4], [24,"Cr","Chromium",51.996,"transition",6,4],
+  [25,"Mn","Manganese",54.938,"transition",7,4], [26,"Fe","Iron",55.845,"transition",8,4],
+  [27,"Co","Cobalt",58.933,"transition",9,4], [28,"Ni","Nickel",58.693,"transition",10,4],
+  [29,"Cu","Copper",63.546,"transition",11,4], [30,"Zn","Zinc",65.38,"transition",12,4],
+  [31,"Ga","Gallium",69.723,"post",13,4], [32,"Ge","Germanium",72.630,"metalloid",14,4],
+  [33,"As","Arsenic",74.922,"metalloid",15,4], [34,"Se","Selenium",78.971,"nonmetal",16,4],
+  [35,"Br","Bromine",79.904,"halogen",17,4], [36,"Kr","Krypton",83.798,"noble",18,4],
+  [37,"Rb","Rubidium",85.468,"alkali",1,5], [38,"Sr","Strontium",87.62,"alkaline",2,5],
+  [39,"Y","Yttrium",88.906,"transition",3,5], [40,"Zr","Zirconium",91.224,"transition",4,5],
+  [41,"Nb","Niobium",92.906,"transition",5,5], [42,"Mo","Molybdenum",95.95,"transition",6,5],
+  [43,"Tc","Technetium",98,"transition",7,5], [44,"Ru","Ruthenium",101.07,"transition",8,5],
+  [45,"Rh","Rhodium",102.906,"transition",9,5], [46,"Pd","Palladium",106.42,"transition",10,5],
+  [47,"Ag","Silver",107.868,"transition",11,5], [48,"Cd","Cadmium",112.414,"transition",12,5],
+  [49,"In","Indium",114.818,"post",13,5], [50,"Sn","Tin",118.710,"post",14,5],
+  [51,"Sb","Antimony",121.760,"metalloid",15,5], [52,"Te","Tellurium",127.60,"metalloid",16,5],
+  [53,"I","Iodine",126.904,"halogen",17,5], [54,"Xe","Xenon",131.293,"noble",18,5],
+  [55,"Cs","Caesium",132.905,"alkali",1,6], [56,"Ba","Barium",137.327,"alkaline",2,6],
+  [57,"La","Lanthanum",138.905,"lanth",3,6], [58,"Ce","Cerium",140.116,"lanth",null,6],
+  [59,"Pr","Praseodymium",140.908,"lanth",null,6], [60,"Nd","Neodymium",144.242,"lanth",null,6],
+  [61,"Pm","Promethium",145,"lanth",null,6], [62,"Sm","Samarium",150.36,"lanth",null,6],
+  [63,"Eu","Europium",151.964,"lanth",null,6], [64,"Gd","Gadolinium",157.25,"lanth",null,6],
+  [65,"Tb","Terbium",158.925,"lanth",null,6], [66,"Dy","Dysprosium",162.500,"lanth",null,6],
+  [67,"Ho","Holmium",164.930,"lanth",null,6], [68,"Er","Erbium",167.259,"lanth",null,6],
+  [69,"Tm","Thulium",168.934,"lanth",null,6], [70,"Yb","Ytterbium",173.045,"lanth",null,6],
+  [71,"Lu","Lutetium",174.967,"lanth",null,6], [72,"Hf","Hafnium",178.49,"transition",4,6],
+  [73,"Ta","Tantalum",180.948,"transition",5,6], [74,"W","Tungsten",183.84,"transition",6,6],
+  [75,"Re","Rhenium",186.207,"transition",7,6], [76,"Os","Osmium",190.23,"transition",8,6],
+  [77,"Ir","Iridium",192.217,"transition",9,6], [78,"Pt","Platinum",195.084,"transition",10,6],
+  [79,"Au","Gold",196.967,"transition",11,6], [80,"Hg","Mercury",200.592,"transition",12,6],
+  [81,"Tl","Thallium",204.38,"post",13,6], [82,"Pb","Lead",207.2,"post",14,6],
+  [83,"Bi","Bismuth",208.980,"post",15,6], [84,"Po","Polonium",209,"post",16,6],
+  [85,"At","Astatine",210,"halogen",17,6], [86,"Rn","Radon",222,"noble",18,6],
+  [87,"Fr","Francium",223,"alkali",1,7], [88,"Ra","Radium",226,"alkaline",2,7],
+  [89,"Ac","Actinium",227,"act",3,7], [90,"Th","Thorium",232.038,"act",null,7],
+  [91,"Pa","Protactinium",231.036,"act",null,7], [92,"U","Uranium",238.029,"act",null,7],
+  [93,"Np","Neptunium",237,"act",null,7], [94,"Pu","Plutonium",244,"act",null,7],
+  [95,"Am","Americium",243,"act",null,7], [96,"Cm","Curium",247,"act",null,7],
+  [97,"Bk","Berkelium",247,"act",null,7], [98,"Cf","Californium",251,"act",null,7],
+  [99,"Es","Einsteinium",252,"act",null,7], [100,"Fm","Fermium",257,"act",null,7],
+  [101,"Md","Mendelevium",258,"act",null,7], [102,"No","Nobelium",259,"act",null,7],
+  [103,"Lr","Lawrencium",266,"act",null,7], [104,"Rf","Rutherfordium",267,"transition",4,7],
+  [105,"Db","Dubnium",268,"transition",5,7], [106,"Sg","Seaborgium",269,"transition",6,7],
+  [107,"Bh","Bohrium",270,"transition",7,7], [108,"Hs","Hassium",269,"transition",8,7],
+  [109,"Mt","Meitnerium",278,"unknown",9,7], [110,"Ds","Darmstadtium",281,"unknown",10,7],
+  [111,"Rg","Roentgenium",282,"unknown",11,7], [112,"Cn","Copernicium",285,"transition",12,7],
+  [113,"Nh","Nihonium",286,"unknown",13,7], [114,"Fl","Flerovium",289,"unknown",14,7],
+  [115,"Mc","Moscovium",290,"unknown",15,7], [116,"Lv","Livermorium",293,"unknown",16,7],
+  [117,"Ts","Tennessine",294,"unknown",17,7], [118,"Og","Oganesson",294,"unknown",18,7]
+];
+
+const ptableCategoryNames = {
+  alkali: "Alkali metal", alkaline: "Alkaline earth metal", transition: "Transition metal",
+  post: "Post-transition metal", metalloid: "Metalloid", nonmetal: "Reactive nonmetal",
+  halogen: "Halogen", noble: "Noble gas", lanth: "Lanthanide", act: "Actinide", unknown: "Properties not fully established"
+};
+
+const ptableCategoryGlows = {
+  alkali: "rgba(225, 29, 72, 0.6)", alkaline: "rgba(234, 88, 12, 0.6)", transition: "rgba(37, 99, 235, 0.6)",
+  post: "rgba(2, 132, 199, 0.6)", metalloid: "rgba(101, 163, 13, 0.6)", nonmetal: "rgba(5, 150, 105, 0.6)",
+  halogen: "rgba(124, 58, 237, 0.6)", noble: "rgba(192, 38, 211, 0.6)", lanth: "rgba(217, 119, 6, 0.6)",
+  act: "rgba(220, 38, 38, 0.6)", unknown: "rgba(71, 85, 105, 0.6)"
+};
+
+const ptableElementsList = ptableRawData.map(a => ({
+  number: a[0], symbol: a[1], name: a[2], mass: a[3], category: a[4], group: a[5], period: a[6]
+}));
+
+let ptableBuiltFlag = false;
+
+function buildPeriodicTableUI() {
+  if (ptableBuiltFlag) return;
+  ptableBuiltFlag = true;
+
+  const main = $("ptableGrid");
+  const lan = $("ptableLanthanides");
+  const act = $("ptableActinides");
+  if (!main) return;
+
+  ptableElementsList.forEach((el, idx) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "ptable-cell " + el.category;
+    b.dataset.atomic = el.number;
+    b.style.animationDelay = `${(idx % 18) * 0.025}s`;
+    b.setAttribute("aria-label", `${el.number} ${el.name}, ${el.symbol}`);
+
+    b.innerHTML = `
+      <span class="num">${el.number}</span>
+      <span class="sym">${el.symbol}</span>
+      <span class="ename">${el.name}</span>
+      <span class="mass">${el.mass}</span>
+    `;
+
+    b.addEventListener("mouseenter", () => playPeriodicAudio('hover'));
+    b.addEventListener("click", () => {
+      playPeriodicAudio('select');
+      selectPeriodicElement(el.number);
+    });
+
+    if (el.number >= 58 && el.number <= 71) lan.appendChild(b);
+    else if (el.number >= 90 && el.number <= 103) act.appendChild(b);
+    else {
+      b.style.gridColumn = el.group;
+      b.style.gridRow = el.period;
+      main.appendChild(b);
+    }
+  });
+}
+
+function filterPeriodicTable() {
+  const q = ($("ptableSearch").value || "").trim().toLowerCase();
+  const selectedCat = $("ptableCategoryFilter") ? $("ptableCategoryFilter").value : "all";
+  let shown = 0;
+
+  document.querySelectorAll("#ptableGrid .ptable-cell, #ptableLanthanides .ptable-cell, #ptableActinides .ptable-cell").forEach(b => {
+    const el = ptableElementsList[Number(b.dataset.atomic) - 1];
+    
+    const matchQ = !q || el.name.toLowerCase().includes(q) || el.symbol.toLowerCase().includes(q) || String(el.number) === q;
+    const matchCat = (selectedCat === "all" || el.category === selectedCat);
+
+    if (matchQ && matchCat) { 
+      b.classList.remove("dimmed"); 
+      shown++; 
+    } else { 
+      b.classList.add("dimmed"); 
+    }
+  });
+
+  $("ptableCountText").textContent = `Showing ${shown} of 118 elements`;
+}
+
+const ptableSearchInput = $("ptableSearch");
+if (ptableSearchInput) {
+  ptableSearchInput.addEventListener("input", filterPeriodicTable);
+}
+
+const ptableCategoryFilterInput = $("ptableCategoryFilter");
+if (ptableCategoryFilterInput) {
+  ptableCategoryFilterInput.addEventListener("change", () => {
+    playPeriodicAudio('select');
+    filterPeriodicTable();
+  });
+}
+
+const ptableOrbitalsList = [
+  [1,"s",2],[2,"s",2],[2,"p",6],[3,"s",2],
+  [3,"p",6],[4,"s",2],[3,"d",10],[4,"p",6],
+  [5,"s",2],[4,"d",10],[5,"p",6],[6,"s",2],
+  [4,"f",14],[5,"d",10],[6,"p",6],[7,"s",2],
+  [5,"f",14],[6,"d",10],[7,"p",6]
+];
+
+function getPeriodicElectronConfig(n) {
+  let left = n;
+  let parts = [];
+  for (const [shell, subshell, cap] of ptableOrbitalsList) {
+    if (left <= 0) break;
+    const take = Math.min(left, cap);
+    parts.push(`${shell}${subshell}<sup>${take}</sup>`);
+    left -= take;
+  }
+  return parts.join(" ");
+}
+
+function getPeriodicShellArray(n) {
+  const counts = [0,0,0,0,0,0,0];
+  let left = n;
+  const orbitals = [
+    [1,2],[2,2],[2,6],[3,2],[3,6],
+    [4,2],[3,10],[4,6],[5,2],[4,10],
+    [5,6],[6,2],[4,14],[5,10],[6,6],
+    [7,2],[5,14],[6,10],[7,6]
+  ];
+  orbitals.forEach(([shell, cap]) => {
+    const take = Math.min(left, cap);
+    counts[shell-1] += take;
+    left -= take;
+  });
+  return counts.filter(v => v > 0);
+}
+
+function selectPeriodicElement(number) {
+  const el = ptableElementsList[number-1];
+  if (!el) return;
+
+  document.querySelectorAll(".ptable-cell.selected").forEach(x => x.classList.remove("selected"));
+  const chosen = document.querySelector(`.ptable-cell[data-atomic="${number}"]`);
+  if (chosen) {
+    chosen.classList.add("selected");
+    chosen.style.setProperty('--glow-color', ptableCategoryGlows[el.category] || "rgba(255,255,255,0.6)");
+  }
+
+  const mass = Number.isInteger(el.mass) ? el.mass : el.mass.toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
+  const shellArray = getPeriodicShellArray(el.number);
+  const maxShellCap = [2, 8, 18, 32, 32, 18, 8];
+  
+  const shellBarsHtml = shellArray.map((count, i) => {
+    const pct = Math.round((count / (maxShellCap[i] || 32)) * 100);
+    return `<div class="shell-bar" style="width: ${pct}%;" title="Shell ${i+1}: ${count} electrons"></div>`;
+  }).join('');
+
+  $("ptableDetail").innerHTML = `
+    <div class="ptable-detail-card">
+      <div class="ptable-detail-top">
+        <div class="ptable-big-symbol ${el.category}">${el.symbol}</div>
+        <div>
+          <h2>${el.name}</h2>
+          <div class="ptable-name">${ptableCategoryNames[el.category]}</div>
+          <div class="small">Element ${el.number} • Standard Properties</div>
+        </div>
+      </div>
+
+      <div class="ptable-facts">
+        <div class="ptable-fact"><strong>${el.number}</strong><span>Atomic number</span></div>
+        <div class="ptable-fact"><strong>${mass}</strong><span>Atomic mass (u)</span></div>
+        <div class="ptable-fact"><strong>${el.group || "—"}</strong><span>Group</span></div>
+        <div class="ptable-fact"><strong>${el.period}</strong><span>Period</span></div>
+        <div class="ptable-fact"><strong>${ptableCategoryNames[el.category]}</strong><span>Category</span></div>
+        <div class="ptable-fact">
+          <strong>${shellArray.join(" • ")}</strong><span>Electrons per shell</span>
+          <div class="shell-bars">${shellBarsHtml}</div>
+        </div>
+      </div>
+
+      <div class="ptable-config">
+        <b>Electron configuration (simplified Aufbau sequence)</b>
+        <span>${getPeriodicElectronConfig(el.number)}</span>
+      </div>
+    </div>
+  `;
+}
+
+document.addEventListener("click", (e) => {
+  const item = e.target.closest("#ptableLegend span");
+  if (!item) return;
+  const cat = item.dataset.cat;
+  if (cat) {
+    playPeriodicAudio('select');
+    const filterSelect = $("ptableCategoryFilter");
+    if (filterSelect) {
+      filterSelect.value = (filterSelect.value === cat) ? "all" : cat;
+      filterPeriodicTable();
+    }
+  }
+});
+
+document.querySelectorAll('[data-go]').forEach(btn => {
+  if (btn.getAttribute('data-go') === 'periodicTableScreen') {
+    btn.addEventListener('click', () => {
+      setTimeout(buildPeriodicTableUI, 50);
+    });
+  }
+});
+</script>
+</body>
+</html>
