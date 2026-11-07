@@ -32,7 +32,6 @@ body {
   letter-spacing: 0.15px;
 }
 
-
 button, input, select { 
   font: inherit; 
 }
@@ -101,110 +100,101 @@ header {
   animation: enter .3s; 
 }
 
-#quiz .panel {
-  background: linear-gradient(135deg, rgba(15, 20, 43, 0.55), rgba(24, 31, 61, 0.65)),
-              url('https://images.unsplash.com/photo-1507668677129-56e32842fceb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-}
-/* Base multi-color glassmorphic cards - Zero White Color */
-.model-card, .option-card, .card {
+/* --- BASE CARD STYLES --- */
+.navcard, .model-card {
   border-radius: 18px;
   backdrop-filter: blur(12px);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
   padding: 16px;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(167, 139, 250, 0.4);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.model-card:hover, .option-card:hover, .card:hover {
-  transform: translateY(-6px) scale(1.03);
+.navcard:hover, .model-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(167, 139, 250, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(167, 139, 250, 0.25);
 }
 
-/* 1. Dalton Model - Neon Emerald */
-.model-card:nth-child(1) {
-  background: linear-gradient(135deg, rgba(6, 78, 59, 0.9), rgba(15, 23, 42, 0.95));
+/* Text readable over vibrant images */
+.navcard .bigicon, .navcard strong, .navcard small,
+.model-card h3, .model-card h4, .model-card p, .model-card span, .model-card div {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+/* --- 1. EXPLORE SCIENCE NEXUS: 8 NAVIGATION CARDS (Thin Color Gradient) --- */
+.navcard[data-go="help"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(96, 165, 250, 0.35)),
+              url('https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="quizSetup"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(167, 139, 250, 0.35)),
+              url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="library"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(74, 222, 128, 0.35)),
+              url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="tables"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(250, 204, 21, 0.35)),
+              url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="chemistry"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(251, 113, 133, 0.35)),
+              url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="atomExplorer"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(74, 222, 128, 0.35)),
+              url('https://upload.wikimedia.org/wikipedia/commons/e/e2/Cadena_de_ADN.jpg') center/cover no-repeat !important;
+}
+
+.navcard[data-go="periodicTableScreen"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(167, 139, 250, 0.35)),
+              url('https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+.navcard[data-go="universeScreen"] {
+  background: linear-gradient(135deg, rgba(15, 20, 43, 0.45), rgba(96, 165, 250, 0.35)),
+              url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80') center/cover no-repeat !important;
+}
+
+/* --- 2. CHEMISTRY LAB: 5 ATOMIC MODEL CARDS (Accurate Model Photos) --- */
+.navcard[data-atommodel="dalton"] {
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
   border: 2px solid #10b981;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-}
-.model-card:nth-child(1):hover {
-  border-color: #34d399;
-  box-shadow: 0 0 30px rgba(52, 211, 153, 0.7);
-}
-.model-card:nth-child(1) h3, .model-card:nth-child(1) h4, .model-card:nth-child(1) span {
-  color: #34d399;
-  text-shadow: 0 0 10px rgba(52, 211, 153, 0.6);
-}
-.model-card:nth-child(1) p, .model-card:nth-child(1) div {
-  color: #a7f3d0;
 }
 
-/* 2. Thomson Model - Vivid Gold & Amber */
-.model-card:nth-child(2) {
-  background: linear-gradient(135deg, rgba(120, 53, 15, 0.9), rgba(15, 23, 42, 0.95));
+.navcard[data-atommodel="thomson"] {
+  background: linear-gradient(135deg, rgba(120, 53, 15, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
   border: 2px solid #f59e0b;
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
-}
-.model-card:nth-child(2):hover {
-  border-color: #fbbf24;
-  box-shadow: 0 0 30px rgba(251, 191, 36, 0.7);
-}
-.model-card:nth-child(2) h3, .model-card:nth-child(2) h4, .model-card:nth-child(2) span {
-  color: #fbbf24;
-  text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
-}
-.model-card:nth-child(2) p, .model-card:nth-child(2) div {
-  color: #fef08a;
 }
 
-/* 3. Rutherford Model - Electric Cyan */
-.model-card:nth-child(3) {
-  background: linear-gradient(135deg, rgba(12, 74, 110, 0.9), rgba(15, 23, 42, 0.95));
+.navcard[data-atommodel="rutherford"] {
+  background: linear-gradient(135deg, rgba(12, 74, 110, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
   border: 2px solid #06b6d4;
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
-}
-.model-card:nth-child(3):hover {
-  border-color: #38bdf8;
-  box-shadow: 0 0 30px rgba(56, 189, 248, 0.7);
-}
-.model-card:nth-child(3) h3, .model-card:nth-child(3) h4, .model-card:nth-child(3) span {
-  color: #38bdf8;
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
-}
-.model-card:nth-child(3) p, .model-card:nth-child(3) div {
-  color: #a5f3fc;
 }
 
-/* 4. Bohr Model - Deep Purple & Violet */
-.model-card:nth-child(4) {
-  background: linear-gradient(135deg, rgba(88, 28, 135, 0.9), rgba(15, 23, 42, 0.95));
+.navcard[data-atommodel="bohr"] {
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
   border: 2px solid #a855f7;
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-}
-.model-card:nth-child(4):hover {
-  border-color: #c084fc;
-  box-shadow: 0 0 30px rgba(192, 132, 252, 0.7);
-}
-.model-card:nth-child(4) h3, .model-card:nth-child(4) h4, .model-card:nth-child(4) span {
-  color: #c084fc;
-  text-shadow: 0 0 10px rgba(192, 132, 252, 0.6);
-}
-.model-card:nth-child(4) p, .model-card:nth-child(4) div {
-  color: #e9d5ff;
 }
 
-/* 5. Quantum Model - Bright Magenta & Hot Pink */
-.model-card:nth-child(5) {
-  background: linear-gradient(135deg, rgba(131, 24, 67, 0.9), rgba(15, 23, 42, 0.95));
+.navcard[data-atommodel="quantum"] {
+  background: linear-gradient(135deg, rgba(131, 24, 67, 0.75), rgba(15, 23, 42, 0.85)),
+              url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80') center/cover no-repeat !important;
   border: 2px solid #ec4899;
-  box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
-}
-.model-card:nth-child(5):hover {
-  border-color: #f472b6;
-  box-shadow: 0 0 30px rgba(244, 114, 182, 0.7);
-}
-.model-card:nth-child(5) h3, .model-card:nth-child(5) h4, .model-card:nth-child(5) span {
-  color: #f472b6;
-  text-shadow: 0 0 10px rgba(244, 114, 182, 0.6);
-}
-.model-card:nth-child(5) p, .model-card:nth-child(5) div {
-  color: #fbcfe8;
 }
 
 .panel {
@@ -226,12 +216,6 @@ header {
 #tables .panel {
   background: linear-gradient(135deg, rgba(15, 20, 43, 0.55), rgba(24, 31, 61, 0.65)),
     url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-}
-
-
-#help .panel {
-  background: linear-gradient(135deg, rgba(15, 20, 43, 0.55), rgba(24, 31, 61, 0.65)),
-              url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
 }
 
 .hero { 
@@ -364,55 +348,6 @@ label {
   min-height: 115px;
   animation: cardFloat 4.5s ease-in-out infinite;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-/* Navcard Background Images */
-/* 1. Math Help Centre */
-.navcard[data-go="help"] {
-  background: linear-gradient(135deg, rgba(24, 31, 61, 0.75), rgba(96, 165, 250, 0.55)),
-              url('https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-}
-
-/* 2. Quiz Arena */
-.navcard[data-go="quizSetup"] {
-  background: linear-gradient(135deg, rgba(24, 31, 61, 0.75), rgba(167, 139, 250, 0.55)),
-              url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-}
-
-/* 3. Formula Library (Alternative Photo) */
-.navcard[data-go="library"] {
-  background: linear-gradient(135deg, rgba(24, 31, 61, 0.75), rgba(74, 222, 128, 0.5)),
-              url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-}
-
-/* 4. Math Tables */
-.navcard[data-go="tables"] {
-  background: linear-gradient(135deg, rgba(24, 31, 61, 0.75), rgba(250, 204, 21, 0.5)),
-              url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-}
-
-/* 5. Chemistry Lab */
-.navcard[data-go="chemistry"] {
-  background: linear-gradient(135deg, rgba(24, 31, 61, 0.75), rgba(251, 113, 133, 0.55)),
-              url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-}
-
-/* 6. First 20 Elements */
-.navcard[data-go="atomExplorer"] {
-  background: linear-gradient(135deg, rgba(24, 31, 61, 0.75), rgba(74, 222, 128, 0.5)),
-              url('https://upload.wikimedia.org/wikipedia/commons/e/e2/Cadena_de_ADN.jpg') center/cover no-repeat;
-}
-
-/* 7. Periodic Table */
-.navcard[data-go="periodicTableScreen"] {
-  background: linear-gradient(135deg, rgba(24, 31, 61, 0.75), rgba(167, 139, 250, 0.55)),
-              url('https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-}
-
-/* 8. Cosmic Universe */
-.navcard[data-go="universeScreen"] {
-  background: linear-gradient(135deg, rgba(24, 31, 61, 0.75), rgba(96, 165, 250, 0.55)),
-              url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
 }
 
 /* Staggered Floating Animation Delays */
@@ -552,20 +487,6 @@ td { background: #ffffff06; }
 .plum { width: min(65vw, 240px); aspect-ratio: 1; position: relative; border-radius: 50%; margin: auto; border: 2px solid #facc15; background: #facc1520; }
 .plum-electron { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #67f5ff; box-shadow: 0 0 10px #67f5ff; }
 
-.rutherford-orbit { position: absolute; left: 50%; top: 50%; border: 1.5px solid rgba(147, 197, 253, .85); border-radius: 50%; pointer-events: none; box-shadow: 0 0 8px #60a5fa18; }
-.rutherford-electron { position: absolute; width: 11px; height: 11px; border-radius: 50%; background: #67f5ff; box-shadow: 0 0 9px #67f5ff, 0 0 18px #38bdf8; transform: translate(-50%, -50%); pointer-events: none; }
-
-.bohr-shell { position: absolute; left: 50%; top: 50%; border: 1.5px solid #93c5fd99; border-radius: 50%; transform: translate(-50%, -50%); }
-.bohr-electron { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #67f5ff; box-shadow: 0 0 10px #67f5ff; transform: translate(-50%, -50%); }
-.bohr-label { position: absolute; font-size: 10px; color: #c4b5fd; font-weight: 800; pointer-events: none; }
-
-.quantum-cloud {
-  position: absolute; left: 50%; top: 50%; width: 90%; height: 90%; transform: translate(-50%, -50%);
-  border-radius: 50%; background: radial-gradient(ellipse, rgba(221, 214, 254, .95), rgba(167, 139, 250, .65) 20%, rgba(96, 165, 250, .35) 45%, transparent 72%);
-  filter: blur(2px); animation: cloudpulse 3s ease-in-out infinite alternate;
-}
-.cloud-speck { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #c4f7ff; box-shadow: 0 0 8px #67e8f9; animation: twinkle 1.8s ease-in-out infinite alternate; }
-
 /* Celebrations */
 .celebration {
   position: fixed; z-index: 1000; pointer-events: none; left: 0; top: 0;
@@ -595,8 +516,6 @@ td { background: #ffffff06; }
 
 @keyframes enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes float { 50% { transform: translateY(-5px); } }
-@keyframes cloudpulse { from { scale: .92; opacity: .75; } to { scale: 1.05; opacity: 1; } }
-@keyframes twinkle { from { opacity: .25; scale: .7; } to { opacity: 1; scale: 1.4; } }
 @keyframes timerBlink { to { visibility: hidden; } }
 @keyframes cardFloat {
   0%, 100% { transform: translateY(0px); }
@@ -839,7 +758,6 @@ td { background: #ffffff06; }
 }
 
 </style>
-
 </head>
 <body>
 <div class="app">
@@ -983,7 +901,6 @@ td { background: #ffffff06; }
     *Electron configurations follow a simplified Aufbau filling model. Atomic masses reflect standard IUPAC values.
   </div>
 </section>
-
 
 <section id="help" class="screen">
   <button class="secondary" data-go="home">← Dashboard</button>
@@ -1828,7 +1745,7 @@ let profile;
 try { profile={...fresh(),...(JSON.parse(localStorage.getItem(PROFILE_KEY))||{})}; }
 catch(e) { profile=fresh(); }
 const badgeNames={first:"🌟 First Quest",perfect:"💯 Perfect Game",streak:"🔥 5 Streak",ten:"🎮 10 Games",scholar:"🧠 100 Correct",marathon:"🏆 20 Questions"};
-let timerId=null, toastId=null, rafIds=[];
+let timerId=null, toastId=null;
 function stopTimer(){if(timerId){clearTimeout(timerId);timerId=null;}}
 function go(id){
   stopTimer();
@@ -2286,7 +2203,7 @@ function burst(){
   }
 }
 
-// --- ENHANCED AUDIO, VOLUME & HAPTICS ENGINE ---
+// --- STREAMLINED AUDIO & HAPTICS ENGINE ---
 const AppAudio = {
   ctx: null,
   init() {
@@ -2308,34 +2225,14 @@ const AppAudio = {
       
       const now = this.ctx.currentTime;
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(420, now);
-      osc.frequency.exponentialRampToValueAtTime(150, now + 0.06);
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
       
-      gain.gain.setValueAtTime(0.35, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
       
       osc.start(now);
-      osc.stop(now + 0.06);
-    } catch(e) {}
-  },
-  playSelect() {
-    try {
-      this.init();
-      const now = this.ctx.currentTime;
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(587.33, now);
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.1);
-
-      gain.gain.setValueAtTime(0.4, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-
-      osc.start(now);
-      osc.stop(now + 0.1);
+      osc.stop(now + 0.04);
     } catch(e) {}
   },
   playCorrect() {
@@ -2350,7 +2247,7 @@ const AppAudio = {
         
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, now + idx * 0.07);
-        gain.gain.setValueAtTime(0.45, now + idx * 0.07);
+        gain.gain.setValueAtTime(0.35, now + idx * 0.07);
         gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.18);
         
         osc.start(now + idx * 0.07);
@@ -2370,7 +2267,7 @@ const AppAudio = {
         
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(freq, now + idx * 0.1);
-        gain.gain.setValueAtTime(0.4, now + idx * 0.1);
+        gain.gain.setValueAtTime(0.3, now + idx * 0.1);
         gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.2);
         
         osc.start(now + idx * 0.1);
@@ -2387,7 +2284,6 @@ document.addEventListener("pointerdown", (e) => {
     if (navigator.vibrate) navigator.vibrate(15);
   }
 });
-
 
 function checkAnswer(v,button){
   if(answered||finished)return;
@@ -2407,9 +2303,7 @@ function checkAnswer(v,button){
     AppAudio.playCorrect();
     if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
     
-    if(button) {
-      button.classList.add("correct-anim");
-    }
+    if(button) button.classList.add("correct-anim");
     
     $("answerFeedback").textContent="✅ Correct! +"+pts+" XP";
     $("answerFeedback").className="feedback good";
@@ -2421,9 +2315,7 @@ function checkAnswer(v,button){
     AppAudio.playWrong();
     if (navigator.vibrate) navigator.vibrate([70, 50, 70]);
     
-    if(button) {
-      button.classList.add("wrong-anim");
-    }
+    if(button) button.classList.add("wrong-anim");
     $("questionCard").classList.add("shake-card");
     setTimeout(() => $("questionCard").classList.remove("shake-card"), 400);
 
@@ -2438,7 +2330,6 @@ function checkAnswer(v,button){
   $("quizProgress").style.width=((qi+1)/COUNT*100)+"%";
   $("nextButton").disabled=false;
 }
-
 
 $("hintButton").onclick=()=>{
   if(!answered&&!hintShown){hintShown=true;$("questionHint").textContent="💡 Hint: "+questions[qi].hint;}
@@ -3281,48 +3172,6 @@ document.querySelectorAll('[data-go]').forEach(btn => {
     });
   }
 });
-
-const AppAudio2 = {
-  ctx: null,
-  init() {
-    if (!this.ctx) {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      this.ctx = new AudioCtx();
-    }
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-  },
-  playTap() {
-    try {
-      this.init();
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      
-      const now = this.ctx.currentTime;
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(320, now);
-      osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
-      
-      gain.gain.setValueAtTime(0.08, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
-      
-      osc.start(now);
-      osc.stop(now + 0.04);
-    } catch(e) {}
-  }
-};
-
-document.addEventListener("pointerdown", (e) => {
-  const interactive = e.target.closest("button, select, input, .navcard, .choice, .stage, .tab");
-  if (interactive) {
-    AppAudio2.playTap();
-    if (navigator.vibrate) navigator.vibrate(15);
-  }
-});
-
 </script>
 </body>
 </html>
