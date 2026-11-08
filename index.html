@@ -199,7 +199,7 @@ header {
 
 .panel {
   background: linear-gradient(135deg, rgba(15, 20, 43, 0.55), rgba(24, 31, 61, 0.65)),
-              url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+              url('https://img.magnific.com/free-photo/space-planet-science-night-generated-by-ai_188544-15619.jpg?semt=ais_hybrid&w=740&q=80') center/cover no-repeat;
   border: 1px solid rgba(167, 139, 250, 0.25);
   border-radius: 20px;
   padding: 17px;
@@ -310,10 +310,12 @@ label {
 
 .stat { 
   padding: 11px 5px; 
-  background: #ffffff0b; 
-  border: 1px solid #ffffff12; 
+  background: rgba(15, 20, 43, 0.45); 
+  border: 1px solid rgba(167, 139, 250, 0.25); 
+  backdrop-filter: blur(8px);
   border-radius: 13px; 
   text-align: center; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .stat strong { display: block; font-size: 1.3rem; }
@@ -375,15 +377,22 @@ label {
 .tab.active { background: #7c3aed; border-color: #c4b5fd; }
 
 .formula-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+
 .formula { 
-  background: #ffffff09; 
-  border: 1px solid #ffffff17; 
+  background: rgba(15, 20, 43, 0.45); 
+  border: 1px solid rgba(167, 139, 250, 0.25); 
+  backdrop-filter: blur(8px);
   border-radius: 13px; 
   padding: 13px; 
   min-width: 0; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   animation: cardFloat 5s ease-in-out infinite;
 }
-.formula:nth-child(even) { animation-delay: 1.5s; }
+
+
+.formula:nth-child(even) { animation-delay: 1.5s; 
+}
+
 .formula-title { font-size: .8rem; color: #c4b5fd; font-weight: 800; margin-bottom: 7px; }
 .equation { font-size: 1.08rem; font-weight: 850; overflow-wrap: anywhere; line-height: 1.65; }
 .explain { font-size: .82rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
